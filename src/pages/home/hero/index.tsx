@@ -1,7 +1,7 @@
 
 const Hero = () => {
   return (
-    <div>Hero</div>
+    <div>Seccion de Luis</div>
   )
 }
 
