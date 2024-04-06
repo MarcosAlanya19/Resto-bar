@@ -1,0 +1,16 @@
+root = true
+
+[*]
+charset = utf-8
+
+end_of_line = lf
+
+indent_style = tab
+
+[**/node_modules/**]
+exclude_files = *.json
+
+insert_final_newline = true
+max_empty_lines = 1
+
+[*.{ts,tsx,js,jsx}]
