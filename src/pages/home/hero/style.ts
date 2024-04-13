@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-	background-image: url("./img/home/img-hero.png");
+	background-image: url("./img/home/hero-1-hero.png");
 	background-size: cover;
-
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	justify-items: center;
@@ -41,7 +40,7 @@ export const Button = styled.button`
 export const Title = styled.div`
 	color: ${(props) => props.theme.white};
 
-	font-size: 80px;
+	font-size: 100px;
 	font-weight: 900;
 `;
 
@@ -49,7 +48,7 @@ export const WrapperImg = styled.div`
 	transform: rotate(5.98deg);
 
 	img {
-		width: 100%;
-		height: 100%;
+		width: 90%;
+		height: 90%;
 	}
 `;
