@@ -1,75 +1,68 @@
+import { CardRestaurant } from "./components/card-restaurant";
 import * as s from "./styles";
 import { vars } from "./utils/vars";
 
 const Restaurant = () => {
 	return (
 		<s.Wrapper>
-			<s.WrapperSecond>
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center",
+				}}
+			>
 				<s.Title>Domicilio</s.Title>
-				<s.WrapperImg>
-					<img src={vars.img.img_currier} alt="img-restaurant" />
-				</s.WrapperImg>
-				<br />
-				<br />
-				<s.Module>
-					<s.Inside style={{ fontSize: "50px" }}>Llamanos al:</s.Inside>
-					<s.Inside>605 1444-88</s.Inside>
-				</s.Module>
-				<br />
-				<br />
-				<s.Module>
-					<s.Inside style={{ fontSize: "50px" }}>Escribenos al:</s.Inside>
-					<s.Inside>+57 232 5456286</s.Inside>
-				</s.Module>
-			</s.WrapperSecond>
-			<s.WrapperTerceary>
-				<s.Title1>Restaurantes</s.Title1>
+				<img
+					src={vars.img.img_currier}
+					alt="img-restaurant"
+					height={330}
+					width={330}
+				/>
+
+				<div style={{ display: "grid", gap: "10px" }}>
+					<s.WrapperNumbers>
+						<div>Llamanos al:</div>
+						<div
+							style={{
+								fontFamily: "Poppins",
+								fontSize: "20px",
+								fontWeight: "normal",
+							}}
+						>
+							605 1444-88
+						</div>
+					</s.WrapperNumbers>
+					<s.WrapperNumbers>
+						<div>Escribenos al:</div>
+						<div
+							style={{
+								fontFamily: "Poppins",
+								fontSize: "20px",
+								fontWeight: "normal",
+							}}
+						>
+							+57 232 5456286
+						</div>
+					</s.WrapperNumbers>
+				</div>
+			</div>
+
+			<div>
+				<s.Title>Restaurantes</s.Title>
 				<s.WrapperCard>
-					<s.WrapperImg>
-						<img src={vars.img.restaurant_boyaca} alt="img-boyaca" />
-					</s.WrapperImg>
-					<s.Text>
-						<s.Inside>Rest. CC Boyaca</s.Inside>
-						<s.Inside>Cr. 155#22-55</s.Inside>
-						<s.Parrafo>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-							ipsum aut placeat consectetur recusandae quod. Sint non, autem
-							velit illum suscipit beatae magnam modi pariatur perspiciatis
-							exercitationem ex ab rerum.
-						</s.Parrafo>
-					</s.Text>
+					{vars.restaurant.map((data) => (
+						<CardRestaurant
+							key={data.title}
+							img={data.img}
+							title={data.title}
+							subtitle={data.subtitle}
+							description={data.description}
+						/>
+					))}
 				</s.WrapperCard>
-				<s.WrapperCard>
-					<s.WrapperImg>
-						<img src={vars.img.restaurant_usaque} alt="img-boyaca" />
-					</s.WrapperImg>
-					<s.Text>
-						<s.Inside>Rest. Usaquen</s.Inside>
-						<s.Inside>Cr. 155#22-55</s.Inside>
-						<s.Parrafo>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-							ipsum aut placeat consectetur recusandae quod. Sint non, autem
-							velit illum suscipit beatae magnam modi pariatur perspiciatis
-							exercitationem ex ab rerum.
-						</s.Parrafo>
-					</s.Text>
-				</s.WrapperCard>
-				<s.WrapperCard>
-					<s.WrapperImg>
-						<img src={vars.img.restauratn_leiva} alt="img-boyaca" />
-					</s.WrapperImg>
-					<s.Text>
-						<s.Inside>Rest. Villa Leiva</s.Inside>
-						<s.Inside>Cr. 155#22-55</s.Inside>
-						<s.Parrafo>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-							ipsum aut placeat consectetur recusandae quod. Sint non, autem
-							velit illum suscipit beatae magnam modi pariatur perspiciatis
-							exercitationem ex ab rerum.
-						</s.Parrafo>
-					</s.Text>
-				</s.WrapperCard>
-			</s.WrapperTerceary>
+			</div>
 		</s.Wrapper>
 	);
 };

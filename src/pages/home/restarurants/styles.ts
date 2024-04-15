@@ -4,75 +4,46 @@ export const Wrapper = styled.div`
 	display: grid;
 	font-family: "Dancing Script", cursive;
 
-	grid-template-columns: 1fr 1fr;
-	justify-items: center;
-	align-items: center;
-	padding: 35px 0px;
+	grid-template-columns: 1fr 2fr;
+	gap: 150px;
+
+	padding: 24px 100px;
 `;
 
-export const WrapperTerceary = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-`;
-
-export const WrapperSecond = styled.div`
-	padding-left: 30px;
-	padding-right: 30px;
-`;
-
-export const Module = styled.div`
+export const WrapperNumbers = styled.div`
+	display: grid;
+	gap: 5px;
 	background-color: ${(props) => props.theme.black};
-	display: flex;
-	flex-direction: column;
-	justify-items: center;
-	align-items: center;
-	border-radius: 30px;
-`;
-
-export const Inside = styled.h2`
-	display: flex;
-	justify-content: center;
-	font-size: 32px;
 	color: ${(props) => props.theme.white};
+	border-radius: 24px;
+	font-size: 32px;
+	text-align: center;
+
+	padding: 4px 36px;
 `;
 
-export const WrapperImg = styled.div`
-	img {
-		width: 100%;
-		height: 100%;
-		border-radius: 25px 0px 0px 25px;
-	}
-`;
-
-export const Title = styled.h1`
+export const Title = styled.div`
 	display: flex;
 	justify-content: center;
 	font-size: 64px;
-`;
-
-export const Title1 = styled.h1`
-	display: flex;
-	justify-content: center;
-	font-size: 64px;
-	padding-right: 170px;
 `;
 
 export const WrapperCard = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	padding-right: 200px;
+	grid-template-rows: repeat(2, 1fr);
+	gap: 20px;
+`;
+
+export const Card = styled.div`
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	border-radius: 24px;
+	background-color: ${(props) => props.theme.black};
+	overflow: hidden;
+	color: ${(props) => props.theme.white};
+
 	img {
 		width: 100%;
-		height: 100%;
+		height: 280px;
 	}
-`;
-
-export const Text = styled.div`
-	background-color: ${(props) => props.theme.black};
-	border-radius: 0px 25px 25px 0px;
-`;
-
-export const Parrafo = styled.p`
-	color: ${(props) => props.theme.white};
 `;
