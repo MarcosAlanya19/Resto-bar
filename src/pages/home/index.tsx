@@ -1,5 +1,5 @@
-import Menu from '../menu';
 import Hero from './hero';
+import Menu1 from './menu';
 import Offert from './offert';
 import Restaurant from './restarurants';
 
@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <Menu />
+      <Menu1 />
       <Offert />
       <Restaurant />
     </>
