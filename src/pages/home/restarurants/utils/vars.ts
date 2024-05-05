@@ -2,9 +2,6 @@ export const vars = {
 	img: {
 		img_currier:
 			"https://s3-alpha-sig.figma.com/img/a28a/5360/0349c3afb26169a3c64e5c57de6dc2ff?Expires=1713744000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=J-Oak37sD8BunBCLDwVI-FhRZJSwntvQMCfzsIckaoZtSdBa396LLzDXs3nEXlCBFi8gQsOEUU-qc7h1EPTmP8aidPd5me58ZKsLS6BUSGbGXq62wUVPb4WBmJ45itloRd~18ASqGXL8S9CbZrIJ5MdUKLNse-JfBGhmSJn6KOu5rlEyTiNkUArrWcjIBtjHcIfzOwgjUTOds97G6o~V0FH6IoJAJD81K8rvsN4wYPjazUs9h2saJIGDkUBYV~wc6j6RaDyqvWxxo1hfJfQvSRqCVgm8tlKqWGWWs7rS5-xJTlnUI5cOSA1z6EMXlkbIPyYdKTW4V1FmOcPtTrzrRA__",
-
-		restauratn_leiva:
-			"https://s3-alpha-sig.figma.com/img/3269/f3a2/f28895c480caada7c911768a6354dec1?Expires=1713744000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FPZaNxDk5-qpFm1kKWX~piQESxTSZ-MsAmOp3qPTasOI7t09JC-P3mf0Ck0Hrr2gA2CCvecHzUAuRis4AXfLYiKPIvXz5QLTFelN1pOH~2ooUrZIpCX6R~JTWSRExglVQnGa-J1Z6lrpV5SNgIu3OQqqMKO5v71LwK-45L7QR-1z7XoWHGLUQeDh5zRKzgYBB7WbiBSCFNKxvZvFVGOnBNChdtV3lGxUoxcYxzSBj943EBS~QjLsMZWZY0KBRyeXUbay2aJPL2Fljt0KHMs0txKmIugF3jV~a9GTv6m3fdD48h2Nd-zjGX9BQ7jZuq48Q0eL18fDAlb6IDgKW2E~YA__",
 	},
 	restaurant: [
 		{
