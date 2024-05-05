@@ -6,7 +6,6 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: "Poppins", sans-serif;
-		overflow-x: hidden;
   }
 
   h1, h2, h3, p {
