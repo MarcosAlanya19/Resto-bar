@@ -5,7 +5,7 @@ interface IProps {
 	img: string;
 	title: string;
 	description: string;
-	price: String;
+	price: string;
 }
 
 export const CardMenu: React.FC<IProps> = (props) => {

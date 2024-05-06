@@ -8,7 +8,7 @@ export const useMediaQuery = (query: string) => {
     const handleChange = (e: MediaQueryListEvent) => setValue(e.matches);
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
+  }, [query]);
 
   return value;
 };
