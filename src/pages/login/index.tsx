@@ -84,7 +84,7 @@ const Login = () => {
 					height: "100vh",
 					objectPosition: "top",
 				}}
-				src="./public/img/login/img-login.jpg"
+				src="./img/login/img-login.jpg"
 				alt="img-login"
 			/>
 			<Wrapper>
