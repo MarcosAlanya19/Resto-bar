@@ -25,10 +25,11 @@ export const Body = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	background-color: #fff;
+	background-color: #FFF;
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 	overflow: hidden;
+	padding: 24px 16px;
 `;
 
 const ButtonStyled = styled.button`
@@ -104,5 +105,22 @@ export const WrapperContent = styled.div`
 	@media (min-width: 768px) {
 		max-height: calc(80vh - 200px);
 		padding: 0 24px 16px;
+	}
+`;
+
+export const WrapperIcon = styled.div<{ alert: boolean }>`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #ced4da;
+	padding: 10px;
+	border-radius: 8px;
+	color: #000;
+	cursor: pointer;
+
+	&:hover {
+		background-color: ${(props) =>
+			props.alert ? "#FCD3D0" : "#F8F9FA"};
+		color: ${(props) => (props.alert ? "#BE1C12" : "#495057")};
 	}
 `;

@@ -1,6 +1,7 @@
 import * as s from "./styles";
 
-import { RiAddLine } from "react-icons/ri";
+import { RiAddLine, RiDeleteBinLine } from "react-icons/ri";
+import { PiPencilSimpleLineDuotone } from "react-icons/pi";
 import Modal from "react-modal";
 import { Text } from "../../components/atomic/text";
 import { useBoolean } from "../../hooks/useBoolean";
@@ -17,7 +18,7 @@ const customStyles = {
 		marginRight: "-50%",
 		boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
 		transform: "translate(-50%, -50%)",
-		padding: "0"
+		padding: "0",
 	},
 	overlay: {
 		backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -30,7 +31,7 @@ const Dashboard = () => {
 	return (
 		<>
 			<s.WrapperDashboard>
-				<AsideModal title="DASHBOARD" />
+				<AsideModal />
 
 				<s.ContainerLeft>
 					<Header
@@ -52,7 +53,24 @@ const Dashboard = () => {
 							</s.Button>
 						}
 					/>
-					<s.Body>sada</s.Body>
+					<s.Body>
+						<input type="text" placeholder="O  Buscar por nombre de hamburguesa" style={{width: "50%", marginBottom: "24px", border: "1px solid #bfbfbf", minHeight: "40px", padding: "4px 8px", fontSize: "14px", borderRadius: "8px"}} />
+
+						<div
+							style={{
+								display: "grid",
+								gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+								gap: "16px",
+							}}
+						>
+							<CardProduct />
+							<CardProduct />
+							<CardProduct />
+							<CardProduct />
+							<CardProduct />
+							<CardProduct />
+						</div>
+					</s.Body>
 				</s.ContainerLeft>
 				<Modal
 					isOpen={showModal}
@@ -62,27 +80,80 @@ const Dashboard = () => {
 				>
 					<s.Container>
 						<s.WrapperHeader>
-							<Text
-								type="title"
-								text="Nuevo hamburguesa"
-							/>
+							<Text type="title" text="Nuevo hamburguesa" />
 						</s.WrapperHeader>
 						<s.WrapperContent>
-							<div style={{display: "flex", flexDirection: "column", width: "100%", gap: "4px"}}>
+							<div
+								style={{
+									display: "flex",
+									flexDirection: "column",
+									width: "100%",
+									gap: "4px",
+								}}
+							>
 								<Text text="Nombre del producto" type="text" />
-								<input type="text" name="" id="" placeholder="Ingresa nombre de la hamburguesa" style={{minHeight: "40px", borderRadius: "8px", border: "1px solid #bfbfbf", padding: "4px 8px", fontSize: "14px"}} />
+								<input
+									type="text"
+									name=""
+									id=""
+									placeholder="Ingresa nombre de la hamburguesa"
+									style={{
+										minHeight: "40px",
+										borderRadius: "8px",
+										border: "1px solid #bfbfbf",
+										padding: "4px 8px",
+										fontSize: "14px",
+									}}
+								/>
 							</div>
 
-							<div style={{display: "flex", flexDirection: "column", width: "100%", gap: "4px"}}>
+							<div
+								style={{
+									display: "flex",
+									flexDirection: "column",
+									width: "100%",
+									gap: "4px",
+								}}
+							>
 								<Text text="Descripción del producto" type="text" />
-								<textarea name="" id="" placeholder="Ingresa descripción de la hamburguesa" style={{minHeight: "40px", borderRadius: "8px", border: "1px solid #bfbfbf", padding: "4px 8px", fontSize: "14px", resize: "none"}} />
+								<textarea
+									name=""
+									id=""
+									placeholder="Ingresa descripción de la hamburguesa"
+									style={{
+										minHeight: "40px",
+										borderRadius: "8px",
+										border: "1px solid #bfbfbf",
+										padding: "4px 8px",
+										fontSize: "14px",
+										resize: "none",
+									}}
+								/>
 							</div>
 
-							<div style={{display: "flex", flexDirection: "column", width: "100%", gap: "4px"}}>
+							<div
+								style={{
+									display: "flex",
+									flexDirection: "column",
+									width: "100%",
+									gap: "4px",
+								}}
+							>
 								<Text text="Costo del producto" type="text" />
-								<input type="text" name="" id="" placeholder="Ingresa costo de la hamburguesa" style={{minHeight: "40px", borderRadius: "8px", border: "1px solid #bfbfbf", padding: "4px 8px", fontSize: "14px"}} />
+								<input
+									type="text"
+									name=""
+									id=""
+									placeholder="Ingresa costo de la hamburguesa"
+									style={{
+										minHeight: "40px",
+										borderRadius: "8px",
+										border: "1px solid #bfbfbf",
+										padding: "4px 8px",
+										fontSize: "14px",
+									}}
+								/>
 							</div>
-
 						</s.WrapperContent>
 						<s.WrapperBtns>
 							<s.Button onClick={offModal}>
@@ -100,3 +171,72 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+function CardProduct() {
+	return (
+		<div
+			style={{
+				borderRadius: "16px",
+				overflow: "hidden",
+				boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+				backgroundColor: "#fff",
+			}}
+		>
+			<div style={{ position: "relative" }}>
+				<div
+					style={{
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						height: "40px",
+						minWidth: "80px",
+						position: "absolute",
+						borderRadius: "16PX",
+						background: "#F14A41",
+						bottom: "20px",
+						color: "#fff",
+						right: "20px",
+					}}
+				>
+					<Text text="S/. 8.00" type="textDefault" weight="bold" />
+				</div>
+
+				<img
+					src="https://res.cloudinary.com/dltl0daa4/image/upload/v1714973455/restobar-tostado/a_lo_pobre_l3cikz.jpg"
+					alt="img-prod"
+					height={300}
+					style={{
+						objectFit: "cover",
+						width: "100%",
+						objectPosition: "center",
+					}}
+				/>
+			</div>
+			<div
+				style={{
+					padding: "4px 16px 12px",
+					display: "grid",
+					gridTemplateColumns: "3fr 2fr",
+					alignItems: "center",
+					justifyItems: "center",
+				}}
+			>
+				<div>
+					<Text
+						text="Hamburguesa a lo pobre"
+						type="textDefault"
+						weight="bold"
+					/>
+				</div>
+				<div style={{display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px"}}>
+					<s.WrapperIcon alert>
+						<RiDeleteBinLine size={20} />
+					</s.WrapperIcon>
+					<s.WrapperIcon alert={false}>
+						<PiPencilSimpleLineDuotone size={20} />
+					</s.WrapperIcon>
+				</div>
+			</div>
+		</div>
+	);
+}

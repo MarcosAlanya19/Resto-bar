@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import App from './App.tsx';
 import GlobalStyles from './config/global-css/index.ts';
+import { router } from './config/router/index.tsx';
 
 const theme = {
   primary: '#ECA400',
@@ -16,7 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <App />
+			<RouterProvider router={router} />
     </ThemeProvider>
   </React.StrictMode>
 );

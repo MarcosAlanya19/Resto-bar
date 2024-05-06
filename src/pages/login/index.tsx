@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { Text } from "../../components/atomic/text";
+import { useNavigate } from "react-router-dom";
 
 const jump = keyframes`
   from{
@@ -19,6 +20,7 @@ const Wrapper = styled.section`
 	align-items: center;
 	width: 100%;
 	color: #fff;
+	padding: 64px
 `;
 
 const Form = styled.form`
@@ -33,8 +35,6 @@ const Form = styled.form`
 const Input = styled.input`
 	padding: 11px 13px;
 	background: #f9f9fa;
-	margin-inline: 64px;
-
 	border-radius: 4px;
 	outline: 0;
 	border: 1px solid rgba(245, 245, 245, 0.7);
@@ -50,8 +50,6 @@ const Input = styled.input`
 const Button = styled.button`
 	padding: 11px 13px;
 	color: rgb(253, 249, 243);
-	margin-inline: 64px;
-
 	font-weight: 600;
 	text-transform: uppercase;
 	background: #f03d4e;
@@ -69,6 +67,8 @@ const Button = styled.button`
 `;
 
 const Login = () => {
+	const navigate = useNavigate();
+
 	return (
 		<div
 			style={{
@@ -79,7 +79,12 @@ const Login = () => {
 			}}
 		>
 			<img
-				style={{ width: "100%", objectFit: "cover", height: "100vh", objectPosition: "top" }}
+				style={{
+					width: "100%",
+					objectFit: "cover",
+					height: "100vh",
+					objectPosition: "top",
+				}}
 				src="./public/img/login/img-login.jpg"
 				alt="img-login"
 			/>
@@ -92,8 +97,8 @@ const Login = () => {
 				<Form>
 					<Input type="email" name="email" placeholder="example@gmail.com" />
 					<Input type="password" name="password" placeholder="********" />
-					<Button>Entrar</Button>
 				</Form>
+				<Button style={{width: "100%"}} onClick={() => navigate("/dashboard")}>Entrar</Button>
 			</Wrapper>
 		</div>
 	);
