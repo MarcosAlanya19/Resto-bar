@@ -19,7 +19,7 @@ export const Sidebar = styled.div`
   padding: 16px;
   padding-top: 24px;
   width: 100%;
-  background-color: #fff;
+  background-color: #fbfbfb;
 `;
 
 export const Body = styled.div`

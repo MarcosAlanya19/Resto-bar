@@ -30,7 +30,7 @@ const Dashboard = () => {
 	return (
 		<>
 			<s.WrapperDashboard>
-				<AsideModal title="hola" />
+				<AsideModal title="DASHBOARD" />
 
 				<s.ContainerLeft>
 					<Header

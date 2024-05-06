@@ -1,22 +1,61 @@
+import { RiBuilding4Line, RiBubbleChartLine } from "react-icons/ri";
 import { Text } from "../../../../components/atomic/text";
 import * as s from "./styles";
 
-interface IProps {
-	title: string;
-	userInfo?: boolean;
-	// routes: IPageConfig<any>[];
-	// goToPage: (slug: string) => void;
-}
-
-export const AsideModal: React.FC<IProps> = (props) => {
+export const AsideModal = () => {
 	return (
 		<s.Sidebar>
-			<Text text={props.title} type="title" weight="medium" />
-			{/* <s.Sections> */}
-			{/* {props.routes.map((section) => ( */}
-			{/* <Section pages={section.pages} title={"sdasd"} /> */}
-			{/* ))} */}
-			{/* </s.Sections> */}
+			<div
+				style={{
+					display: "grid",
+					alignItems: "center",
+					justifyItems: "center",
+					margin: "80px 0",
+				}}
+			>
+				<Text
+					text="EL TOSTADO."
+					type="title"
+					weight="medium"
+					style={{ fontSize: "32px" }}
+				/>
+				<Text
+					style={{ textAlign: "center" }}
+					text="Restobar"
+					type="text"
+					weight="medium"
+				/>
+			</div>
+
+			<div
+				style={{
+					backgroundColor: "#edf3fc",
+					padding: "13px 12px",
+					borderRadius: "8px",
+				}}
+			>
+				<Text
+					leftIcon={<RiBubbleChartLine />}
+					text="Hamburguesas"
+					type="textDefault"
+					weight="bold"
+				/>
+			</div>
+
+			<div
+				style={{
+					// backgroundColor: "#edf3fc",
+					padding: "13px 12px",
+					borderRadius: "8px",
+				}}
+			>
+				<Text
+					leftIcon={<RiBuilding4Line />}
+					text="Sucursales"
+					type="textDefault"
+					weight="medium"
+				/>
+			</div>
 		</s.Sidebar>
 	);
 };
