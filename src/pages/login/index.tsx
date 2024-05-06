@@ -1,7 +1,6 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { Text } from "../../components/atomic/text";
-import { useNavigate } from "react-router-dom";
 
 const jump = keyframes`
   from{
@@ -20,7 +19,7 @@ const Wrapper = styled.section`
 	align-items: center;
 	width: 100%;
 	color: #fff;
-	padding: 64px
+	padding: 64px;
 `;
 
 const Form = styled.form`
