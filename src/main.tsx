@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import App from './App.tsx';
-import GlobalStyles from './assets/global-css';
+import GlobalStyles from './config/global-css/index.ts';
 
 const theme = {
   primary: '#ECA400',
