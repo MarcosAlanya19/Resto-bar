@@ -7,6 +7,7 @@ import { Text } from "../../components/atomic/text";
 import { useBoolean } from "../../hooks/useBoolean";
 import { AsideModal } from "./components/aside";
 import { Header } from "./components/header";
+import { Outlet } from "react-router-dom";
 
 const customStyles = {
 	content: {
@@ -33,7 +34,7 @@ const Dashboard = () => {
 			<s.WrapperDashboard>
 				<AsideModal />
 
-				<s.ContainerLeft>
+				{/* <s.ContainerLeft>
 					<Header
 						title="Hamburguesas"
 						subtitle="Crea y configura las hamburguesas del local"
@@ -164,7 +165,9 @@ const Dashboard = () => {
 							</s.Button>
 						</s.WrapperBtns>
 					</s.Container>
-				</Modal>
+				</Modal> */}
+
+				<Outlet />
 			</s.WrapperDashboard>
 		</>
 	);
