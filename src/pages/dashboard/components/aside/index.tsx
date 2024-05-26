@@ -1,4 +1,4 @@
-import { RiBuilding4Line, RiBubbleChartLine } from "react-icons/ri";
+import { RiBubbleChartLine, RiBuilding4Line } from "react-icons/ri";
 import { Text } from "../../../../components/atomic/text";
 import * as s from "./styles";
 
@@ -27,35 +27,20 @@ export const AsideModal = () => {
 				/>
 			</div>
 
-			<div
-				style={{
-					backgroundColor: "#edf3fc",
-					padding: "13px 12px",
-					borderRadius: "8px",
-				}}
-			>
-				<Text
-					leftIcon={<RiBubbleChartLine />}
-					text="Hamburguesas"
-					type="textDefault"
-					weight="bold"
-				/>
-			</div>
-
-			<div
-				style={{
-					// backgroundColor: "#edf3fc",
-					padding: "13px 12px",
-					borderRadius: "8px",
-				}}
-			>
+			<s.StyledNavLink to={"/dashboard/store"}>
 				<Text
 					leftIcon={<RiBuilding4Line />}
 					text="Sucursales"
 					type="textDefault"
-					weight="medium"
 				/>
-			</div>
+			</s.StyledNavLink>
+			<s.StyledNavLink to={"/dashboard/burguer"}>
+				<Text
+					leftIcon={<RiBubbleChartLine />}
+					text="Hamburguesas"
+					type="textDefault"
+				/>
+			</s.StyledNavLink>
 		</s.Sidebar>
 	);
 };

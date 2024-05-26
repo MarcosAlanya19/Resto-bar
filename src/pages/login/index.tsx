@@ -97,7 +97,12 @@ const Login = () => {
 					<Input type="email" name="email" placeholder="example@gmail.com" />
 					<Input type="password" name="password" placeholder="********" />
 				</Form>
-				<Button style={{width: "100%"}} onClick={() => navigate("/dashboard")}>Entrar</Button>
+				<Button
+					style={{ width: "100%" }}
+					onClick={() => navigate("/dashboard/store")}
+				>
+					Entrar
+				</Button>
 			</Wrapper>
 		</div>
 	);
