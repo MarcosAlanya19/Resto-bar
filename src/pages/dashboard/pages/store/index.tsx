@@ -1,16 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC } from "react";
 import * as s from "../../styles";
 
-import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { PiPencilSimpleLineDuotone } from "react-icons/pi";
 import { RiAddLine, RiDeleteBinLine } from "react-icons/ri";
 import Modal from "react-modal";
 import { Text } from "../../../../components/atomic/text";
+import { usePostStore } from "../../../../hooks/store/usePostStore";
 import { useBoolean } from "../../../../hooks/useBoolean";
 import { Header } from "../../components/header";
 import { IFormInput } from "../../types";
-import { createFormData } from "../../utils/createFormData";
 
 const customStyles = {
 	content: {
@@ -38,31 +38,11 @@ export const StoreDashboard: FC = () => {
 		formState: { errors },
 	} = useForm<IFormInput>();
 
-	const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-		try {
-			const formData = createFormData(data);
-			const response = await axios.post(
-				"http://localhost:3000/api/stores",
-				formData,
-				{
-					headers: {
-						"Content-Type": "multipart/form-data",
-					},
-				}
-			);
+	// const {data: storeData} = useFetchStores()
+	const { postStore } = usePostStore();
 
-			if (response.status === 201) {
-				alert("Store created successfully");
-			} else {
-				alert("Error creating store");
-			}
-		} catch (error: never) {
-			alert(
-				`Error creating store: ${
-					error.response?.data?.message || error.message
-				}`
-			);
-		}
+	const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+		await postStore(data);
 	};
 
 	return (
