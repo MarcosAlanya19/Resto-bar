@@ -111,7 +111,7 @@ export const StoreDashboard: FC = () => {
 						}}
 					>
 						{storeData?.map((store) => (
-							<CardProduct data={store} />
+							<CardProduct refresh={fetchStore} data={store} />
 						))}
 					</div>
 				</s.Body>

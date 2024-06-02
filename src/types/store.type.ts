@@ -9,7 +9,7 @@ export interface IPostStore {
 }
 
 export interface Store {
-	id: number;
+	id: string;
 	store_name: string;
 	public_id: string;
 	secure_url: string;

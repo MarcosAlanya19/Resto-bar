@@ -5,13 +5,17 @@ import { PiPencilSimpleLineDuotone } from "react-icons/pi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Text } from "../../../../../../components/atomic/text";
 import { Store } from "../../../../../../types/store.type";
+import { useDeleteStore } from "../../../../../../hooks/store/useDeleteStore";
 
 interface IProps {
 	data: Store;
+	refresh: () => void;
 }
 
 export const CardProduct: React.FC<IProps> = (props) => {
 	const { data } = props;
+
+	const { deleteStore } = useDeleteStore();
 
 	return (
 		<>
@@ -44,7 +48,10 @@ export const CardProduct: React.FC<IProps> = (props) => {
 						gap: "8px",
 					}}
 				>
-					<s.WrapperIcon alert>
+					<s.WrapperIcon alert onClick={() => {
+						deleteStore(data.id)
+						props.refresh()
+					}}>
 						<RiDeleteBinLine size={16} />
 					</s.WrapperIcon>
 					<s.WrapperIcon alert={false}>
