@@ -12,7 +12,7 @@ interface IProps {
 	refresh: () => void;
 }
 
-export const CardProduct: React.FC<IProps> = (props) => {
+export const CardStore: React.FC<IProps> = (props) => {
 	const { data } = props;
 
 	const { deleteStore } = useDeleteStore();
@@ -48,10 +48,13 @@ export const CardProduct: React.FC<IProps> = (props) => {
 						gap: "8px",
 					}}
 				>
-					<s.WrapperIcon alert onClick={() => {
-						deleteStore(data.id)
-						props.refresh()
-					}}>
+					<s.WrapperIcon
+						alert
+						onClick={async () => {
+							await deleteStore(data.id);
+							props.refresh();
+						}}
+					>
 						<RiDeleteBinLine size={16} />
 					</s.WrapperIcon>
 					<s.WrapperIcon alert={false}>
