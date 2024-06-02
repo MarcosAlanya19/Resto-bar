@@ -9,6 +9,8 @@ import Modal from "react-modal";
 import { Text } from "../../../../components/atomic/text";
 import { useBoolean } from "../../../../hooks/useBoolean";
 import { Header } from "../../components/header";
+import { IFormInput } from "../../types";
+import { createFormData } from "../../utils/createFormData";
 
 const customStyles = {
 	content: {
@@ -27,15 +29,6 @@ const customStyles = {
 	},
 };
 
-interface IFormInput {
-	store_name: string;
-	address: string;
-	phone: string;
-	opening_hour: string;
-	closing_hour: string;
-	image: FileList;
-}
-
 export const StoreDashboard: FC = () => {
 	const { active: showModal, off: offModal, on: onModal } = useBoolean();
 
@@ -47,28 +40,28 @@ export const StoreDashboard: FC = () => {
 
 	const onSubmit: SubmitHandler<IFormInput> = async (data) => {
 		try {
-			const storeData = {
-				store_name: data.store_name,
-				address: data.address,
-				phone: data.phone,
-				opening_hour: data.opening_hour,
-				closing_hour: data.closing_hour,
-				image_url: data.image[0],
-			};
-
-			const response = await axios.post("/api/stores", storeData, {
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-			});
+			const formData = createFormData(data);
+			const response = await axios.post(
+				"http://localhost:3000/api/stores",
+				formData,
+				{
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				}
+			);
 
 			if (response.status === 201) {
 				alert("Store created successfully");
 			} else {
 				alert("Error creating store");
 			}
-		} catch (error) {
-			alert("Error creating store");
+		} catch (error: never) {
+			alert(
+				`Error creating store: ${
+					error.response?.data?.message || error.message
+				}`
+			);
 		}
 	};
 
