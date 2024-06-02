@@ -3,14 +3,15 @@ import { FC } from "react";
 import * as s from "../../styles";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { PiPencilSimpleLineDuotone } from "react-icons/pi";
-import { RiAddLine, RiDeleteBinLine } from "react-icons/ri";
+import { RiAddLine } from "react-icons/ri";
 import Modal from "react-modal";
 import { Text } from "../../../../components/atomic/text";
+import { useFetchStores } from "../../../../hooks/store/useFetchStore";
 import { usePostStore } from "../../../../hooks/store/usePostStore";
 import { useBoolean } from "../../../../hooks/useBoolean";
 import { Header } from "../../components/header";
 import { IFormInput } from "../../types";
+import { CardProduct } from "./components/card-product";
 
 const customStyles = {
 	content: {
@@ -30,7 +31,7 @@ const customStyles = {
 };
 
 export const StoreDashboard: FC = () => {
-	const { active: showModal, off: offModal, on: onModal } = useBoolean();
+	const modalStore = useBoolean();
 
 	const {
 		register,
@@ -38,11 +39,14 @@ export const StoreDashboard: FC = () => {
 		formState: { errors },
 	} = useForm<IFormInput>();
 
-	// const {data: storeData} = useFetchStores()
+	const { data: storeData, fetchStore } = useFetchStores();
 	const { postStore } = usePostStore();
 
 	const onSubmit: SubmitHandler<IFormInput> = async (data) => {
 		await postStore(data);
+		fetchStore();
+
+		modalStore.off();
 	};
 
 	return (
@@ -52,7 +56,7 @@ export const StoreDashboard: FC = () => {
 					title="Sucursales"
 					subtitle="Crea y configura las sucursales de la marca"
 					actions={
-						<s.Button onClick={onModal}>
+						<s.Button onClick={modalStore.on}>
 							<Text
 								text="Agregar"
 								type="text"
@@ -84,23 +88,37 @@ export const StoreDashboard: FC = () => {
 
 					<div
 						style={{
+							borderRadius: "8px",
+							overflow: "hidden",
+							backgroundColor: "#edf3fc",
 							display: "grid",
-							gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+							gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 100px",
+							marginBottom: "4px",
+							padding: "8px 16px",
+						}}
+					>
+						<Text weight="medium" text={"Nombre"} type="text" />
+						<Text weight="medium" text={"Apertura"} type="text" />
+						<Text weight="medium" text={"Cierre"} type="text" />
+						<Text weight="medium" text={"Dirección"} type="text" />
+						<Text weight="medium" text={"Imagen"} type="text" />
+					</div>
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
 							gap: "16px",
 						}}
 					>
-						<CardProduct />
-						<CardProduct />
-						<CardProduct />
-						<CardProduct />
-						<CardProduct />
-						<CardProduct />
+						{storeData?.map((store) => (
+							<CardProduct data={store} />
+						))}
 					</div>
 				</s.Body>
 			</s.ContainerLeft>
 			<Modal
-				isOpen={showModal}
-				onRequestClose={offModal}
+				isOpen={modalStore.active}
+				onRequestClose={modalStore.on}
 				style={customStyles}
 				contentLabel="Example Modal"
 			>
@@ -181,7 +199,7 @@ export const StoreDashboard: FC = () => {
 						</s.WrapperInput>
 					</s.WrapperContent>
 					<s.WrapperBtns>
-						<s.Button onClick={offModal}>
+						<s.Button onClick={modalStore.off}>
 							<Text text="Cancelar" type="text" />
 						</s.Button>
 						<s.Button onClick={handleSubmit(onSubmit)}>
@@ -193,78 +211,3 @@ export const StoreDashboard: FC = () => {
 		</>
 	);
 };
-
-function CardProduct() {
-	return (
-		<div
-			style={{
-				borderRadius: "16px",
-				overflow: "hidden",
-				boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-				backgroundColor: "#fff",
-			}}
-		>
-			<div style={{ position: "relative" }}>
-				<div
-					style={{
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center",
-						height: "40px",
-						minWidth: "80px",
-						position: "absolute",
-						borderRadius: "16PX",
-						background: "#F14A41",
-						bottom: "20px",
-						color: "#fff",
-						right: "20px",
-					}}
-				>
-					<Text text="S/. 8.00" type="textDefault" weight="bold" />
-				</div>
-
-				<img
-					src="https://res.cloudinary.com/dltl0daa4/image/upload/v1714973455/restobar-tostado/a_lo_pobre_l3cikz.jpg"
-					alt="img-prod"
-					height={300}
-					style={{
-						objectFit: "cover",
-						width: "100%",
-						objectPosition: "center",
-					}}
-				/>
-			</div>
-			<div
-				style={{
-					padding: "4px 16px 12px",
-					display: "grid",
-					gridTemplateColumns: "3fr 2fr",
-					alignItems: "center",
-					justifyItems: "center",
-				}}
-			>
-				<div>
-					<Text
-						text="Hamburguesa a lo pobre"
-						type="textDefault"
-						weight="bold"
-					/>
-				</div>
-				<div
-					style={{
-						display: "grid",
-						gridTemplateColumns: "1fr 1fr",
-						gap: "8px",
-					}}
-				>
-					<s.WrapperIcon alert>
-						<RiDeleteBinLine size={20} />
-					</s.WrapperIcon>
-					<s.WrapperIcon alert={false}>
-						<PiPencilSimpleLineDuotone size={20} />
-					</s.WrapperIcon>
-				</div>
-			</div>
-		</div>
-	);
-}

@@ -7,3 +7,14 @@ export interface IPostStore {
 	closing_hour: string;
 	image: any;
 }
+
+export interface Store {
+	id: number;
+	store_name: string;
+	public_id: string;
+	secure_url: string;
+	address: string;
+	phone: string;
+	opening_hour: string;
+	closing_hour: string;
+}
