@@ -25,7 +25,7 @@ export const Body = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	background-color: #FFF;
+	background-color: #fff;
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 	overflow: hidden;
@@ -119,8 +119,22 @@ export const WrapperIcon = styled.div<{ alert: boolean }>`
 	cursor: pointer;
 
 	&:hover {
-		background-color: ${(props) =>
-			props.alert ? "#FCD3D0" : "#F8F9FA"};
+		background-color: ${(props) => (props.alert ? "#FCD3D0" : "#F8F9FA")};
 		color: ${(props) => (props.alert ? "#BE1C12" : "#495057")};
 	}
+`;
+
+export const WrapperInput = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 4px;
+`;
+
+export const InputStyle = styled.input`
+	min-height: 40px;
+	border-radius: 8px;
+	border: 1px solid #bfbfbf;
+	padding: 4px 8px;
+	font-size: 14px;
 `;

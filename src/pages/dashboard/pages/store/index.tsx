@@ -1,6 +1,8 @@
 import { FC } from "react";
 import * as s from "../../styles";
 
+import axios from "axios";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { PiPencilSimpleLineDuotone } from "react-icons/pi";
 import { RiAddLine, RiDeleteBinLine } from "react-icons/ri";
 import Modal from "react-modal";
@@ -25,8 +27,50 @@ const customStyles = {
 	},
 };
 
+interface IFormInput {
+	store_name: string;
+	address: string;
+	phone: string;
+	opening_hour: string;
+	closing_hour: string;
+	image: FileList;
+}
+
 export const StoreDashboard: FC = () => {
 	const { active: showModal, off: offModal, on: onModal } = useBoolean();
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<IFormInput>();
+
+	const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+		try {
+			const storeData = {
+				store_name: data.store_name,
+				address: data.address,
+				phone: data.phone,
+				opening_hour: data.opening_hour,
+				closing_hour: data.closing_hour,
+				image_url: data.image[0],
+			};
+
+			const response = await axios.post("/api/stores", storeData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			});
+
+			if (response.status === 201) {
+				alert("Store created successfully");
+			} else {
+				alert("Error creating store");
+			}
+		} catch (error) {
+			alert("Error creating store");
+		}
+	};
 
 	return (
 		<>
@@ -92,83 +136,82 @@ export const StoreDashboard: FC = () => {
 						<Text type="title" text="Nuevo hamburguesa" />
 					</s.WrapperHeader>
 					<s.WrapperContent>
-						<div
-							style={{
-								display: "flex",
-								flexDirection: "column",
-								width: "100%",
-								gap: "4px",
-							}}
-						>
-							<Text text="Nombre del producto" type="text" />
-							<input
+						<s.WrapperInput>
+							<Text text="Nombre de sucursal" type="text" />
+							<s.InputStyle
+								id="store_name"
 								type="text"
-								name=""
-								id=""
+								{...register("store_name", {
+									required: "Store name is required",
+								})}
 								placeholder="Ingresa nombre de la hamburguesa"
-								style={{
-									minHeight: "40px",
-									borderRadius: "8px",
-									border: "1px solid #bfbfbf",
-									padding: "4px 8px",
-									fontSize: "14px",
-								}}
 							/>
-						</div>
+							{errors.store_name && <p>{errors.store_name.message}</p>}
+						</s.WrapperInput>
 
-						<div
-							style={{
-								display: "flex",
-								flexDirection: "column",
-								width: "100%",
-								gap: "4px",
-							}}
-						>
-							<Text text="Descripción del producto" type="text" />
-							<textarea
-								name=""
-								id=""
+						<s.WrapperInput>
+							<Text text="Imagen de sucursal" type="text" />
+							<s.InputStyle
+								id="image"
+								type="file"
+								{...register("image", { required: "Store image is required" })}
+								placeholder="Ingresa nombre de la hamburguesa"
+							/>
+							{errors.image && <p>{errors.image.message}</p>}
+						</s.WrapperInput>
+
+						<s.WrapperInput>
+							<Text text="Dirección" type="text" />
+							<s.InputStyle
+								id="address"
+								{...register("address", { required: "Address is required" })}
 								placeholder="Ingresa descripción de la hamburguesa"
-								style={{
-									minHeight: "40px",
-									borderRadius: "8px",
-									border: "1px solid #bfbfbf",
-									padding: "4px 8px",
-									fontSize: "14px",
-									resize: "none",
-								}}
 							/>
-						</div>
+							{errors.address && <p>{errors.address.message}</p>}
+						</s.WrapperInput>
 
-						<div
-							style={{
-								display: "flex",
-								flexDirection: "column",
-								width: "100%",
-								gap: "4px",
-							}}
-						>
-							<Text text="Costo del producto" type="text" />
-							<input
-								type="text"
-								name=""
-								id=""
+						<s.WrapperInput>
+							<Text text="Telefono" type="text" />
+							<s.InputStyle
+								type="phone"
+								id="phone"
+								{...register("phone", { required: "Phone is required" })}
 								placeholder="Ingresa costo de la hamburguesa"
-								style={{
-									minHeight: "40px",
-									borderRadius: "8px",
-									border: "1px solid #bfbfbf",
-									padding: "4px 8px",
-									fontSize: "14px",
-								}}
 							/>
-						</div>
+							{errors.phone && <p>{errors.phone.message}</p>}
+						</s.WrapperInput>
+
+						<s.WrapperInput>
+							<Text text="Hora de apertura" type="text" />
+							<s.InputStyle
+								type="time"
+								id="opening_hour"
+								{...register("opening_hour", {
+									required: "Opening hour is required",
+								})}
+								placeholder="Ingresa costo de la hamburguesa"
+							/>
+							{errors.opening_hour && <p>{errors.opening_hour.message}</p>}
+						</s.WrapperInput>
+
+						<s.WrapperInput>
+							<Text text="Hora de cierre" type="text" />
+							<s.InputStyle
+								type="time"
+								id="closing_hour"
+								{...register("closing_hour", {
+									required: "Closing hour is required",
+								})}
+								placeholder="Ingresa costo de la hamburguesa"
+							/>
+							{errors.closing_hour && <p>{errors.closing_hour.message}</p>}
+						</s.WrapperInput>
 					</s.WrapperContent>
 					<s.WrapperBtns>
 						<s.Button onClick={offModal}>
 							<Text text="Cancelar" type="text" />
 						</s.Button>
-						<s.Button>
+						<s.Button onClick={handleSubmit(onSubmit)}>
 							<Text text="Crear hamburguesa" type="text" />
 						</s.Button>
 					</s.WrapperBtns>
