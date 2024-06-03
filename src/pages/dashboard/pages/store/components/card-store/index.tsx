@@ -9,6 +9,7 @@ import { useDeleteStore } from "../../../../../../hooks/store/useDeleteStore";
 import { useBoolean } from "../../../../../../hooks/useBoolean";
 import { ModalConfirm } from "../../../../../../components/modal/confirm";
 import { toast } from "react-toastify";
+import { ModalFormStore } from "../form-store";
 
 interface IProps {
 	data: Store;
@@ -18,6 +19,8 @@ interface IProps {
 export const CardStore: React.FC<IProps> = (props) => {
 	const { data } = props;
 	const confirm = useBoolean();
+	const editStore = useBoolean();
+	const [update, setUpdate] = React.useState<Store>(data);
 
 	const { deleteStore } = useDeleteStore();
 
@@ -30,7 +33,7 @@ export const CardStore: React.FC<IProps> = (props) => {
 					boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
 					backgroundColor: "#fff",
 					display: "grid",
-					gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 100px",
+					gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 100px",
 					padding: "8px 16px",
 				}}
 			>
@@ -38,6 +41,7 @@ export const CardStore: React.FC<IProps> = (props) => {
 				<Text text={data.opening_hour} type="text" />
 				<Text text={data.closing_hour} type="text" />
 				<Text text={data.address} type="text" />
+				<Text text={data.phone} type="text" />
 				<div style={{ width: 50, height: 50, overflow: "hidden" }}>
 					<img
 						src={data.secure_url}
@@ -55,7 +59,13 @@ export const CardStore: React.FC<IProps> = (props) => {
 					<s.WrapperIcon alert onClick={confirm.on}>
 						<RiDeleteBinLine size={16} />
 					</s.WrapperIcon>
-					<s.WrapperIcon alert={false}>
+					<s.WrapperIcon
+						alert={false}
+						onClick={async () => {
+							setUpdate(data);
+							editStore.on();
+						}}
+					>
 						<PiPencilSimpleLineDuotone size={16} />
 					</s.WrapperIcon>
 				</div>
@@ -70,10 +80,16 @@ export const CardStore: React.FC<IProps> = (props) => {
 				}}
 				onConfirm={async () => {
 					await deleteStore(data.id);
-					toast.success("Se elimino sucursal con éxito")
+					toast.success("Se elimino sucursal con éxito");
 					props.refresh();
 				}}
 				modal={confirm}
+				refresh={props.refresh}
+			/>
+
+			<ModalFormStore
+				update={update}
+				modal={editStore}
 				refresh={props.refresh}
 			/>
 		</>

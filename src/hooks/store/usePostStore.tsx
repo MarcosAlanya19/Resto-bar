@@ -14,7 +14,7 @@ const createFormData = (data: IPostStore) => {
 	return formData;
 };
 
-export const usePostStore = () => {
+export const usePetitionStore = () => {
 	const [loading, setLoading] = React.useState(false);
 	const [error, setError] = React.useState(null);
 	const [success, setSuccess] = React.useState(false);
@@ -52,5 +52,37 @@ export const usePostStore = () => {
 		}
 	};
 
-	return { postStore, loading, error, success, response };
+	const updateStore = async (id: string, data: IPostStore) => {
+		setLoading(true);
+		setError(null);
+		setSuccess(false);
+
+		const formData = createFormData(data);
+
+		try {
+			const response = await axios.put(
+				`http://localhost:3000/api/stores/${id}`,
+				formData,
+				{
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				}
+			);
+
+			if (response.status === 204) {
+				setSuccess(true);
+			} else {
+				throw new Error("Error updating store");
+			}
+
+			setResponse(response.data);
+		} catch (error: any) {
+			setError(error.response?.data?.message || error.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	return { postStore, updateStore, loading, error, success, response };
 };

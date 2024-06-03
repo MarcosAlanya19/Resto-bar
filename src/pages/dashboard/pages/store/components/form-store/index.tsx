@@ -4,9 +4,10 @@ import * as s from "./styles";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Modal from "react-modal";
 import { Text } from "../../../../../../components/atomic/text";
-import { usePostStore } from "../../../../../../hooks/store/usePostStore";
+import { usePetitionStore } from "../../../../../../hooks/store/usePostStore";
 import { IFormInput } from "../../../../types";
 import { toast } from "react-toastify";
+import { Store } from "../../../../../../types/store.type";
 
 const customStyles = {
 	content: {
@@ -27,7 +28,7 @@ const customStyles = {
 };
 
 interface IProps {
-	modalStore: {
+	modal: {
 		on: () => void;
 		off: () => void;
 		toggle: () => void;
@@ -35,34 +36,66 @@ interface IProps {
 		active: boolean;
 	};
 	refresh: () => void;
+	update?: Store;
 }
 
-export const FormStore: React.FC<IProps> = (props) => {
+export const ModalFormStore: React.FC<IProps> = (props) => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<IFormInput>();
+	} = useForm<IFormInput>({
+		defaultValues: {
+			address: props.update?.id ? props.update.address : "",
+			closing_hour: props.update?.id ? props.update.closing_hour : "",
+			opening_hour: props.update?.id ? props.update.opening_hour : "",
+			phone: props.update?.id ? props.update.phone : "",
+			store_name: props.update?.id ? props.update.store_name : "",
+		},
+	});
 
-	const { postStore } = usePostStore();
+	const { postStore, updateStore } = usePetitionStore();
 
 	const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-		await postStore(data);
-		props.modalStore.off();
-		toast.success("Creación de sucursal con éxito");
+		if (props.update) {
+			await updateStore(props.update.id, data);
+			toast.success("Actualización de sucursal con éxito");
+		} else {
+			await postStore(data);
+			toast.success("Creación de sucursal con éxito");
+		}
 		props.refresh();
+		props.modal.off();
+	};
+
+	const [imagePreview, setImagePreview] = React.useState(
+		props.update ? props.update.secure_url : ""
+	);
+
+	const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const file = event.target.files?.[0];
+		if (file) {
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				setImagePreview(reader.result as string);
+			};
+			reader.readAsDataURL(file);
+		}
 	};
 
 	return (
 		<Modal
-			isOpen={props.modalStore.active}
-			onRequestClose={props.modalStore.on}
+			isOpen={props.modal.active}
+			onRequestClose={props.modal.on}
 			style={customStyles}
 			contentLabel="Example Modal"
 		>
 			<s.Container>
 				<s.WrapperHeader>
-					<Text type="title" text="Nuevo hamburguesa" />
+					<Text
+						type="title"
+						text={props.update ? "Edición de Sucursal" : "Nueva Sucursal"}
+					/>
 				</s.WrapperHeader>
 				<s.WrapperContent>
 					<s.WrapperInput>
@@ -80,13 +113,18 @@ export const FormStore: React.FC<IProps> = (props) => {
 
 					<s.WrapperInput>
 						<Text text="Imagen de sucursal" type="text" />
+
 						<s.InputStyle
 							id="image"
 							type="file"
-							{...register("image", { required: "Store image is required" })}
+							{...register("image")}
 							placeholder="Ingresa nombre de la hamburguesa"
+							onChange={handleImageChange}
 						/>
 						{errors.image && <p>{errors.image.message}</p>}
+						{imagePreview && (
+							<img src={imagePreview} alt="Imagen de sucursal" width="100" />
+						)}
 					</s.WrapperInput>
 
 					<s.WrapperInput>
@@ -137,11 +175,14 @@ export const FormStore: React.FC<IProps> = (props) => {
 					</s.WrapperInput>
 				</s.WrapperContent>
 				<s.WrapperBtns>
-					<s.Button onClick={props.modalStore.off}>
+					<s.Button onClick={props.modal.off}>
 						<Text text="Cancelar" type="text" />
 					</s.Button>
 					<s.Button onClick={handleSubmit(onSubmit)}>
-						<Text text="Crear hamburguesa" type="text" />
+						<Text
+							text={props.update ? "Editar sucursal" : "Crear sucursal"}
+							type="text"
+						/>
 					</s.Button>
 				</s.WrapperBtns>
 			</s.Container>

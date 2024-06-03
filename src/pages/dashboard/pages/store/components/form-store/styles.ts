@@ -90,3 +90,40 @@ export const WrapperBtns = styled.div`
 		padding: 16px 24px 16px 24px;
 	}
 `;
+
+export const FileInputContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	cursor: pointer;
+	border-radius: 8px;
+	border: 1px solid #bfbfbf;
+	padding: 8px 16px;
+	background-color: #fff;
+	font-size: 14px;
+	color: #333;
+	min-height: 40px;
+
+	&:hover {
+		background-color: #f0f0f0;
+	}
+`;
+
+export const HiddenFileInput = styled.input`
+	display: none;
+`;
+
+export const UploadButton = styled.span`
+	display: inline-block;
+	margin-right: 8px;
+	background-color: #4318ff;
+	color: white;
+	padding: 8px 12px;
+	border-radius: 4px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #0056b3;
+	}
+`;

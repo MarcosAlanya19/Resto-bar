@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FC } from "react";
+import React from "react";
 import * as s from "../../styles";
 
 import { RiAddLine } from "react-icons/ri";
@@ -8,10 +8,10 @@ import { useFetchStores } from "../../../../hooks/store/useFetchStore";
 import { useBoolean } from "../../../../hooks/useBoolean";
 import { Header } from "../../components/header";
 import { CardStore } from "./components/card-store";
-import { FormStore } from "./components/form-store";
+import { ModalFormStore } from "./components/form-store";
 
-export const StoreDashboard: FC = () => {
-	const modalStore = useBoolean();
+export const StoreDashboard: React.FC = () => {
+	const createStore = useBoolean();
 
 	const { data: storeData, fetchStore } = useFetchStores();
 
@@ -22,7 +22,7 @@ export const StoreDashboard: FC = () => {
 					title="Sucursales"
 					subtitle="Crea y configura las sucursales de la marca"
 					actions={
-						<s.Button onClick={modalStore.on}>
+						<s.Button onClick={createStore.on}>
 							<Text
 								text="Agregar"
 								type="text"
@@ -58,7 +58,7 @@ export const StoreDashboard: FC = () => {
 							overflow: "hidden",
 							backgroundColor: "#edf3fc",
 							display: "grid",
-							gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 100px",
+							gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 100px",
 							marginBottom: "4px",
 							padding: "8px 16px",
 						}}
@@ -67,6 +67,7 @@ export const StoreDashboard: FC = () => {
 						<Text weight="medium" text={"Apertura"} type="text" />
 						<Text weight="medium" text={"Cierre"} type="text" />
 						<Text weight="medium" text={"Dirección"} type="text" />
+						<Text weight="medium" text={"Número"} type="text" />
 						<Text weight="medium" text={"Imagen"} type="text" />
 					</div>
 					<div
@@ -82,7 +83,7 @@ export const StoreDashboard: FC = () => {
 					</div>
 				</s.Body>
 			</s.ContainerLeft>
-			<FormStore modalStore={modalStore} refresh={fetchStore} />
+			<ModalFormStore modal={createStore} refresh={fetchStore} />
 		</>
 	);
 };
