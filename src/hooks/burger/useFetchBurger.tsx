@@ -3,14 +3,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { IStore } from "../../types/store.type";
 
-export const useFetchStores = () => {
+export const useFetchBurgers = () => {
 	const [data, setData] = useState<IStore[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	const fetchStore = async () => {
+	const fetchBurger = async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/api/stores");
+			const response = await axios.get("http://localhost:3000/api/burgers");
 			response.data;
 			setData(response.data);
 			setLoading(false);
@@ -22,8 +22,8 @@ export const useFetchStores = () => {
 	};
 
 	useEffect(() => {
-		fetchStore();
+		fetchBurger();
 	}, []);
 
-	return { data, loading, error, fetchStore };
+	return { data, loading, error, fetchBurger };
 };

@@ -1,26 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
 import axios from "axios";
-import { IPostStore, IStore } from "../../types/store.type";
+import React from "react";
+import { IBurger, IPostBurger } from "../../types/burger.type";
 
-const createFormData = (data: IPostStore) => {
+const createFormData = (data: IPostBurger) => {
 	const formData = new FormData();
-	formData.append("store_name", data.store_name);
-	formData.append("address", data.address);
-	formData.append("phone", data.phone);
-	formData.append("opening_hour", data.opening_hour);
-	formData.append("closing_hour", data.closing_hour);
+	formData.append("burger_name", data.burger_name);
+	formData.append("description", data.description);
+	formData.append("price", data.price);
+	formData.append("store_id", data.store_id);
 	formData.append("image", data.image[0]);
 	return formData;
 };
 
-export const usePetitionStore = () => {
+export const usePetitionBurger = () => {
 	const [loading, setLoading] = React.useState(false);
 	const [error, setError] = React.useState(null);
 	const [success, setSuccess] = React.useState(false);
-	const [response, setResponse] = React.useState<IStore>({} as IStore);
+	const [response, setResponse] = React.useState<IBurger>({} as IBurger);
 
-	const postStore = async (data: IPostStore) => {
+	const postBurger = async (data: IPostBurger) => {
 		setLoading(true);
 		setError(null);
 		setSuccess(false);
@@ -29,7 +28,7 @@ export const usePetitionStore = () => {
 
 		try {
 			const response = await axios.post(
-				"http://localhost:3000/api/stores",
+				"http://localhost:3000/api/burgers",
 				formData,
 				{
 					headers: {
@@ -52,7 +51,7 @@ export const usePetitionStore = () => {
 		}
 	};
 
-	const updateStore = async (id: string, data: IPostStore) => {
+	const updateBurger = async (id: string, data: IPostBurger) => {
 		setLoading(true);
 		setError(null);
 		setSuccess(false);
@@ -61,7 +60,7 @@ export const usePetitionStore = () => {
 
 		try {
 			const response = await axios.put(
-				`http://localhost:3000/api/stores/${id}`,
+				`http://localhost:3000/api/burgers/${id}`,
 				formData,
 				{
 					headers: {
@@ -84,5 +83,12 @@ export const usePetitionStore = () => {
 		}
 	};
 
-	return { postStore, updateStore, loading, error, success, response };
+	return {
+		postStore: postBurger,
+		updateStore: updateBurger,
+		loading,
+		error,
+		success,
+		response,
+	};
 };

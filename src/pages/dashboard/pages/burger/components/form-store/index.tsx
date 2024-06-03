@@ -3,11 +3,10 @@ import * as s from "./styles";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import Modal from "react-modal";
-import { Text } from "../../../../../../components/atomic/text";
-import { usePetitionStore } from "../../../../../../hooks/store/usePostStore";
-import { IFormInput } from "../../../../types";
 import { toast } from "react-toastify";
-import { IStore } from "../../../../../../types/store.type";
+import { Text } from "../../../../../../components/atomic/text";
+import { usePetitionBurger } from "../../../../../../hooks/burger/usePostBurger";
+import { IBurger, IPostBurger } from "../../../../../../types/burger.type";
 
 const customStyles = {
 	content: {
@@ -36,7 +35,7 @@ interface IProps {
 		active: boolean;
 	};
 	refresh: () => void;
-	update?: IStore;
+	update?: IBurger;
 }
 
 export const ModalFormStore: React.FC<IProps> = (props) => {
@@ -44,19 +43,18 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<IFormInput>({
+	} = useForm<IPostBurger>({
 		defaultValues: {
-			address: props.update?.id ? props.update.address : "",
-			closing_hour: props.update?.id ? props.update.closing_hour : "",
-			opening_hour: props.update?.id ? props.update.opening_hour : "",
-			phone: props.update?.id ? props.update.phone : "",
-			store_name: props.update?.id ? props.update.store_name : "",
+			burger_name: props.update?.id ? props.update.burger_name : "",
+			description: props.update?.id ? props.update.description : "",
+			price: props.update?.id ? props.update.price : "",
+			store_id: props.update?.id ? props.update.store_id : "",
 		},
 	});
 
-	const { postStore, updateStore } = usePetitionStore();
+	const { postStore, updateStore } = usePetitionBurger();
 
-	const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+	const onSubmit: SubmitHandler<IPostBurger> = async (data) => {
 		if (props.update) {
 			await updateStore(props.update.id, data);
 			toast.success("Actualización de sucursal con éxito");
@@ -94,25 +92,25 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 				<s.WrapperHeader>
 					<Text
 						type="title"
-						text={props.update ? "Edición de Sucursal" : "Nueva Sucursal"}
+						text={props.update ? "Edición de Hamburguesa" : "Nueva Hamburguesa"}
 					/>
 				</s.WrapperHeader>
 				<s.WrapperContent>
 					<s.WrapperInput>
-						<Text text="Nombre de sucursal" type="text" />
+						<Text text="Nombre de hamburguesa" type="text" />
 						<s.InputStyle
 							id="store_name"
 							type="text"
-							{...register("store_name", {
+							{...register("burger_name", {
 								required: "Store name is required",
 							})}
 							placeholder="Ingresa nombre de la hamburguesa"
 						/>
-						{errors.store_name && <p>{errors.store_name.message}</p>}
+						{errors.burger_name && <p>{errors.burger_name.message}</p>}
 					</s.WrapperInput>
 
 					<s.WrapperInput>
-						<Text text="Imagen de sucursal" type="text" />
+						<Text text="Imagen de hamburguesa" type="text" />
 
 						<s.InputStyle
 							id="image"
@@ -128,50 +126,37 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 					</s.WrapperInput>
 
 					<s.WrapperInput>
-						<Text text="Dirección" type="text" />
+						<Text text="Descripción" type="text" />
 						<s.InputStyle
-							id="address"
-							{...register("address", { required: "Address is required" })}
+							id="description"
+							{...register("description", { required: "Address is required" })}
 							placeholder="Ingresa descripción de la hamburguesa"
 						/>
-						{errors.address && <p>{errors.address.message}</p>}
+						{errors.description && <p>{errors.description.message}</p>}
 					</s.WrapperInput>
 
 					<s.WrapperInput>
-						<Text text="Telefono" type="text" />
+						<Text text="Precio" type="text" />
 						<s.InputStyle
-							type="phone"
-							id="phone"
-							{...register("phone", { required: "Phone is required" })}
+							type="number"
+							id="price"
+							{...register("price", { required: "Phone is required" })}
 							placeholder="Ingresa costo de la hamburguesa"
 						/>
-						{errors.phone && <p>{errors.phone.message}</p>}
+						{errors.price && <p>{errors.price.message}</p>}
 					</s.WrapperInput>
 
 					<s.WrapperInput>
-						<Text text="Hora de apertura" type="text" />
+						<Text text="Seleccione un local" type="text" />
 						<s.InputStyle
-							type="time"
-							id="opening_hour"
-							{...register("opening_hour", {
-								required: "Opening hour is required",
-							})}
-							placeholder="Ingresa costo de la hamburguesa"
-						/>
-						{errors.opening_hour && <p>{errors.opening_hour.message}</p>}
-					</s.WrapperInput>
-
-					<s.WrapperInput>
-						<Text text="Hora de cierre" type="text" />
-						<s.InputStyle
-							type="time"
+							type="select"
 							id="closing_hour"
-							{...register("closing_hour", {
+							{...register("store_id", {
 								required: "Closing hour is required",
 							})}
 							placeholder="Ingresa costo de la hamburguesa"
 						/>
-						{errors.closing_hour && <p>{errors.closing_hour.message}</p>}
+						{errors.store_id && <p>{errors.store_id.message}</p>}
 					</s.WrapperInput>
 				</s.WrapperContent>
 				<s.WrapperBtns>

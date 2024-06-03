@@ -1,41 +1,28 @@
-import { FC } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
 import * as s from "../../styles";
 
-import { PiPencilSimpleLineDuotone } from "react-icons/pi";
-import { RiAddLine, RiDeleteBinLine } from "react-icons/ri";
-import Modal from "react-modal";
+import { RiAddLine } from "react-icons/ri";
 import { Text } from "../../../../components/atomic/text";
+import { useFetchBurgers } from "../../../../hooks/burger/useFetchBurger";
 import { useBoolean } from "../../../../hooks/useBoolean";
 import { Header } from "../../components/header";
+import { CardBurger } from "./components/card-store";
+import { ModalFormStore } from "./components/form-store";
 
-const customStyles = {
-	content: {
-		top: "50%",
-		left: "50%",
-		right: "auto",
-		bottom: "auto",
-		border: "none",
-		marginRight: "-50%",
-		boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-		transform: "translate(-50%, -50%)",
-		padding: "0",
-	},
-	overlay: {
-		backgroundColor: "rgba(0, 0, 0, 0.5)",
-	},
-};
+export const BurguerDashboard: React.FC = () => {
+	const createStore = useBoolean();
 
-export const BurguerDashboard: FC = () => {
-	const { active: showModal, off: offModal, on: onModal } = useBoolean();
+	const { data: burgerData, fetchBurger } = useFetchBurgers();
 
 	return (
 		<>
 			<s.ContainerLeft>
 				<Header
 					title="Hamburguesas"
-					subtitle="Crea y configura las hamburguesas del local"
+					subtitle="Crea y configura las hamburguesas de la marca"
 					actions={
-						<s.Button onClick={onModal}>
+						<s.Button onClick={createStore.on}>
 							<Text
 								text="Agregar"
 								type="text"
@@ -67,188 +54,35 @@ export const BurguerDashboard: FC = () => {
 
 					<div
 						style={{
+							borderRadius: "8px",
+							overflow: "hidden",
+							backgroundColor: "#edf3fc",
 							display: "grid",
-							gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+							gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 100px",
+							marginBottom: "4px",
+							padding: "8px 16px",
+						}}
+					>
+						<Text weight="medium" text={"Nombre"} type="text" />
+						<Text weight="medium" text={"Descripción"} type="text" />
+						<Text weight="medium" text={"Precio"} type="text" />
+						<Text weight="medium" text={"Tienda"} type="text" />
+						<Text weight="medium" text={"Imagen"} type="text" />
+					</div>
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
 							gap: "16px",
 						}}
 					>
-						<CardProduct />
-						<CardProduct />
-						<CardProduct />
-						<CardProduct />
-						<CardProduct />
-						<CardProduct />
+						{burgerData?.map((burger) => (
+							<CardBurger key={burger.id} refresh={fetchBurger} data={burger} />
+						))}
 					</div>
 				</s.Body>
 			</s.ContainerLeft>
-			<Modal
-				isOpen={showModal}
-				onRequestClose={offModal}
-				style={customStyles}
-				contentLabel="Example Modal"
-			>
-				<s.Container>
-					<s.WrapperHeader>
-						<Text type="title" text="Nuevo hamburguesa" />
-					</s.WrapperHeader>
-					<s.WrapperContent>
-						<div
-							style={{
-								display: "flex",
-								flexDirection: "column",
-								width: "100%",
-								gap: "4px",
-							}}
-						>
-							<Text text="Nombre del producto" type="text" />
-							<input
-								type="text"
-								name=""
-								id=""
-								placeholder="Ingresa nombre de la hamburguesa"
-								style={{
-									minHeight: "40px",
-									borderRadius: "8px",
-									border: "1px solid #bfbfbf",
-									padding: "4px 8px",
-									fontSize: "14px",
-								}}
-							/>
-						</div>
-
-						<div
-							style={{
-								display: "flex",
-								flexDirection: "column",
-								width: "100%",
-								gap: "4px",
-							}}
-						>
-							<Text text="Descripción del producto" type="text" />
-							<textarea
-								name=""
-								id=""
-								placeholder="Ingresa descripción de la hamburguesa"
-								style={{
-									minHeight: "40px",
-									borderRadius: "8px",
-									border: "1px solid #bfbfbf",
-									padding: "4px 8px",
-									fontSize: "14px",
-									resize: "none",
-								}}
-							/>
-						</div>
-
-						<div
-							style={{
-								display: "flex",
-								flexDirection: "column",
-								width: "100%",
-								gap: "4px",
-							}}
-						>
-							<Text text="Costo del producto" type="text" />
-							<input
-								type="text"
-								name=""
-								id=""
-								placeholder="Ingresa costo de la hamburguesa"
-								style={{
-									minHeight: "40px",
-									borderRadius: "8px",
-									border: "1px solid #bfbfbf",
-									padding: "4px 8px",
-									fontSize: "14px",
-								}}
-							/>
-						</div>
-					</s.WrapperContent>
-					<s.WrapperBtns>
-						<s.Button onClick={offModal}>
-							<Text text="Cancelar" type="text" />
-						</s.Button>
-						<s.Button>
-							<Text text="Crear hamburguesa" type="text" />
-						</s.Button>
-					</s.WrapperBtns>
-				</s.Container>
-			</Modal>
+			<ModalFormStore modal={createStore} refresh={fetchBurger} />
 		</>
 	);
 };
-
-function CardProduct() {
-	return (
-		<div
-			style={{
-				borderRadius: "16px",
-				overflow: "hidden",
-				boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-				backgroundColor: "#fff",
-			}}
-		>
-			<div style={{ position: "relative" }}>
-				<div
-					style={{
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center",
-						height: "40px",
-						minWidth: "80px",
-						position: "absolute",
-						borderRadius: "16PX",
-						background: "#F14A41",
-						bottom: "20px",
-						color: "#fff",
-						right: "20px",
-					}}
-				>
-					<Text text="S/. 8.00" type="textDefault" weight="bold" />
-				</div>
-
-				<img
-					src="https://res.cloudinary.com/dltl0daa4/image/upload/v1714973455/restobar-tostado/a_lo_pobre_l3cikz.jpg"
-					alt="img-prod"
-					height={300}
-					style={{
-						objectFit: "cover",
-						width: "100%",
-						objectPosition: "center",
-					}}
-				/>
-			</div>
-			<div
-				style={{
-					padding: "4px 16px 12px",
-					display: "grid",
-					gridTemplateColumns: "3fr 2fr",
-					alignItems: "center",
-					justifyItems: "center",
-				}}
-			>
-				<div>
-					<Text
-						text="Hamburguesa a lo pobre"
-						type="textDefault"
-						weight="bold"
-					/>
-				</div>
-				<div
-					style={{
-						display: "grid",
-						gridTemplateColumns: "1fr 1fr",
-						gap: "8px",
-					}}
-				>
-					<s.WrapperIcon alert>
-						<RiDeleteBinLine size={20} />
-					</s.WrapperIcon>
-					<s.WrapperIcon alert={false}>
-						<PiPencilSimpleLineDuotone size={20} />
-					</s.WrapperIcon>
-				</div>
-			</div>
-		</div>
-	);
-}

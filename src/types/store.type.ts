@@ -8,7 +8,7 @@ export interface IPostStore {
 	image: any;
 }
 
-export interface Store {
+export interface IStore {
 	id: string;
 	store_name: string;
 	public_id: string;

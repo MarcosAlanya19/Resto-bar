@@ -3,24 +3,24 @@ import * as s from "./styles";
 
 import { PiPencilSimpleLineDuotone } from "react-icons/pi";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { toast } from "react-toastify";
 import { Text } from "../../../../../../components/atomic/text";
-import { IStore } from "../../../../../../types/store.type";
+import { ModalConfirm } from "../../../../../../components/modal/confirm";
 import { useDeleteStore } from "../../../../../../hooks/store/useDeleteStore";
 import { useBoolean } from "../../../../../../hooks/useBoolean";
-import { ModalConfirm } from "../../../../../../components/modal/confirm";
-import { toast } from "react-toastify";
+import { IBurger } from "../../../../../../types/burger.type";
 import { ModalFormStore } from "../form-store";
 
 interface IProps {
-	data: IStore;
+	data: IBurger;
 	refresh: () => void;
 }
 
-export const CardStore: React.FC<IProps> = (props) => {
+export const CardBurger: React.FC<IProps> = (props) => {
 	const { data } = props;
 	const confirm = useBoolean();
 	const editStore = useBoolean();
-	const [update, setUpdate] = React.useState<IStore>(data);
+	const [update, setUpdate] = React.useState<IBurger>(data);
 
 	const { deleteStore } = useDeleteStore();
 
@@ -33,15 +33,14 @@ export const CardStore: React.FC<IProps> = (props) => {
 					boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
 					backgroundColor: "#fff",
 					display: "grid",
-					gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 100px",
+					gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 100px",
 					padding: "8px 16px",
 				}}
 			>
-				<Text text={data.store_name} type="text" />
-				<Text text={data.opening_hour} type="text" />
-				<Text text={data.closing_hour} type="text" />
-				<Text text={data.address} type="text" />
-				<Text text={data.phone} type="text" />
+				<Text text={data.burger_name} type="text" />
+				<Text text={data.description} type="text" />
+				<Text text={data.price} type="text" />
+				<Text text={data.store_id} type="text" />
 				<div style={{ width: 50, height: 50, overflow: "hidden" }}>
 					<img
 						src={data.secure_url}
