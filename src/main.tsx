@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./config/global-css/index.ts";
 import { RoutesConfig } from "./config/router/index.tsx";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const theme = {
 	primary: "#ECA400",
@@ -19,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 			<GlobalStyles />
 			<BrowserRouter>
 				<RoutesConfig />
+				<ToastContainer />
 			</BrowserRouter>
 		</ThemeProvider>
 	</React.StrictMode>

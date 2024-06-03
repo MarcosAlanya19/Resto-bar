@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import { Text } from "../../../../../../components/atomic/text";
 import { usePostStore } from "../../../../../../hooks/store/usePostStore";
 import { IFormInput } from "../../../../types";
+import { toast } from "react-toastify";
 
 const customStyles = {
 	content: {
@@ -18,6 +19,7 @@ const customStyles = {
 		boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
 		transform: "translate(-50%, -50%)",
 		padding: "0",
+		borderRadius: "16px",
 	},
 	overlay: {
 		backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -47,6 +49,7 @@ export const FormStore: React.FC<IProps> = (props) => {
 	const onSubmit: SubmitHandler<IFormInput> = async (data) => {
 		await postStore(data);
 		props.modalStore.off();
+		toast.success("Creación de sucursal con éxito");
 		props.refresh();
 	};
 

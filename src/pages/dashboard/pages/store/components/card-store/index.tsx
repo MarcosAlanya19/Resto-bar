@@ -6,6 +6,9 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { Text } from "../../../../../../components/atomic/text";
 import { Store } from "../../../../../../types/store.type";
 import { useDeleteStore } from "../../../../../../hooks/store/useDeleteStore";
+import { useBoolean } from "../../../../../../hooks/useBoolean";
+import { ModalConfirm } from "../../../../../../components/modal/confirm";
+import { toast } from "react-toastify";
 
 interface IProps {
 	data: Store;
@@ -14,6 +17,7 @@ interface IProps {
 
 export const CardStore: React.FC<IProps> = (props) => {
 	const { data } = props;
+	const confirm = useBoolean();
 
 	const { deleteStore } = useDeleteStore();
 
@@ -48,13 +52,7 @@ export const CardStore: React.FC<IProps> = (props) => {
 						gap: "8px",
 					}}
 				>
-					<s.WrapperIcon
-						alert
-						onClick={async () => {
-							await deleteStore(data.id);
-							props.refresh();
-						}}
-					>
+					<s.WrapperIcon alert onClick={confirm.on}>
 						<RiDeleteBinLine size={16} />
 					</s.WrapperIcon>
 					<s.WrapperIcon alert={false}>
@@ -62,6 +60,22 @@ export const CardStore: React.FC<IProps> = (props) => {
 					</s.WrapperIcon>
 				</div>
 			</div>
+
+			<ModalConfirm
+				info={{
+					title: "¿Estás seguro que deseas eliminar esta sucursal?",
+					subtitle: "Esta acción no se puede deshacer",
+					confirm: "Si, eliminar",
+					cancel: "No, cancelar",
+				}}
+				onConfirm={async () => {
+					await deleteStore(data.id);
+					toast.success("Se elimino sucursal con éxito")
+					props.refresh();
+				}}
+				modal={confirm}
+				refresh={props.refresh}
+			/>
 		</>
 	);
 };
