@@ -30,6 +30,7 @@ export const Form = styled.form`
 `;
 
 export const Input = styled.input`
+	width: 100%;
 	padding: 11px 13px;
 	background: #f9f9fa;
 	border-radius: 4px;

@@ -14,8 +14,9 @@ export const Sections = styled.div`
 `;
 
 export const Sidebar = styled.div`
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+
 	gap: 12px;
 	padding: 16px;
 	padding-top: 24px;
@@ -48,5 +49,20 @@ export const StyledNavLink = styled(NavLink)`
 
 	&.default div {
 		color: black;
+	}
+`;
+
+export const BtnLogout = styled.div`
+	background-color: #bfbfbf30;
+	padding: 16px 8px;
+	border-radius: 8px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: bold;
+
+	&:hover {
+		background-color: #bfbfbf20;
 	}
 `;

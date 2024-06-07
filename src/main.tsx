@@ -5,7 +5,8 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./config/global-css/index.ts";
 import { RoutesConfig } from "./config/router/index.tsx";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import { UserProvider } from "./context/userContext.tsx";
 
 const theme = {
 	primary: "#ECA400",
@@ -17,12 +18,14 @@ const theme = {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
-		<ThemeProvider theme={theme}>
-			<GlobalStyles />
-			<BrowserRouter>
-				<RoutesConfig />
-				<ToastContainer />
-			</BrowserRouter>
-		</ThemeProvider>
+		<UserProvider>
+			<ThemeProvider theme={theme}>
+				<GlobalStyles />
+				<BrowserRouter>
+					<RoutesConfig />
+					<ToastContainer />
+				</BrowserRouter>
+			</ThemeProvider>
+		</UserProvider>
 	</React.StrictMode>
 );
