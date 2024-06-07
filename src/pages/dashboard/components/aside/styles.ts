@@ -53,16 +53,17 @@ export const StyledNavLink = styled(NavLink)`
 `;
 
 export const BtnLogout = styled.div`
-	background-color: #bfbfbf30;
 	padding: 16px 8px;
 	border-radius: 8px;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	font-weight: bold;
 
 	&:hover {
 		background-color: #bfbfbf20;
+		> div {
+			font-weight: bold;
+		}
 	}
 `;

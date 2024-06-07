@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import { Text } from "../../../../../../components/atomic/text";
 import { usePetitionBurger } from "../../../../../../hooks/burger/usePostBurger";
+import { useFetchStores } from "../../../../../../hooks/store/useFetchStore";
 import { IBurger, IPostBurger } from "../../../../../../types/burger.type";
 
 const customStyles = {
@@ -81,6 +82,8 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 		}
 	};
 
+	const { data: storesData } = useFetchStores();
+
 	return (
 		<Modal
 			isOpen={props.modal.active}
@@ -147,15 +150,21 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 					</s.WrapperInput>
 
 					<s.WrapperInput>
-						<Text text="Seleccione un local" type="text" />
-						<s.InputStyle
-							type="select"
-							id="closing_hour"
-							{...register("store_id", {
-								required: "Closing hour is required",
-							})}
-							placeholder="Ingresa costo de la hamburguesa"
-						/>
+						<Text text="Seleccione local" type="text" />
+						{storesData.map((store) => (
+							<div key={store.id}>
+								<label style={{ display: "flex", gap: "4px" }}>
+									<input
+										type="checkbox"
+										value={store.id}
+										{...register("store_id", {
+											required: "Debes seleccionar al menos un local",
+										})}
+									/>
+									<Text text={store.store_name} type="text" />
+								</label>
+							</div>
+						))}
 						{errors.store_id && <p>{errors.store_id.message}</p>}
 					</s.WrapperInput>
 				</s.WrapperContent>
