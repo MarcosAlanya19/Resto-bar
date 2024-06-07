@@ -53,18 +53,40 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 		},
 	});
 
-	const { postStore, updateStore } = usePetitionBurger();
+	const { postBurger, updateBurger } = usePetitionBurger();
 
 	const onSubmit: SubmitHandler<IPostBurger> = async (data) => {
-		if (props.update) {
-			await updateStore(props.update.id, data);
-			toast.success("Actualización de sucursal con éxito");
-		} else {
-			await postStore(data);
-			toast.success("Creación de sucursal con éxito");
+		console.log(data);
+
+		try {
+			const promises = data.store_id.map((storeId) => {
+				const burgerData = {
+					...data,
+					store_id: storeId,
+				};
+
+				if (props.update) {
+					// Llamada a la función de actualización para cada store_id
+					return updateBurger(props.update.id, burgerData);
+				} else {
+					// Llamada a la función de creación para cada store_id
+					return postBurger(burgerData);
+				}
+			});
+
+			await Promise.all(promises);
+
+			toast.success(
+				props.update
+					? "Actualización de hamburguesa(s) con éxito"
+					: "Creación de hamburguesa(s) con éxito"
+			);
+			props.refresh();
+			props.modal.off();
+		} catch (error) {
+			console.error("Error al procesar hamburguesa(s):", error);
+			toast.error("Hubo un error al procesar la(s) hamburguesa(s)");
 		}
-		props.refresh();
-		props.modal.off();
 	};
 
 	const [imagePreview, setImagePreview] = React.useState(
@@ -151,21 +173,29 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 
 					<s.WrapperInput>
 						<Text text="Seleccione local" type="text" />
-						{storesData.map((store) => (
-							<div key={store.id}>
-								<label style={{ display: "flex", gap: "4px" }}>
-									<input
-										type="checkbox"
-										value={store.id}
-										{...register("store_id", {
-											required: "Debes seleccionar al menos un local",
-										})}
-									/>
-									<Text text={store.store_name} type="text" />
-								</label>
-							</div>
-						))}
-						{errors.store_id && <p>{errors.store_id.message}</p>}
+						<div
+							style={{
+								display: "grid",
+								gridTemplateColumns: "1fr 1fr",
+								gap: "8px",
+							}}
+						>
+							{storesData.map((store) => (
+								<div key={store.id}>
+									<label style={{ display: "flex", gap: "4px" }}>
+										<input
+											type="checkbox"
+											value={store.id}
+											{...register("store_id", {
+												required: "Debes seleccionar al menos un local",
+											})}
+										/>
+										<Text text={store.store_name} type="text" />
+									</label>
+								</div>
+							))}
+							{errors.store_id && <p>{errors.store_id.message}</p>}
+						</div>
 					</s.WrapperInput>
 				</s.WrapperContent>
 				<s.WrapperBtns>

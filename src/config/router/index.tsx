@@ -12,7 +12,10 @@ export const RoutesConfig = () => {
 	return (
 		<Routes>
 			<Route path="/" element={<Home />} />
-			<Route path="/login" element={<Login />} />
+			<Route
+				path="/login"
+				element={!user ? <Login /> : <Navigate to={"/dashboard/store"} />}
+			/>
 			<Route
 				path="/dashboard"
 				element={user ? <Dashboard /> : <Navigate to={"/login"} />}

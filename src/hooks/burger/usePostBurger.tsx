@@ -84,8 +84,8 @@ export const usePetitionBurger = () => {
 	};
 
 	return {
-		postStore: postBurger,
-		updateStore: updateBurger,
+		postBurger,
+		updateBurger,
 		loading,
 		error,
 		success,
