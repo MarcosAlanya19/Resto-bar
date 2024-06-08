@@ -4,28 +4,21 @@ export const Wrapper = styled.div`
 	display: grid;
 	background-color: #bfbfbf40;
 
-	grid-template-columns: 1fr 2fr;
-	gap: 150px;
+	grid-template-columns: 1fr 1fr;
+	gap: 50px;
 
 	padding: 24px 24px 48px 24px;
 `;
 
 export const WrapperNumbers = styled.div`
 	display: grid;
-	gap: 5px;
+	gap: 8px;
 	background-color: ${(props) => props.theme.black};
 	color: ${(props) => props.theme.white};
 	border-radius: 24px;
-	font-size: 32px;
 	text-align: center;
 
-	padding: 4px 36px;
-`;
-
-export const Title = styled.div`
-	display: flex;
-	justify-content: center;
-	font-size: 64px;
+	padding: 16px 30px;
 `;
 
 export const WrapperCard = styled.div`

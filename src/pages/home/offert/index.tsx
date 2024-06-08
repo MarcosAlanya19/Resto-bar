@@ -49,7 +49,7 @@ const Offert = () => {
 						display: "flex",
 						gap: "20px",
 						alignItems: "center",
-						color: theme.primary,
+						color: "#ECA400",
 					}}
 				>
 					<StyledLink
@@ -66,7 +66,7 @@ const Offert = () => {
 						gap: "20px",
 						alignItems: "center",
 						paddingBottom: "48px",
-						color: theme.secondary,
+						color: "#F14A41",
 					}}
 				>
 					<StyledLink
