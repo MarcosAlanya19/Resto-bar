@@ -1,10 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+export enum MenuItemType {
+  Beverage = 'Beverage',
+  Burger = 'Burger',
+  Other = 'Other'
+}
+
 export interface IPostBurger {
-	burger_name: string;
+	item_name: string;
 	description: string;
 	price: string;
 	store_ids: string[];
 	image: string;
+	type: MenuItemType
 }
 
 interface Store {
@@ -14,11 +22,12 @@ interface Store {
 
 export interface IBurger {
 	id: string;
-	burger_name: string;
+	item_name: string;
 	description: string;
 	price: string;
 	image: any;
 	public_id: string;
 	secure_url: string;
 	stores: Store[];
+	type: MenuItemType
 }

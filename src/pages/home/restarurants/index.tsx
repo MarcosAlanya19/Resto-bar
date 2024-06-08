@@ -1,8 +1,11 @@
+import { useFetchStores } from "../../../hooks/store/useFetchStore";
 import { CardRestaurant } from "./components/card-restaurant";
 import * as s from "./styles";
 import { vars } from "./utils/vars";
 
 const Restaurant = () => {
+	const { data: dataStore } = useFetchStores();
+
 	return (
 		<s.Wrapper>
 			<div
@@ -52,12 +55,12 @@ const Restaurant = () => {
 			<div>
 				<s.Title>Restaurantes</s.Title>
 				<s.WrapperCard>
-					{vars.restaurant.map((data) => (
+					{dataStore.map((data) => (
 						<CardRestaurant
-							key={data.title}
-							img={data.img}
-							title={data.title}
-							subtitle={data.subtitle}
+							key={data.id}
+							img={data.secure_url}
+							title={data.store_name}
+							subtitle={data.phone}
 							description={data.description}
 						/>
 					))}

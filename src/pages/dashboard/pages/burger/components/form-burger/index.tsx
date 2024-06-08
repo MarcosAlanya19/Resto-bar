@@ -7,7 +7,11 @@ import { toast } from "react-toastify";
 import { Text } from "../../../../../../components/atomic/text";
 import { usePetitionBurger } from "../../../../../../hooks/burger/usePostBurger";
 import { useFetchStores } from "../../../../../../hooks/store/useFetchStore";
-import { IBurger, IPostBurger } from "../../../../../../types/burger.type";
+import {
+	IBurger,
+	IPostBurger,
+	MenuItemType,
+} from "../../../../../../types/burger.type";
 
 const customStyles = {
 	content: {
@@ -40,17 +44,18 @@ interface IProps {
 }
 
 export const ModalFormStore: React.FC<IProps> = (props) => {
-	const storeIds = props.update?.stores.map(store => store.id.toString());
+	const storeIds = props.update?.stores.map((store) => store.id.toString());
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<IPostBurger>({
 		defaultValues: {
-			burger_name: props.update?.id ? props.update.burger_name : "",
+			item_name: props.update?.id ? props.update.item_name : "",
 			description: props.update?.id ? props.update.description : "",
 			price: props.update?.id ? props.update.price : "",
-			store_ids: props.update?.id ? storeIds :   [],
+			store_ids: props.update?.id ? storeIds : [],
+			type: props.update?.id ? props.update.type : MenuItemType.Beverage,
 		},
 	});
 
@@ -106,10 +111,29 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 						<s.InputStyle
 							id="store_name"
 							type="text"
-							{...register("burger_name")}
+							{...register("item_name")}
 							placeholder="Ingresa nombre de la hamburguesa"
 						/>
-						{errors.burger_name && <p>{errors.burger_name.message}</p>}
+						{errors.item_name && <p>{errors.item_name.message}</p>}
+					</s.WrapperInput>
+
+					<s.WrapperInput>
+						<Text text="Tipo de elemento" type="text" />
+						<s.SelectStyle {...register("type")}>
+							<option value={MenuItemType.Beverage}>Bebida</option>
+							<option value={MenuItemType.Burger}>Hamburguesa</option>
+							<option value={MenuItemType.Other}>Otro</option>
+						</s.SelectStyle>
+					</s.WrapperInput>
+
+					<s.WrapperInput>
+						<Text text="Descripción" type="text" />
+						<s.InputStyle
+							id="description"
+							{...register("description", { required: "Address is required" })}
+							placeholder="Ingresa descripción de la hamburguesa"
+						/>
+						{errors.description && <p>{errors.description.message}</p>}
 					</s.WrapperInput>
 
 					<s.WrapperInput>
@@ -127,17 +151,6 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 							<img src={imagePreview} alt="Imagen de sucursal" width="100" />
 						)}
 					</s.WrapperInput>
-
-					<s.WrapperInput>
-						<Text text="Descripción" type="text" />
-						<s.InputStyle
-							id="description"
-							{...register("description", { required: "Address is required" })}
-							placeholder="Ingresa descripción de la hamburguesa"
-						/>
-						{errors.description && <p>{errors.description.message}</p>}
-					</s.WrapperInput>
-
 					<s.WrapperInput>
 						<Text text="Precio" type="text" />
 						<s.InputStyle

@@ -1,6 +1,8 @@
 import React from "react";
 import * as s from "./styles.ts";
 
+import { Text } from "../../../../../components/atomic/text/index.tsx";
+
 interface IProps {
 	img: string;
 	title: string;
@@ -12,41 +14,24 @@ export const CardMenu: React.FC<IProps> = (props) => {
 	const { title, description, price, img } = props;
 
 	return (
-		<s.Card
-			style={{
-				position: "relative",
-				borderRadius: "24px",
-				backgroundColor: "${(props) => props.theme.black}",
-				color: "${(props) => props.theme.white}",
-				width: "400px",
-				height: "250px",
-			}}
-		>
-			<div style={{ fontSize: "32px", fontWeight: "900", textAlign: "center" }}>
-				{title}
-			</div>
-			<p
-				style={{
-					fontWeight: "normal",
-					fontFamily: "Poppins",
-					textAlign: "center",
-				}}
-			>
-				{description}
-			</p>
-			<div style={{ fontSize: "32px", fontWeight: "900", textAlign: "end" }}>
-				{price}
-			</div>
+		<s.Card>
+			<s.Image src={img} alt={"img"} />
 			<div
 				style={{
-					position: "absolute",
-					bottom: "-40px",
-					left: "-130px",
-					width: "300px",
-					height: "200px",
+					borderRadius: "16px",
+					padding: "16px",
+					paddingLeft: "220px",
+					display: "grid",
+					gridAutoRows: "1fr auto",
 				}}
 			>
-				<img style={{ width: "100%", height: "100%" }} src={img} alt={img} />
+				<div>
+					<Text text={title} type="title" weight="medium" />
+					<Text text={description} type="text" />
+				</div>
+				<div style={{ display: "flex", justifyContent: "end" }}>
+					<Text text={`S/ ${price}`} type="title" weight="bold" />
+				</div>
 			</div>
 		</s.Card>
 	);

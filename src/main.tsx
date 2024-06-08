@@ -8,12 +8,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserProvider } from "./context/userContext.tsx";
 
-const theme = {
+export const theme = {
 	primary: "#ECA400",
 	secondary: "#F14A41",
 	terceary: "#3FB43D",
 	white: "#FDFFFC",
-	black: "#240f03",
+	black: "#0e0e0e",
 };
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

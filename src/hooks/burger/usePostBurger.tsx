@@ -5,9 +5,10 @@ import { IBurger, IPostBurger } from "../../types/burger.type";
 
 const createFormData = (data: IPostBurger) => {
   const formData = new FormData();
-  formData.append("burger_name", data.burger_name);
+  formData.append("item_name", data.item_name);
   formData.append("description", data.description);
   formData.append("price", data.price);
+  formData.append("type", data.type);
   formData.append("store_ids", data.store_ids);
   formData.append("image", data.image[0]);
   return formData;

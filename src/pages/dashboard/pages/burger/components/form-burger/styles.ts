@@ -51,6 +51,14 @@ export const InputStyle = styled.input`
 	font-size: 14px;
 `;
 
+export const SelectStyle = styled.select`
+	min-height: 40px;
+	border-radius: 8px;
+	border: 1px solid #bfbfbf;
+	padding: 4px 8px;
+	font-size: 14px;
+`;
+
 const ButtonStyled = styled.button`
 	border: none;
 	border-radius: 12px;

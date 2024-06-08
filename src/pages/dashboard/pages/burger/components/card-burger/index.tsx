@@ -37,7 +37,7 @@ export const CardBurger: React.FC<IProps> = (props) => {
 					padding: "8px 16px",
 				}}
 			>
-				<Text text={data.burger_name} type="text" />
+				<Text text={data.item_name} type="text" />
 				<Text text={data.description} type="text" />
 				<Text text={data.price} type="text" />
 				<div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
