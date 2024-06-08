@@ -57,7 +57,7 @@ const Restaurant = () => {
 								fontWeight: "normal",
 							}}
 						>
-							+51{dataStore[0].phone ?? "-"}
+							+51{dataStore[0]?.phone ?? "-"}
 						</div>
 					</s.WrapperNumbers>
 				</div>

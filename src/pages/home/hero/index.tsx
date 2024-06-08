@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Text } from "../../../components/atomic/text";
 import * as s from "./style";
 
@@ -10,7 +11,8 @@ const Hero = () => {
 					backgroundColor: "#0e0e0e",
 					display: "flex",
 					alignItems: "center",
-					paddingInline: "24px",
+					justifyContent: "space-between",
+					paddingInline: "40px",
 					color: "#fff",
 				}}
 			>
@@ -19,6 +21,13 @@ const Hero = () => {
 				>
 					<Text text="TOSTADO" type="textDefault" weight="bold" />
 					<Text text="restobar." type="textDefault" />
+				</div>
+
+				<div style={{ display: "flex", gap: "40px" }}>
+					<Link to={"menu"}>
+						<Text text="Menú" type="textDefault" />
+					</Link>
+					<Text text="Blog" type="textDefault" />
 				</div>
 			</div>
 			<s.Wrapper>
