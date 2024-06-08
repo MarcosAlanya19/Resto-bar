@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 	grid-template-columns: 1fr 2fr;
 	gap: 150px;
 
-	padding: 24px 100px;
+	padding: 24px 24px 48px 24px;
 `;
 
 export const WrapperNumbers = styled.div`
