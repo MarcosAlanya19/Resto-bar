@@ -1,35 +1,10 @@
-import { Link } from "react-router-dom";
-import { Text } from "../../../../components/atomic/text";
 import * as s from "./style";
+
+import { Text } from "../../../../components/atomic/text";
 
 const Hero = () => {
 	return (
-		<div>
-			<div
-				style={{
-					height: "64px",
-					backgroundColor: "#0e0e0e",
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "space-between",
-					paddingInline: "40px",
-					color: "#fff",
-				}}
-			>
-				<div
-					style={{ display: "grid", justifyItems: "center", lineHeight: "1" }}
-				>
-					<Text text="TOSTADO" type="textDefault" weight="bold" />
-					<Text text="restobar." type="textDefault" />
-				</div>
-
-				<div style={{ display: "flex", gap: "40px" }}>
-					<Link to={"menu"}>
-						<Text text="Menú" type="textDefault" />
-					</Link>
-					<Text text="Blog" type="textDefault" />
-				</div>
-			</div>
+		<>
 			<s.Wrapper>
 				<div style={{ color: "#fff", lineHeight: 1 }}>
 					<Text
@@ -84,7 +59,7 @@ const Hero = () => {
 					</div>
 				</div>
 			</s.Wrapper>
-		</div>
+		</>
 	);
 };
 
