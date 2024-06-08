@@ -1,6 +1,7 @@
 import { FC } from "react";
+import * as s from "./styles"
+
 import { Text } from "../atomic/text";
-import { Link } from "react-router-dom";
 
 export const Navbar: FC = () => {
 	return (
@@ -21,13 +22,13 @@ export const Navbar: FC = () => {
 			</div>
 
 			<div style={{ display: "flex", gap: "40px" }}>
-				<Link to={"/"}>
+				<s.StyledNavLink to={"/"}>
 					<Text text="Inicio" type="textDefault" />
-				</Link>
+				</s.StyledNavLink>
 
-				<Link to={"menu"}>
+				<s.StyledNavLink to={"menu"}>
 					<Text text="Menú" type="textDefault" />
-				</Link>
+				</s.StyledNavLink>
 				<Text text="Blog" type="textDefault" />
 			</div>
 		</div>
