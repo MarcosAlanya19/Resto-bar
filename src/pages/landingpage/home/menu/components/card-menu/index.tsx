@@ -1,7 +1,7 @@
 import React from "react";
 import * as s from "./styles.ts";
 
-import { Text } from "../../../../../components/atomic/text/index.tsx";
+import { Text } from "../../../../../../components/atomic/text/index.tsx";
 
 interface IProps {
 	img: string;

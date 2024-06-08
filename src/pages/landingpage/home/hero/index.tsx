@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Text } from "../../../components/atomic/text";
+import { Text } from "../../../../components/atomic/text";
 import * as s from "./style";
 
 const Hero = () => {

@@ -3,19 +3,22 @@ import { useUserContext } from "../../context/userContext";
 import Dashboard from "../../pages/dashboard";
 import { BurguerDashboard } from "../../pages/dashboard/pages/burger";
 import { StoreDashboard } from "../../pages/dashboard/pages/store";
-import Home from "../../pages/home";
+import Home from "../../pages/landingpage/home";
 import Login from "../../pages/login";
+import Menu from "../../pages/landingpage/menu";
 
 export const RoutesConfig = () => {
 	const { user } = useUserContext();
 
 	return (
 		<Routes>
-			<Route path="/" element={<Home />} />
 			<Route
 				path="/login"
 				element={!user ? <Login /> : <Navigate to={"/dashboard/store"} />}
 			/>
+			<Route path="/" element={<Home />}>
+				<Route path="/menu" element={<Menu />} />
+			</Route>
 			<Route
 				path="/dashboard"
 				element={user ? <Dashboard /> : <Navigate to={"/login"} />}

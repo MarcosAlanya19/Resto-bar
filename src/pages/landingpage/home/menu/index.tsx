@@ -1,5 +1,5 @@
-import { Text } from "../../../components/atomic/text";
-import { useFetchBurgers } from "../../../hooks/burger/useFetchBurger";
+import { Text } from "../../../../components/atomic/text";
+import { useFetchBurgers } from "../../../../hooks/burger/useFetchBurger";
 import { CardMenu } from "./components/card-menu";
 import * as s from "./styles";
 

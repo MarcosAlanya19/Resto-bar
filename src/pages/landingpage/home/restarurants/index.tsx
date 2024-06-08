@@ -1,7 +1,7 @@
 import * as s from "./styles";
 
-import { Text } from "../../../components/atomic/text";
-import { useFetchStores } from "../../../hooks/store/useFetchStore";
+import { Text } from "../../../../components/atomic/text";
+import { useFetchStores } from "../../../../hooks/store/useFetchStore";
 import { CardRestaurant } from "./components/card-restaurant";
 
 const Restaurant = () => {

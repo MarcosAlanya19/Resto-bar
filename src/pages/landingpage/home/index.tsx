@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import Hero from './hero';
 import Menu1 from './menu';
 import Offert from './offert';
@@ -7,6 +8,7 @@ const Home = () => {
   return (
     <>
       <Hero />
+			<Outlet />
       <Menu1 />
       <Offert />
       <Restaurant />

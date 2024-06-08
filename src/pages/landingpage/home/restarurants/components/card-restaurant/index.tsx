@@ -2,8 +2,8 @@ import React from "react";
 import * as s from "./styles.ts";
 
 import dayjs from "dayjs";
-import { Text } from "../../../../../components/atomic/text/index.tsx";
-import { IStore } from "../../../../../types/store.type.ts";
+import { Text } from "../../../../../../components/atomic/text/index.tsx";
+import { IStore } from "../../../../../../types/store.type.ts";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
 dayjs.extend(customParseFormat);
