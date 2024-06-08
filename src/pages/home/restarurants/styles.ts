@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
 	display: grid;
-	font-family: "Dancing Script", cursive;
+	background-color: #bfbfbf40;
 
 	grid-template-columns: 1fr 2fr;
 	gap: 150px;
