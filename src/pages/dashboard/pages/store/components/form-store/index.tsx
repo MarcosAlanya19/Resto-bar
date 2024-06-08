@@ -49,6 +49,7 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 			address: props.update?.id ? props.update.address : "",
 			closing_hour: props.update?.id ? props.update.closing_hour : "",
 			opening_hour: props.update?.id ? props.update.opening_hour : "",
+			description: props.update?.id ? props.update.description : "",
 			phone: props.update?.id ? props.update.phone : "",
 			store_name: props.update?.id ? props.update.store_name : "",
 		},
@@ -109,6 +110,19 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 							placeholder="Ingresa nombre de la hamburguesa"
 						/>
 						{errors.store_name && <p>{errors.store_name.message}</p>}
+					</s.WrapperInput>
+
+					<s.WrapperInput>
+						<Text text="Descripción" type="text" />
+						<s.InputStyle
+							id="description"
+							type="text"
+							{...register("description", {
+								required: "Store name is required",
+							})}
+							placeholder="Ingresa una descripción"
+						/>
+						{errors.description && <p>{errors.description.message}</p>}
 					</s.WrapperInput>
 
 					<s.WrapperInput>

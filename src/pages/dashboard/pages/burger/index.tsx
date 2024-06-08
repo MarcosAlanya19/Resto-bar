@@ -7,8 +7,8 @@ import { Text } from "../../../../components/atomic/text";
 import { useFetchBurgers } from "../../../../hooks/burger/useFetchBurger";
 import { useBoolean } from "../../../../hooks/useBoolean";
 import { Header } from "../../components/header";
-import { CardBurger } from "./components/card-store";
-import { ModalFormStore } from "./components/form-store";
+import { CardBurger } from "./components/card-burger";
+import { ModalFormStore } from "./components/form-burger";
 
 export const BurguerDashboard: React.FC = () => {
 	const createStore = useBoolean();

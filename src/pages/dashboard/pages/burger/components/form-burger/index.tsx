@@ -40,6 +40,7 @@ interface IProps {
 }
 
 export const ModalFormStore: React.FC<IProps> = (props) => {
+	const storeIds = props.update?.stores.map(store => store.id.toString());
 	const {
 		register,
 		handleSubmit,
@@ -49,44 +50,23 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 			burger_name: props.update?.id ? props.update.burger_name : "",
 			description: props.update?.id ? props.update.description : "",
 			price: props.update?.id ? props.update.price : "",
-			store_id: props.update?.id ? props.update.store_id : "",
+			store_ids: props.update?.id ? storeIds :   [],
 		},
 	});
 
 	const { postBurger, updateBurger } = usePetitionBurger();
 
 	const onSubmit: SubmitHandler<IPostBurger> = async (data) => {
-		console.log(data);
-
-		try {
-			const promises = data.store_id.map((storeId) => {
-				const burgerData = {
-					...data,
-					store_id: storeId,
-				};
-
-				if (props.update) {
-					// Llamada a la función de actualización para cada store_id
-					return updateBurger(props.update.id, burgerData);
-				} else {
-					// Llamada a la función de creación para cada store_id
-					return postBurger(burgerData);
-				}
-			});
-
-			await Promise.all(promises);
-
-			toast.success(
-				props.update
-					? "Actualización de hamburguesa(s) con éxito"
-					: "Creación de hamburguesa(s) con éxito"
-			);
-			props.refresh();
-			props.modal.off();
-		} catch (error) {
-			console.error("Error al procesar hamburguesa(s):", error);
-			toast.error("Hubo un error al procesar la(s) hamburguesa(s)");
+		if (props.update) {
+			await updateBurger(props.update.id, data);
+			toast.success("Actualización de sucursal con éxito");
+		} else {
+			console.log({ data });
+			await postBurger(data);
+			toast.success("Creación de sucursal con éxito");
 		}
+		props.refresh();
+		props.modal.off();
 	};
 
 	const [imagePreview, setImagePreview] = React.useState(
@@ -126,9 +106,7 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 						<s.InputStyle
 							id="store_name"
 							type="text"
-							{...register("burger_name", {
-								required: "Store name is required",
-							})}
+							{...register("burger_name")}
 							placeholder="Ingresa nombre de la hamburguesa"
 						/>
 						{errors.burger_name && <p>{errors.burger_name.message}</p>}
@@ -165,7 +143,7 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 						<s.InputStyle
 							type="number"
 							id="price"
-							{...register("price", { required: "Phone is required" })}
+							{...register("price")}
 							placeholder="Ingresa costo de la hamburguesa"
 						/>
 						{errors.price && <p>{errors.price.message}</p>}
@@ -186,15 +164,13 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 										<input
 											type="checkbox"
 											value={store.id}
-											{...register("store_id", {
-												required: "Debes seleccionar al menos un local",
-											})}
+											{...register("store_ids")}
 										/>
 										<Text text={store.store_name} type="text" />
 									</label>
 								</div>
 							))}
-							{errors.store_id && <p>{errors.store_id.message}</p>}
+							{errors.store_ids && <p>{errors.store_ids.message}</p>}
 						</div>
 					</s.WrapperInput>
 				</s.WrapperContent>

@@ -5,7 +5,7 @@ export const useDeleteBurger = () => {
 	const [loading, setLoading] = React.useState(false);
 	const [error, setError] = React.useState("");
 
-	const deleteStore = async (itemId: string) => {
+	const deleteBurger = async (itemId: string) => {
 		setLoading(true);
 		setError("");
 
@@ -18,5 +18,5 @@ export const useDeleteBurger = () => {
 		}
 	};
 
-	return { loading, error, deleteStore };
+	return { loading, error, deleteBurger };
 };

@@ -5,12 +5,14 @@ export interface IPostStore {
 	phone: string;
 	opening_hour: string;
 	closing_hour: string;
+	description: string;
 	image: any;
 }
 
 export interface IStore {
 	id: string;
 	store_name: string;
+	description: string;
 	public_id: string;
 	secure_url: string;
 	address: string;

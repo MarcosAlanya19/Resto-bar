@@ -6,6 +6,7 @@ import { IPostStore, IStore } from "../../types/store.type";
 const createFormData = (data: IPostStore) => {
 	const formData = new FormData();
 	formData.append("store_name", data.store_name);
+	formData.append("description", data.description);
 	formData.append("address", data.address);
 	formData.append("phone", data.phone);
 	formData.append("opening_hour", data.opening_hour);

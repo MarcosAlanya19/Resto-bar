@@ -4,13 +4,13 @@ import React from "react";
 import { IBurger, IPostBurger } from "../../types/burger.type";
 
 const createFormData = (data: IPostBurger) => {
-	const formData = new FormData();
-	formData.append("burger_name", data.burger_name);
-	formData.append("description", data.description);
-	formData.append("price", data.price);
-	formData.append("store_id", data.store_id);
-	formData.append("image", data.image[0]);
-	return formData;
+  const formData = new FormData();
+  formData.append("burger_name", data.burger_name);
+  formData.append("description", data.description);
+  formData.append("price", data.price);
+  formData.append("store_ids", data.store_ids);
+  formData.append("image", data.image[0]);
+  return formData;
 };
 
 export const usePetitionBurger = () => {

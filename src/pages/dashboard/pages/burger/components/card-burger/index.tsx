@@ -6,10 +6,10 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 import { Text } from "../../../../../../components/atomic/text";
 import { ModalConfirm } from "../../../../../../components/modal/confirm";
-import { useDeleteStore } from "../../../../../../hooks/store/useDeleteStore";
+import { useDeleteBurger } from "../../../../../../hooks/burger/useDeleteBurger";
 import { useBoolean } from "../../../../../../hooks/useBoolean";
 import { IBurger } from "../../../../../../types/burger.type";
-import { ModalFormStore } from "../form-store";
+import { ModalFormStore } from "../form-burger";
 
 interface IProps {
 	data: IBurger;
@@ -22,7 +22,7 @@ export const CardBurger: React.FC<IProps> = (props) => {
 	const editStore = useBoolean();
 	const [update, setUpdate] = React.useState<IBurger>(data);
 
-	const { deleteStore } = useDeleteStore();
+	const { deleteBurger } = useDeleteBurger();
 
 	return (
 		<>
@@ -40,7 +40,24 @@ export const CardBurger: React.FC<IProps> = (props) => {
 				<Text text={data.burger_name} type="text" />
 				<Text text={data.description} type="text" />
 				<Text text={data.price} type="text" />
-				<Text text={data.store_id} type="text" />
+				<div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+					{data.stores.map((store) => (
+						<div
+							key={store.id}
+							style={{
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+								backgroundColor: "#bfbfbf70",
+								borderRadius: "8px",
+								textTransform: "uppercase",
+								maxWidth: "120px",
+							}}
+						>
+							<Text text={store.name} type="text" weight="medium" />
+						</div>
+					))}
+				</div>
 				<div style={{ width: 50, height: 50, overflow: "hidden" }}>
 					<img
 						src={data.secure_url}
@@ -78,7 +95,7 @@ export const CardBurger: React.FC<IProps> = (props) => {
 					cancel: "No, cancelar",
 				}}
 				onConfirm={async () => {
-					await deleteStore(data.id);
+					await deleteBurger(data.id);
 					toast.success("Se elimino sucursal con éxito");
 					props.refresh();
 				}}
