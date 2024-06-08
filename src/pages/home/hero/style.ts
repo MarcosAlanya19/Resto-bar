@@ -2,15 +2,20 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
 	background-image: url("./img/home/hero-1-hero.png");
+
 	background-size: cover;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	justify-items: center;
-	align-items: center;
-
-	min-height: 100vh;
-
+	background-position: center;
+	height: calc(100vh - 64px);
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+	position: relative;
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	grid-template-columns: 1fr 1fr;
+	padding: 0 200px;
+	gap: 50px;
+
 `;
 
 export const Name = styled.div`
@@ -40,7 +45,7 @@ export const Button = styled.button`
 export const Title = styled.div`
 	color: ${(props) => props.theme.white};
 
-	font-size: 100px;
+	font-size: 40px;
 	font-weight: 900;
 `;
 

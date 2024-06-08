@@ -13,7 +13,7 @@ const theme = {
 	secondary: "#F14A41",
 	terceary: "#3FB43D",
 	white: "#FDFFFC",
-	black: "#2F2D2E",
+	black: "#240f03",
 };
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

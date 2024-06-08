@@ -1,21 +1,81 @@
+import { Text } from "../../../components/atomic/text";
 import * as s from "./style";
 
 const Hero = () => {
-	
-	const img =
-		"https://s3-alpha-sig.figma.com/img/32a9/6b23/5dde658f0ce4b45b38e24b2a6ecb2dc6?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e-VmWyLWePkyUwjLEmlpTSaFWmfQqfVkketmXRUKDgTDcV~Jh52reTkbgSVFknK~FBrhK6YMHf6k94sooIHsdpTuqeC9vf7WOPwS3PB4T6Aq3McqQX88DIXCx7EpKv7O5YPvfFcDd3x25LFZPsZuRiszDX-QpROVhcYuEzD-gRqk9MzfLaXSSbwfVz-OFAIUBYCT5SeLxHTXRXHdEiqLnhnFl59htD1WOpR~Zofkp2max1eCq0zVHSLyMx9CMWD~rsaBk~iP8AxT5paIPoySHHffWRAvY5QzDwoX3Sf150KcCBu153VaPWLQaYaUSnTFX7mw4hmxdXJb~d-Q-frYDA__";
-
 	return (
-		<s.Wrapper>
-			<s.Name>
-				<s.Title>La mejor Hamburguesa</s.Title>
-				<s.Button>Pide ahora</s.Button>
-			</s.Name>
-
-			<s.WrapperImg>
-				<img src={img} alt="img-hero" />
-			</s.WrapperImg>
-		</s.Wrapper>
+		<div>
+			<div
+				style={{
+					height: "64px",
+					backgroundColor: "#0e0e0e",
+					display: "flex",
+					alignItems: "center",
+					paddingInline: "24px",
+					color: "#fff",
+				}}
+			>
+				<div
+					style={{ display: "grid", justifyItems: "center", lineHeight: "1" }}
+				>
+					<Text text="TOSTADO" type="textDefault" weight="bold" />
+					<Text text="restobar." type="textDefault" />
+				</div>
+			</div>
+			<s.Wrapper>
+				<div style={{ color: "#fff", lineHeight: 1 }}>
+					<Text
+						weight="semiBold"
+						text="¡Deliciosos sabores, "
+						style={{ fontSize: "70px", color: "#F14A41" }}
+					/>
+					<Text
+						weight="semiBold"
+						text="momentos tostados para"
+						style={{ fontSize: "70px", color: "#ECA400" }}
+					/>
+					<Text
+						weight="semiBold"
+						text="recordar!"
+						style={{ fontSize: "70px" }}
+					/>
+				</div>
+				<div
+					style={{
+						display: "grid",
+						justifyItems: "center",
+						alignItems: "center",
+						background: "#0e0e0e",
+						height: "500px",
+						width: "500px",
+						borderRadius: "50%",
+					}}
+				>
+					<div
+						style={{
+							display: "grid",
+							justifyItems: "center",
+							alignItems: "center",
+							border: "2px dashed #fff",
+							height: "470px",
+							width: "470px",
+							borderRadius: "50%",
+						}}
+					>
+						<div
+							style={{
+								display: "grid",
+								justifyItems: "center",
+								color: "#fff",
+								lineHeight: "1",
+							}}
+						>
+							<Text text="TOSTADO" style={{ fontSize: "70px" }} weight="bold" />
+							<Text text="restobar." style={{ fontSize: "50px" }} />
+						</div>
+					</div>
+				</div>
+			</s.Wrapper>
+		</div>
 	);
 };
 
