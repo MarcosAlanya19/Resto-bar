@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Text } from "../../../components/atomic/text";
+import { Text } from "../atomic/text";
 import { Link } from "react-router-dom";
 
 export const Navbar: FC = () => {

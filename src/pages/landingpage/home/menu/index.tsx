@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 import { Text } from "../../../../components/atomic/text";
 import { useFetchBurgers } from "../../../../hooks/burger/useFetchBurger";
 import { CardMenu } from "./components/card-menu";
 import * as s from "./styles";
+import { MdOutlineRestaurantMenu } from "react-icons/md";
 
 const Menu1 = () => {
 	const { data: dataBurger } = useFetchBurgers();
@@ -24,7 +26,7 @@ const Menu1 = () => {
 				/>
 			</div>
 			<s.WrapperCard>
-				{dataBurger.map((data) => (
+				{dataBurger.slice(0, 6).map((data) => (
 					<CardMenu
 						key={data.id}
 						img={data.secure_url}
@@ -33,6 +35,20 @@ const Menu1 = () => {
 						description={data.description}
 					/>
 				))}
+				<div />
+				<div />
+				<div style={{ display: "flex", justifyContent: "end" }}>
+					<Link to={"/menu"} style={{textDecoration: "none"}}>
+						{dataBurger.length > 6 && (
+							<Text
+								leftIcon={<MdOutlineRestaurantMenu />}
+								text="Ver menú completo"
+								weight="medium"
+								style={{ fontSize: "24px" }}
+							/>
+						)}
+					</Link>
+				</div>
 			</s.WrapperCard>
 		</div>
 	);
