@@ -58,10 +58,7 @@ const Restaurant = () => {
 					{dataStore.map((data) => (
 						<CardRestaurant
 							key={data.id}
-							img={data.secure_url}
-							title={data.store_name}
-							subtitle={data.phone}
-							description={data.description}
+							data={data}
 						/>
 					))}
 				</s.WrapperCard>
