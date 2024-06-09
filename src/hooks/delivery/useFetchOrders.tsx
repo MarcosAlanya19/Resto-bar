@@ -11,19 +11,18 @@ export const useFetchOrders = () => {
 	const fetchOrder = async () => {
 		try {
 			const response = await axios.get("http://localhost:3000/api/orders");
-			response.data;
 			setData(response.data);
 			setLoading(false);
 		} catch (error: any) {
 			console.error("Error fetching order data:", error);
 			setError(error);
-			return;
 		}
 	};
 
 	useEffect(() => {
 		fetchOrder();
 	}, []);
+
 
 	return { data, loading, error, fetchOrder };
 };

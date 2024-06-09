@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
 import * as sg from "../../styles";
 import * as s from "./styles";
 
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+import { Text } from "../../../../components/atomic/text";
 import { useFetchOrders } from "../../../../hooks/delivery/useFetchOrders";
 import { Header } from "../../components/header";
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import React from "react";
-import { Text } from "../../../../components/atomic/text";
+import { CardOrderPeding } from "./components/card-order-peding";
 
 export const HomeDashboard = () => {
 	const { data: dataOrders, loading: isLoading, error } = useFetchOrders();
@@ -71,23 +72,24 @@ export const HomeDashboard = () => {
 									)}
 								</Tab>
 							</TabList>
+
 							<TabPanels>
 								<TabPanel>
-									{dataOrders
-										.filter((order) => order.status === "pending")
-										.map((order) => (
-											<div key={order.order_id}>
-												<h3>{order.user_name}</h3>
-												<p>{order.order_date}</p>
-												<ul>
-													{order.items.map((item) => (
-														<li key={item.id}>
-															{item.item_name} - {item.quantity}
-														</li>
-													))}
-												</ul>
-											</div>
-										))}
+									<div
+										style={{
+											display: "grid",
+											marginTop: "16px",
+											gridTemplateColumns:
+												"repeat(auto-fill, minmax(300px, 1fr))",
+											gap: "16px",
+										}}
+									>
+										{dataOrders
+											.filter((order) => order.status === "pending")
+											.map((order) => (
+												<CardOrderPeding key={order.order_id} data={order} />
+											))}
+									</div>
 								</TabPanel>
 
 								<TabPanel>
