@@ -15,6 +15,7 @@
     "@cloudinary/url-gen": "^1.19.0",
     "@floating-ui/core": "^1.6.2",
     "@floating-ui/dom": "^1.6.5",
+    "@headlessui/react": "^2.0.4",
     "axios": "^1.7.2",
     "cloudinary": "^2.2.0",
     "dayjs": "^1.11.11",

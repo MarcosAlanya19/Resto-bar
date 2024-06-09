@@ -1,8 +1,7 @@
 import { useFetchBurgers } from "../../../hooks/burger/useFetchBurger";
 import { useFetchStores } from "../../../hooks/store/useFetchStore";
 import { MenuItemType } from "../../../types/burger.type";
-import { CardMenu } from "../home/menu/components/card-menu";
-
+import { CardMenuComplete } from "./card-product";
 
 interface IOptions {
 	label: string;
@@ -37,7 +36,7 @@ const Menu = () => {
 		<div
 			style={{ backgroundColor: "#bfbfbf40", minHeight: "calc(100vh - 60px)" }}
 		>
-			<div style={{paddingTop: "50px"}}>
+			<div style={{ paddingTop: "50px" }}>
 				<div
 					style={{
 						boxSizing: "content-box",
@@ -49,7 +48,7 @@ const Menu = () => {
 						margin: "0 auto",
 						padding: "16px",
 						borderRadius: "8px",
-						backgroundColor: "#0e0e0e"
+						backgroundColor: "#0e0e0e",
 					}}
 				>
 					<input
@@ -111,16 +110,13 @@ const Menu = () => {
 					gridTemplateColumns: "repeat(3, 1fr)",
 					gap: "16px",
 					rowGap: "80px",
-					padding: "70px 0"
+					padding: "70px 0",
 				}}
 			>
 				{dataItem.map((data) => (
-					<CardMenu
+					<CardMenuComplete
 						key={data.id}
-						img={data.secure_url}
-						title={data.item_name}
-						price={data.price}
-						description={data.description}
+						data={data}
 					/>
 				))}
 			</div>

@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+
+// Interfaces de Tipos
 export interface User {
     id: number;
     user_name: string;
@@ -25,7 +27,7 @@ export interface Order {
     store_id: number;
     items: CartItem[];
     status: 'pending' | 'in_process' | 'delivered';
-    order_date?: string;
+    order_date?: string; // opcional para el manejo de la fecha de pedido
 }
 
 // Tipos del Contexto
@@ -33,8 +35,9 @@ interface UserCartContextType {
     user: User | null;
     setUser: React.Dispatch<React.SetStateAction<User | null>>;
     cart: CartItem[];
-    addToCart: (item: CartItem) => void;
-    removeFromCart: (item: CartItem) => void;
+    addToCart: (item: MenuItem) => void;
+    removeFromCart: (item: MenuItem) => void;
+    updateItemQuantity: (item: MenuItem, quantity: number) => void;
     clearCart: () => void;
     submitOrder: (store_id: number) => Promise<void>;
 }
@@ -46,6 +49,7 @@ const UserCartContext = createContext<UserCartContextType>({
     cart: [],
     addToCart: () => null,
     removeFromCart: () => null,
+    updateItemQuantity: () => null,
     clearCart: () => null,
     submitOrder: async () => {},
 });
@@ -76,12 +80,33 @@ export const UserCartProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
 
-    const addToCart = (item: CartItem) => {
-        setCart(prevCart => [...prevCart, item]);
+    const addToCart = (item: MenuItem) => {
+        setCart(prevCart => {
+            const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
+            if (existingItem) {
+                return prevCart.map(cartItem =>
+                    cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+                );
+            } else {
+                return [...prevCart, { ...item, quantity: 1 }];
+            }
+        });
     };
 
-    const removeFromCart = (item: CartItem) => {
+    const removeFromCart = (item: MenuItem) => {
         setCart(prevCart => prevCart.filter(cartItem => cartItem.id !== item.id));
+    };
+
+    const updateItemQuantity = (item: MenuItem, quantity: number) => {
+        setCart(prevCart => {
+            if (quantity <= 0) {
+                return prevCart.filter(cartItem => cartItem.id !== item.id);
+            } else {
+                return prevCart.map(cartItem =>
+                    cartItem.id === item.id ? { ...cartItem, quantity } : cartItem
+                );
+            }
+        });
     };
 
     const clearCart = () => {
@@ -118,7 +143,7 @@ export const UserCartProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     };
 
     return (
-        <UserCartContext.Provider value={{ user, setUser, cart, addToCart, removeFromCart, clearCart, submitOrder }}>
+        <UserCartContext.Provider value={{ user, setUser, cart, addToCart, removeFromCart, updateItemQuantity, clearCart, submitOrder }}>
             {children}
         </UserCartContext.Provider>
     );
