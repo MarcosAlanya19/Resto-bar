@@ -171,7 +171,7 @@ export const Navbar: FC = () => {
 												borderRadius: "8px",
 												cursor: "pointer",
 											}}
-											onClick={() => submitOrder(1)}
+											onClick={() => submitOrder(4)}
 										>
 											<Text
 												text="Realizar Pedido"

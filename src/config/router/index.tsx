@@ -3,6 +3,7 @@ import { useUserCartContext } from "../../context/userContext";
 import Dashboard from "../../pages/dashboard";
 import { BurguerDashboard } from "../../pages/dashboard/pages/burger";
 import { StoreDashboard } from "../../pages/dashboard/pages/store";
+import { HomeDashboard } from "../../pages/dashboard/pages/home-dashboard";
 import Home from "../../pages/landingpage/home";
 import Menu from "../../pages/landingpage/menu";
 import { Layout } from "../../pages/layout";
@@ -27,6 +28,9 @@ export const RoutesConfig = () => {
 				path="/dashboard"
 				element={user ? <Dashboard /> : <Navigate to={"/login"} />}
 			>
+				<Route path="reception" element={<HomeDashboard />} />
+				<Route path="orders" element={<BurguerDashboard />} />
+
 				<Route path="burguer" element={<BurguerDashboard />} />
 				<Route path="store" element={<StoreDashboard />} />
 			</Route>

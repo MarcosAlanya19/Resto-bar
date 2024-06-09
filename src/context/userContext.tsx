@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { IItem } from "../types/burger.type";
 
@@ -111,31 +112,36 @@ export const UserCartProvider: React.FC<{ children: React.ReactNode }> = ({
 		setCart([]);
 	};
 
-	const submitOrder = async (store_id: number) => {
+	const submitOrder = async () => {
 		if (!user) {
 			alert("Usuario no autenticado");
 			return;
 		}
 
+		const orderItems = cart.map((item) => ({
+			item_id: item.id,
+			quantity: item.quantity,
+		}));
+
 		const order: Order = {
 			user_id: user.id,
-			store_id,
-			items: cart,
+			items: orderItems,
 			status: "pending",
 		};
 
-		const response = await fetch("/api/orders", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(order),
-		});
-
-		if (response.ok) {
-			alert("Pedido realizado con éxito");
-			clearCart();
-		} else {
+		try {
+			const response = await axios.post(
+				"http://localhost:3000/api/orders",
+				order
+			);
+			if (response.status === 201) {
+				alert("Pedido realizado con éxito");
+				clearCart();
+			} else {
+				alert("Error al realizar el pedido");
+			}
+		} catch (error) {
+			console.error("Error al realizar el pedido:", error);
 			alert("Error al realizar el pedido");
 		}
 	};

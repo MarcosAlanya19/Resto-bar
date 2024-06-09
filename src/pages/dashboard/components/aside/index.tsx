@@ -1,6 +1,8 @@
 import {
 	RiBubbleChartLine,
 	RiBuilding4Line,
+	RiChatHistoryLine,
+	RiDashboardLine,
 	RiLogoutCircleLine,
 } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
@@ -37,22 +39,51 @@ export const AsideModal = () => {
 				/>
 			</div>
 
-			<div>
-				<s.StyledNavLink to={"/dashboard/store"}>
+			<div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+				<div style={{ display: "grid", gap: "8px" }}>
+					<Text text="Gestión de Pedidos" type="textDefault" weight="medium" />
+					<div>
+						<s.StyledNavLink to={"/dashboard/reception"}>
+							<Text
+								leftIcon={<RiDashboardLine />}
+								text="Recepción"
+								type="textDefault"
+							/>
+						</s.StyledNavLink>
+						<s.StyledNavLink to={"/dashboard/orders"}>
+							<Text
+								leftIcon={<RiChatHistoryLine />}
+								text="Historial"
+								type="textDefault"
+							/>
+						</s.StyledNavLink>
+					</div>
+				</div>
+				<div style={{ display: "grid", gap: "8px" }}>
 					<Text
-						leftIcon={<RiBuilding4Line />}
-						text="Sucursales"
+						text="Gestión de Sucursales y Productos"
 						type="textDefault"
+						weight="medium"
 					/>
-				</s.StyledNavLink>
-				<s.StyledNavLink to={"/dashboard/burguer"}>
-					<Text
-						leftIcon={<RiBubbleChartLine />}
-						text="Hamburguesas"
-						type="textDefault"
-					/>
-				</s.StyledNavLink>
+					<div>
+						<s.StyledNavLink to={"/dashboard/store"}>
+							<Text
+								leftIcon={<RiBuilding4Line />}
+								text="Sucursales"
+								type="textDefault"
+							/>
+						</s.StyledNavLink>
+						<s.StyledNavLink to={"/dashboard/burguer"}>
+							<Text
+								leftIcon={<RiBubbleChartLine />}
+								text="Productos"
+								type="textDefault"
+							/>
+						</s.StyledNavLink>
+					</div>
+				</div>
 			</div>
+
 			<div style={{ display: "grid", gap: "8px" }}>
 				<s.BtnLogout
 					onClick={() => {

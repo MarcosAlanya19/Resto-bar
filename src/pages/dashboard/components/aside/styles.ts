@@ -34,6 +34,7 @@ export const StyledNavLink = styled(NavLink)`
 	text-decoration: none;
 	display: flex;
 	align-items: center;
+	color: #000;
 
 	&.active div {
 		font-weight: bold;
