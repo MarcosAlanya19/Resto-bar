@@ -1,10 +1,10 @@
 import React from "react";
 
 import { useForm, useWatch } from "react-hook-form";
-import { Text } from "../../../../../../components/atomic/text";
-import { apiConfig } from "../../../../../../config/axios";
-import { useFetchStores } from "../../../../../../hooks/store/useFetchStore";
-import { IOrder, IOrderStatus } from "../../../../../../types/order.type";
+import { Text } from "../../../../../../../components/atomic/text";
+import { apiConfig } from "../../../../../../../config/axios";
+import { useFetchStores } from "../../../../../../../hooks/store/useFetchStore";
+import { IOrder, IOrderStatus } from "../../../../../../../types/order.type";
 
 interface IProps {
 	data: IOrder;

@@ -2,15 +2,16 @@ import React from "react";
 
 import axios from "axios";
 import { useForm, useWatch } from "react-hook-form";
-import { Text } from "../../../../../../components/atomic/text";
-import { useFetchStores } from "../../../../../../hooks/store/useFetchStore";
-import { IOrder } from "../../../../../../types/order.type";
+import { Text } from "../../../../../../../components/atomic/text";
+import { useFetchStores } from "../../../../../../../hooks/store/useFetchStore";
+import { IOrder } from "../../../../../../../types/order.type";
 
 interface IProps {
 	data: IOrder;
+	refresh: () => void;
 }
 
-export const CardOrderProcess: React.FC<IProps> = (props) => {
+export const CardOrderDelivered: React.FC<IProps> = (props) => {
 	const [order, setOrder] = React.useState(props.data);
 	const { data: dataStore } = useFetchStores();
 
@@ -80,7 +81,7 @@ export const CardOrderProcess: React.FC<IProps> = (props) => {
 			</ul>
 
 			<select
-				{...register("store")} // Registra el select con react-hook-form
+				{...register("store")}
 				style={{
 					borderRadius: "8px",
 					padding: "10px",
