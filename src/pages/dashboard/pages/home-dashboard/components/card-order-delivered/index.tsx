@@ -80,7 +80,7 @@ export const CardOrderDelivered: React.FC<IProps> = (props) => {
 			</ul>
 
 			<select
-				{...register("store")} // Registra el select con react-hook-form
+				{...register("store")}
 				style={{
 					borderRadius: "8px",
 					padding: "10px",

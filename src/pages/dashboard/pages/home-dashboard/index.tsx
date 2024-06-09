@@ -6,11 +6,17 @@ import * as s from "./styles";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Text } from "../../../../components/atomic/text";
 import { useFetchOrders } from "../../../../hooks/delivery/useFetchOrders";
+import { IOrderStatus } from "../../../../types/order.type";
 import { Header } from "../../components/header";
 import { CardOrderPeding } from "./components/card-order-peding";
 
 export const HomeDashboard = () => {
-	const { data: dataOrders, loading: isLoading, error } = useFetchOrders();
+	const {
+		data: dataOrders,
+		loading: isLoading,
+		error,
+		fetchOrder,
+	} = useFetchOrders();
 
 	return (
 		<>
@@ -87,14 +93,18 @@ export const HomeDashboard = () => {
 										{dataOrders
 											.filter((order) => order.status === "pending")
 											.map((order) => (
-												<CardOrderPeding key={order.order_id} data={order} />
+												<CardOrderPeding
+													key={order.order_id}
+													data={order}
+													refresh={fetchOrder}
+												/>
 											))}
 									</div>
 								</TabPanel>
 
 								<TabPanel>
 									{dataOrders
-										.filter((order) => order.status === "in_process")
+										.filter((order) => order.status === IOrderStatus.process)
 										.map((order) => (
 											<div key={order.order_id}>
 												<h3>{order.user_name}</h3>

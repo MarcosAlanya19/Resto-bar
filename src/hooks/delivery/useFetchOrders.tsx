@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { apiConfig } from "../../config/axios";
 import { IOrder } from "../../types/order.type";
 
 export const useFetchOrders = () => {
@@ -10,7 +10,7 @@ export const useFetchOrders = () => {
 
 	const fetchOrder = async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/api/orders");
+			const response = await apiConfig.get("/orders");
 			setData(response.data);
 			setLoading(false);
 		} catch (error: any) {
@@ -22,7 +22,6 @@ export const useFetchOrders = () => {
 	useEffect(() => {
 		fetchOrder();
 	}, []);
-
 
 	return { data, loading, error, fetchOrder };
 };
