@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { IBurger } from "../../types/burger.type";
+import { IItem } from "../../types/burger.type";
 
 export const useFetchBurgers = () => {
-	const [data, setData] = useState<IBurger[]>([]);
+	const [data, setData] = useState<IItem[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 

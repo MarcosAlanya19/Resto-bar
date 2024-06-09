@@ -5,11 +5,13 @@ import { Popover, Transition } from "@headlessui/react";
 import { Text } from "../atomic/text";
 import { FaCartShopping } from "react-icons/fa6";
 import { useUserCartContext } from "../../context/userContext";
+import { IItem } from "../../types/burger.type";
 
 export const Navbar: FC = () => {
-	const { cart, removeFromCart, clearCart, submitOrder, updateItemQuantity } = useUserCartContext();
+	const { cart, removeFromCart, clearCart, submitOrder, updateItemQuantity } =
+		useUserCartContext();
 
-	const handleQuantityChange = (item, quantity) => {
+	const handleQuantityChange = (item: IItem, quantity: string) => {
 		updateItemQuantity(item, parseInt(quantity, 10));
 	};
 

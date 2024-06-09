@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import React from "react";
-import { IBurger, IPostBurger } from "../../types/burger.type";
+import { IItem, IPostItem } from "../../types/burger.type";
 
-const createFormData = (data: IPostBurger) => {
+const createFormData = (data: IPostItem) => {
   const formData = new FormData();
   formData.append("item_name", data.item_name);
   formData.append("description", data.description);
@@ -18,9 +18,9 @@ export const usePetitionBurger = () => {
 	const [loading, setLoading] = React.useState(false);
 	const [error, setError] = React.useState(null);
 	const [success, setSuccess] = React.useState(false);
-	const [response, setResponse] = React.useState<IBurger>({} as IBurger);
+	const [response, setResponse] = React.useState<IItem>({} as IItem);
 
-	const postBurger = async (data: IPostBurger) => {
+	const postBurger = async (data: IPostItem) => {
 		setLoading(true);
 		setError(null);
 		setSuccess(false);
@@ -52,7 +52,7 @@ export const usePetitionBurger = () => {
 		}
 	};
 
-	const updateBurger = async (id: string, data: IPostBurger) => {
+	const updateBurger = async (id: string, data: IPostItem) => {
 		setLoading(true);
 		setError(null);
 		setSuccess(false);

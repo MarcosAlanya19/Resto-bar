@@ -8,8 +8,8 @@ import { Text } from "../../../../../../components/atomic/text";
 import { usePetitionBurger } from "../../../../../../hooks/burger/usePostBurger";
 import { useFetchStores } from "../../../../../../hooks/store/useFetchStore";
 import {
-	IBurger,
-	IPostBurger,
+	IItem,
+	IPostItem,
 	MenuItemType,
 } from "../../../../../../types/burger.type";
 
@@ -40,7 +40,7 @@ interface IProps {
 		active: boolean;
 	};
 	refresh: () => void;
-	update?: IBurger;
+	update?: IItem;
 }
 
 export const ModalFormStore: React.FC<IProps> = (props) => {
@@ -49,7 +49,7 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<IPostBurger>({
+	} = useForm<IPostItem>({
 		defaultValues: {
 			item_name: props.update?.id ? props.update.item_name : "",
 			description: props.update?.id ? props.update.description : "",
@@ -61,7 +61,7 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 
 	const { postBurger, updateBurger } = usePetitionBurger();
 
-	const onSubmit: SubmitHandler<IPostBurger> = async (data) => {
+	const onSubmit: SubmitHandler<IPostItem> = async (data) => {
 		if (props.update) {
 			await updateBurger(props.update.id, data);
 			toast.success("Actualización de sucursal con éxito");

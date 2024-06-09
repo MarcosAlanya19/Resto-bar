@@ -3,10 +3,10 @@ import * as s from "./styles.ts";
 
 import { Text } from "../../../../components/atomic/text/index.tsx";
 import { useUserCartContext } from "../../../../context/userContext.tsx";
-import { IBurger } from "../../../../types/burger.type.ts";
+import { IItem } from "../../../../types/burger.type.ts";
 
 interface IProps {
-	data: IBurger
+	data: IItem
 }
 
 export const CardMenuComplete: React.FC<IProps> = (props) => {

@@ -8,11 +8,11 @@ import { Text } from "../../../../../../components/atomic/text";
 import { ModalConfirm } from "../../../../../../components/modal/confirm";
 import { useDeleteBurger } from "../../../../../../hooks/burger/useDeleteBurger";
 import { useBoolean } from "../../../../../../hooks/useBoolean";
-import { IBurger } from "../../../../../../types/burger.type";
+import { IItem } from "../../../../../../types/burger.type";
 import { ModalFormStore } from "../form-burger";
 
 interface IProps {
-	data: IBurger;
+	data: IItem;
 	refresh: () => void;
 }
 
@@ -20,7 +20,7 @@ export const CardBurger: React.FC<IProps> = (props) => {
 	const { data } = props;
 	const confirm = useBoolean();
 	const editStore = useBoolean();
-	const [update, setUpdate] = React.useState<IBurger>(data);
+	const [update, setUpdate] = React.useState<IItem>(data);
 
 	const { deleteBurger } = useDeleteBurger();
 

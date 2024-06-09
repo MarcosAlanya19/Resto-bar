@@ -7,7 +7,7 @@ export enum MenuItemType {
   Other = 'Other'
 }
 
-export interface IPostBurger {
+export interface IPostItem {
 	item_name: string;
 	description: string;
 	price: string;
@@ -21,7 +21,7 @@ interface Store {
 	name: string;
 }
 
-export interface IBurger {
+export interface IItem {
 	id: string;
 	item_name: string;
 	description: string;
