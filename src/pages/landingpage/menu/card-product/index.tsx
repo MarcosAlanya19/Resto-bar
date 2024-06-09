@@ -3,7 +3,7 @@ import * as s from "./styles.ts";
 
 import { Text } from "../../../../components/atomic/text/index.tsx";
 import { useUserCartContext } from "../../../../context/userContext.tsx";
-import { IItem } from "../../../../types/burger.type.ts";
+import { IItem, MenuItemType } from "../../../../types/burger.type.ts";
 
 interface IProps {
 	data: IItem;
@@ -12,6 +12,19 @@ interface IProps {
 export const CardMenuComplete: React.FC<IProps> = (props) => {
 	const { data } = props;
 	const { addToCart } = useUserCartContext();
+
+	function translateMenuItemType(type: MenuItemType): string {
+		switch (type) {
+			case MenuItemType.Beverage:
+				return 'Bebida';
+			case MenuItemType.Burger:
+				return 'Hamburguesa';
+			case MenuItemType.Other:
+				return 'Otro';
+			default:
+				return '';
+		}
+	}
 
 	return (
 		<s.Card>
@@ -26,7 +39,10 @@ export const CardMenuComplete: React.FC<IProps> = (props) => {
 				}}
 			>
 				<div>
-					<Text text={data.item_name} type="title" weight="medium" />
+					<div style={{display: "flex", justifyContent: "space-between"}}>
+						<Text text={data.item_name} type="title" weight="medium" />
+						<Text text={translateMenuItemType(data.type) ?? ""} weight="medium" />
+					</div>
 					<Text text={data.description} type="text" />
 				</div>
 				<div style={{ display: "flex", justifyContent: "space-between" }}>

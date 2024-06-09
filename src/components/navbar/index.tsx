@@ -37,22 +37,29 @@ export const Navbar: FC = () => {
 				<Popover>
 					<s.StyledPopoverButton>
 						<FaCartShopping size={20} />
-						<div
-							style={{
-								minWidth: "20px",
-								minHeight: "20px",
-								backgroundColor: "#ECA400",
-								borderRadius: "50%",
-								position: "absolute",
-								bottom: "-10px",
-								right: "-5px",
-								display: "flex",
-								justifyContent: "center",
-								alignItems: "center",
-							}}
-						>
-							<Text text={cart.length.toString()} weight="semiBold" type="text" style={{color: "#000"}} />
-						</div>
+						{cart.length > 0 && (
+							<div
+								style={{
+									minWidth: "20px",
+									minHeight: "20px",
+									backgroundColor: "#ECA400",
+									borderRadius: "50%",
+									position: "absolute",
+									bottom: "-10px",
+									right: "-5px",
+									display: "flex",
+									justifyContent: "center",
+									alignItems: "center",
+								}}
+							>
+								<Text
+									text={cart.length.toString()}
+									weight="semiBold"
+									type="text"
+									style={{ color: "#000" }}
+								/>
+							</div>
+						)}
 					</s.StyledPopoverButton>
 					<Transition
 						enter="transition ease-out duration-200"
