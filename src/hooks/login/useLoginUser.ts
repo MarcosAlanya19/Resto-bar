@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import React from "react";
-import { useUserContext } from "../../context/userContext";
-import { ILogin } from "../../types/user.type";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useUserCartContext } from "../../context/userContext";
+import { ILogin } from "../../types/user.type";
 
 const createFormData = (data: ILogin) => {
 	const formData = new FormData();
@@ -18,7 +18,7 @@ export const useLoginUser = () => {
 	const [error, setError] = React.useState(null);
 	const [success, setSuccess] = React.useState(false);
 	const [response, setResponse] = React.useState();
-	const { setUser } = useUserContext();
+	const { setUser } = useUserCartContext();
 	const navigate = useNavigate();
 
 	const loginUser = async (data: ILogin) => {

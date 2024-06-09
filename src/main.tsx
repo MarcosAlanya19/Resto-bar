@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./config/global-css/index.ts";
 import { RoutesConfig } from "./config/router/index.tsx";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { UserProvider } from "./context/userContext.tsx";
+import { UserCartProvider } from "./context/userContext.tsx";
 
 export const theme = {
 	primary: "#ECA400",
@@ -18,7 +18,7 @@ export const theme = {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
-		<UserProvider>
+		<UserCartProvider>
 			<ThemeProvider theme={theme}>
 				<GlobalStyles />
 				<BrowserRouter>
@@ -26,6 +26,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 					<ToastContainer />
 				</BrowserRouter>
 			</ThemeProvider>
-		</UserProvider>
+		</UserCartProvider>
 	</React.StrictMode>
 );

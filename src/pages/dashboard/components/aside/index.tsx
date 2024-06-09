@@ -3,14 +3,14 @@ import {
 	RiBuilding4Line,
 	RiLogoutCircleLine,
 } from "react-icons/ri";
-import { Text } from "../../../../components/atomic/text";
-import { useUserContext } from "../../../../context/userContext";
-import * as s from "./styles";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Text } from "../../../../components/atomic/text";
+import { useUserCartContext } from "../../../../context/userContext";
+import * as s from "./styles";
 
 export const AsideModal = () => {
-	const { user, setUser } = useUserContext();
+	const { user, setUser } = useUserCartContext();
 	const navigate = useNavigate();
 
 	return (
@@ -58,7 +58,7 @@ export const AsideModal = () => {
 					onClick={() => {
 						setUser(null);
 						navigate("/login");
-						toast.success("Cerrado de sesión exitoso")
+						toast.success("Cerrado de sesión exitoso");
 					}}
 				>
 					<Text

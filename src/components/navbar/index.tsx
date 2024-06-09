@@ -1,7 +1,8 @@
 import { FC } from "react";
-import * as s from "./styles"
+import * as s from "./styles";
 
 import { Text } from "../atomic/text";
+import { FaCartShopping } from "react-icons/fa6";
 
 export const Navbar: FC = () => {
 	return (
@@ -29,7 +30,11 @@ export const Navbar: FC = () => {
 				<s.StyledNavLink to={"menu"}>
 					<Text text="Menú" type="textDefault" />
 				</s.StyledNavLink>
+
 				<Text text="Blog" type="textDefault" />
+				<div style={{color: "#fff", display: "flex", alignItems: "center", cursor: "pointer"}}>
+					<FaCartShopping size={20} />
+				</div>
 			</div>
 		</div>
 	);
