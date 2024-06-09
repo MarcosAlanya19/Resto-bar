@@ -4,8 +4,8 @@ import * as sg from "../../styles";
 import { TabGroup } from "@headlessui/react";
 import { useFetchOrders } from "../../../../hooks/delivery/useFetchOrders";
 import { Header } from "../../components/header";
-import { TabHeader } from "./components/tabs/header";
 import { TabBody } from "./components/tabs/body";
+import { TabHeader } from "./components/tabs/header";
 
 export const Reception = () => {
 	const {
@@ -30,6 +30,7 @@ export const Reception = () => {
 					) : (
 						<TabGroup>
 							<TabHeader />
+
 							<TabBody data={dataOrders} refresh={fetchOrder} />
 						</TabGroup>
 					)}
