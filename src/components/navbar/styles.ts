@@ -34,33 +34,52 @@ export const MenuItem = styled.div`
 `;
 
 export const StyledPopoverButton = styled(PopoverButton)`
-  color: #fff;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  outline: none;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	background-color: transparent;
+	border: none;
+	outline: none;
 
-  &:hover,
-  &:focus,
-  &[data-active="true"] {
-    color: #eca400;
-    border: none;
-    outline: none;
-  }
+	&:hover,
+	&:focus,
+	&[data-active="true"] {
+		color: #eca400;
+		border: none;
+		outline: none;
+	}
 
-  &:focus-visible {
-    outline: none;
-  }
+	&:focus-visible {
+		outline: none;
+	}
 `;
 
 export const StyledPopoverPanel = styled(PopoverPanel)`
-	background-color: rgba(255, 255, 255, 0.05);
-	color: white;
-	font-size: 0.875rem;
-	line-height: 1.5;
-	border-radius: 0.75rem;
-	--anchor-gap: var(--spacing-5);
-	divide-y: rgba(255, 255, 255, 0.05);
+	width: 400px;
+	margin-top: 25px;
+`;
+
+export const QuantityInput = styled.input`
+  width: 100px;
+  padding: 4px 8px ;
+  border-radius: 4px;
+  border: none;
+  background-color: #1c1c1c;
+  color: white;
+  text-align: right;
+
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type=number] {
+    -moz-appearance: textfield;
+  }
 `;
