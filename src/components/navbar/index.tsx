@@ -37,6 +37,22 @@ export const Navbar: FC = () => {
 				<Popover>
 					<s.StyledPopoverButton>
 						<FaCartShopping size={20} />
+						<div
+							style={{
+								minWidth: "20px",
+								minHeight: "20px",
+								backgroundColor: "#ECA400",
+								borderRadius: "50%",
+								position: "absolute",
+								bottom: "-10px",
+								right: "-5px",
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							<Text text={cart.length.toString()} weight="semiBold" type="text" style={{color: "#000"}} />
+						</div>
 					</s.StyledPopoverButton>
 					<Transition
 						enter="transition ease-out duration-200"
@@ -56,51 +72,57 @@ export const Navbar: FC = () => {
 								}}
 							>
 								<Text text="Carrito de Compras" type="title" />
-								{cart.length === 0 && <p>El carrito está vacío.</p>}
-								<div
-									style={{
-										display: "grid",
-										gap: "8px",
-										padding: "8px 0 16px 0",
-									}}
-								>
-									{cart.map((item, index) => (
-										<div
-											style={{
-												backgroundColor: "#bfbfbf20",
-												borderRadius: "8px",
-												// color: "#000",
-												display: "grid",
-												gridTemplateColumns: "7fr 1fr",
-												padding: "8px",
-												alignItems: "center",
-											}}
-											key={index}
-										>
-											<div>
-												<Text text={`${item.item_name} - S/ ${item.price}`} style={{color: "#ECA400"}} />
-												<div style={{ display: "flex", gap: "8px" }}>
-													<Text text="Cantidad:" />
-													<div>
-														<s.QuantityInput
-															type="number"
-															value={item.quantity}
-															onChange={(e) =>
-																handleQuantityChange(item, e.target.value)
-															}
-															min="1"
-														/>
+								{cart.length === 0 ? (
+									<Text text={`El carrito está vacío.`} />
+								) : (
+									<div
+										style={{
+											display: "grid",
+											gap: "8px",
+											padding: "8px 0 16px 0",
+										}}
+									>
+										{cart.map((item, index) => (
+											<div
+												style={{
+													backgroundColor: "#bfbfbf20",
+													borderRadius: "8px",
+													display: "grid",
+													gridTemplateColumns: "7fr 1fr",
+													padding: "8px",
+													alignItems: "center",
+												}}
+												key={index}
+											>
+												<div>
+													<Text
+														text={`${item.item_name} - S/ ${item.price}`}
+														style={{ color: "#ECA400	" }}
+													/>
+													<div style={{ display: "flex", gap: "8px" }}>
+														<Text text="Cantidad:" />
+														<div>
+															<s.QuantityInput
+																type="number"
+																value={item.quantity}
+																onChange={(e) =>
+																	handleQuantityChange(item, e.target.value)
+																}
+																min="1"
+															/>
+														</div>
 													</div>
 												</div>
+												<MdCancel
+													onClick={() => removeFromCart(item)}
+													size={30}
+													color="#F14A41"
+													style={{ cursor: "pointer" }}
+												/>
 											</div>
-											<MdCancel
-												onClick={() => removeFromCart(item)}
-												size={30}
-												color="#F14A41"
-											/>
-										</div>
-									))}
-								</div>
+										))}
+									</div>
+								)}
 								{cart.length > 0 && (
 									<div
 										style={{
@@ -119,6 +141,7 @@ export const Navbar: FC = () => {
 												padding: "8px",
 												border: "none",
 												borderRadius: "8px",
+												cursor: "pointer",
 											}}
 											onClick={clearCart}
 										>
@@ -139,6 +162,7 @@ export const Navbar: FC = () => {
 												padding: "8px",
 												border: "none",
 												borderRadius: "8px",
+												cursor: "pointer",
 											}}
 											onClick={() => submitOrder(1)}
 										>

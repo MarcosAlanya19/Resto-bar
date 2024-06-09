@@ -41,6 +41,7 @@ export const StyledPopoverButton = styled(PopoverButton)`
 	background-color: transparent;
 	border: none;
 	outline: none;
+	position: relative;
 
 	&:hover,
 	&:focus,

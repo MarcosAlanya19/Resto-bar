@@ -6,7 +6,7 @@ import { useUserCartContext } from "../../../../context/userContext.tsx";
 import { IItem } from "../../../../types/burger.type.ts";
 
 interface IProps {
-	data: IItem
+	data: IItem;
 }
 
 export const CardMenuComplete: React.FC<IProps> = (props) => {
@@ -29,11 +29,24 @@ export const CardMenuComplete: React.FC<IProps> = (props) => {
 					<Text text={data.item_name} type="title" weight="medium" />
 					<Text text={data.description} type="text" />
 				</div>
-				<div style={{ display: "flex", justifyContent: "end" }}>
-					<Text text={`S/ ${data.price}`} type="title" weight="bold" />
+				<div style={{ display: "flex", justifyContent: "space-between" }}>
+					<button
+						style={{
+							border: "none",
+							padding: "8px 16px",
+							borderRadius: "8px",
+							backgroundColor: "#3FB43D",
+							color: "#fff",
+							cursor: "pointer"
+						}}
+						onClick={() => addToCart(data)}
+					>
+						<Text text="Añadir al Carrito" type="text" weight="semiBold" />
+					</button>
+					<div style={{ display: "flex", justifyContent: "end" }}>
+						<Text text={`S/ ${data.price}`} type="title" weight="bold" />
+					</div>
 				</div>
-				<button onClick={() => addToCart(data)}>Añadir al Carrito</button>
-
 			</div>
 		</s.Card>
 	);
