@@ -4,7 +4,7 @@ export const Card = styled.div`
 	display: grid;
 	color: ${(props) => props.theme.white};
 	position: relative;
-	height: 170px;
+	min-height: 220px;
 	border-radius: 16px;
 	background-color: ${(props) => props.theme.black};
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);

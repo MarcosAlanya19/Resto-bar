@@ -16,13 +16,13 @@ export const CardMenuComplete: React.FC<IProps> = (props) => {
 	function translateMenuItemType(type: MenuItemType): string {
 		switch (type) {
 			case MenuItemType.Beverage:
-				return 'Bebida';
+				return "Bebida";
 			case MenuItemType.Burger:
-				return 'Hamburguesa';
+				return "Hamburguesa";
 			case MenuItemType.Other:
-				return 'Otro';
+				return "Otro";
 			default:
-				return '';
+				return "";
 		}
 	}
 
@@ -36,12 +36,26 @@ export const CardMenuComplete: React.FC<IProps> = (props) => {
 					paddingLeft: "220px",
 					display: "grid",
 					gridAutoRows: "1fr auto",
+					gap: "8px",
 				}}
 			>
-				<div>
-					<div style={{display: "flex", justifyContent: "space-between"}}>
+				<div style={{ display: "grid", gap: "4px" }}>
+					<div style={{ display: "flex", justifyContent: "space-between" }}>
 						<Text text={data.item_name} type="title" weight="medium" />
-						<Text text={translateMenuItemType(data.type) ?? ""} weight="medium" />
+						<Text
+							text={translateMenuItemType(data.type) ?? ""}
+							weight="medium"
+						/>
+					</div>
+					<div>
+						<Text text={"Ubicanos en:"} type="text" />
+						<ul style={{ margin: "0" }}>
+							{data.stores.map((store) => (
+								<li>
+									<Text key={store.id} text={store.name} type="text" />
+								</li>
+							))}
+						</ul>
 					</div>
 					<Text text={data.description} type="text" />
 				</div>
@@ -53,7 +67,7 @@ export const CardMenuComplete: React.FC<IProps> = (props) => {
 							borderRadius: "8px",
 							backgroundColor: "#3FB43D",
 							color: "#fff",
-							cursor: "pointer"
+							cursor: "pointer",
 						}}
 						onClick={() => addToCart(data)}
 					>

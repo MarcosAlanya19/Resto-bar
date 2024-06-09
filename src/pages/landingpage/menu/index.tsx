@@ -107,7 +107,7 @@ const Menu = () => {
 					margin: "0 auto",
 					width: "90vw",
 					display: "grid",
-					gridTemplateColumns: "repeat(3, 1fr)",
+					gridTemplateColumns: "repeat(auto-fill, minmax(470px, 1fr))",
 					gap: "16px",
 					rowGap: "80px",
 					padding: "70px 0",
