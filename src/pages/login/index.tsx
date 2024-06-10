@@ -4,8 +4,13 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Text } from "../../components/atomic/text";
 import { useLoginUser } from "../../hooks/login/useLoginUser";
 import { ILogin } from "../../types/user.type";
+import { IoArrowBackOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../config/router/routes";
 
 export const Login = () => {
+	const navigate = useNavigate();
+
 	const {
 		formState: { errors },
 		register,
@@ -27,6 +32,24 @@ export const Login = () => {
 		<s.WrapperLogin>
 			<s.ImgLogin src="./img/login/img-login.jpg" alt="img-login" />
 			<s.Wrapper>
+				<Text
+					onClick={() => {
+						navigate(routes.index);
+					}}
+					leftIcon={<IoArrowBackOutline size={20} />}
+					style={{
+						cursor: "pointer",
+						top: "0",
+						position: "absolute",
+						right: "0",
+						padding: "24px 60px",
+						alignItems: "center",
+					}}
+					text="REGRESAR"
+					type="textDefault"
+					weight="medium"
+				/>
+
 				{error && (
 					<s.WrapperError>
 						<Text type="text" text={error ?? ""} weight="medium" />
@@ -79,6 +102,8 @@ export const Login = () => {
 				<s.Button style={{ width: "100%" }} onClick={handleSubmit(onSubmit)}>
 					Entrar
 				</s.Button>
+
+				<Text text="¿No tienes cuenta? Registrate" type="smallText" />
 			</s.Wrapper>
 		</s.WrapperLogin>
 	);

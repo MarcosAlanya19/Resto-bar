@@ -42,6 +42,7 @@ export const jump = keyframes`
 
 export const Wrapper = styled.section`
 	display: flex;
+	position: relative;
 	flex-direction: column;
 	background-color: #000;
 	justify-content: center;

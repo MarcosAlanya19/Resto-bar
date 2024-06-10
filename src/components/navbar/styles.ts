@@ -8,6 +8,10 @@ export const StyledNavLink = styled(NavLink)`
 	align-items: center;
 	color: #fff;
 
+	&:hover {
+		color: #eca400;
+	}
+
 	&.active div {
 		font-weight: 600;
 	}
@@ -62,25 +66,25 @@ export const StyledPopoverPanel = styled(PopoverPanel)`
 `;
 
 export const QuantityInput = styled.input`
-  width: 100px;
-  padding: 4px 8px ;
-  border-radius: 4px;
-  border: none;
-  background-color: #1c1c1c;
-  color: white;
-  text-align: right;
+	width: 100px;
+	padding: 4px 8px;
+	border-radius: 4px;
+	border: none;
+	background-color: #1c1c1c;
+	color: white;
+	text-align: right;
 
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-  appearance: textfield;
+	-webkit-appearance: textfield;
+	-moz-appearance: textfield;
+	appearance: textfield;
 
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+	&::-webkit-inner-spin-button,
+	&::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
 
-  &[type=number] {
-    -moz-appearance: textfield;
-  }
+	&[type="number"] {
+		-moz-appearance: textfield;
+	}
 `;
