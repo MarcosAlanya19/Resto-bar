@@ -8,6 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Text } from "../../../../components/atomic/text";
+import { routes } from "../../../../config/router/routes";
 import { useUserCartContext } from "../../../../context/userContext";
 import * as s from "./styles";
 
@@ -43,14 +44,14 @@ export const AsideModal = () => {
 				<div style={{ display: "grid", gap: "8px" }}>
 					<Text text="Gestión de Pedidos" type="textDefault" weight="medium" />
 					<div>
-						<s.StyledNavLink to={"/dashboard/reception"}>
+						<s.StyledNavLink to={routes.dashboard.reception}>
 							<Text
 								leftIcon={<RiDashboardLine />}
 								text="Recepción"
 								type="textDefault"
 							/>
 						</s.StyledNavLink>
-						<s.StyledNavLink to={"/dashboard/orders"}>
+						<s.StyledNavLink to={routes.dashboard.order}>
 							<Text
 								leftIcon={<RiChatHistoryLine />}
 								text="Historial"
@@ -66,14 +67,14 @@ export const AsideModal = () => {
 						weight="medium"
 					/>
 					<div>
-						<s.StyledNavLink to={"/dashboard/store"}>
+						<s.StyledNavLink to={routes.dashboard.store}>
 							<Text
 								leftIcon={<RiBuilding4Line />}
 								text="Sucursales"
 								type="textDefault"
 							/>
 						</s.StyledNavLink>
-						<s.StyledNavLink to={"/dashboard/burguer"}>
+						<s.StyledNavLink to={routes.dashboard.item}>
 							<Text
 								leftIcon={<RiBubbleChartLine />}
 								text="Productos"
@@ -88,7 +89,7 @@ export const AsideModal = () => {
 				<s.BtnLogout
 					onClick={() => {
 						setUser(null);
-						navigate("/login");
+						navigate(routes.login.index);
 						toast.success("Cerrado de sesión exitoso");
 					}}
 				>

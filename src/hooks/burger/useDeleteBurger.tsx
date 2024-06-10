@@ -1,16 +1,16 @@
-import axios from "axios";
 import React from "react";
+import { apiConfig } from "../../config/axios";
 
-export const useDeleteBurger = () => {
+export const useDeleteItem = () => {
 	const [loading, setLoading] = React.useState(false);
 	const [error, setError] = React.useState("");
 
-	const deleteBurger = async (itemId: string) => {
+	const deleteItem = async (itemId: string) => {
 		setLoading(true);
 		setError("");
 
 		try {
-			await axios.delete(`http://localhost:3000/api/burgers/${itemId}`);
+			await apiConfig.delete(`/burgers/${itemId}`);
 		} catch (error) {
 			setError("Error deleting item");
 		} finally {
@@ -18,5 +18,5 @@ export const useDeleteBurger = () => {
 		}
 	};
 
-	return { loading, error, deleteBurger };
+	return { loading, error, deleteItem };
 };

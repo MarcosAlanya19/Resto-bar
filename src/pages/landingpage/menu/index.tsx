@@ -1,4 +1,4 @@
-import { useFetchBurgers } from "../../../hooks/burger/useFetchBurger";
+import { useFetchItems } from "../../../hooks/burger/useFetchBurger";
 import { useFetchStores } from "../../../hooks/store/useFetchStore";
 import { MenuItemType } from "../../../types/burger.type";
 import { CardMenuComplete } from "./card-product";
@@ -29,7 +29,7 @@ const options: IOptions[] = [
 ];
 
 export const Menu = () => {
-	const { data: dataItem } = useFetchBurgers();
+	const { data: dataItem } = useFetchItems();
 	const { data: dataStore } = useFetchStores();
 
 	return (

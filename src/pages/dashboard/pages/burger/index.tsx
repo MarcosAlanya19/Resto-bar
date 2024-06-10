@@ -4,16 +4,16 @@ import * as s from "../../styles";
 
 import { RiAddLine } from "react-icons/ri";
 import { Text } from "../../../../components/atomic/text";
-import { useFetchBurgers } from "../../../../hooks/burger/useFetchBurger";
+import { useFetchItems } from "../../../../hooks/burger/useFetchBurger";
 import { useBoolean } from "../../../../hooks/useBoolean";
 import { Header } from "../../components/header";
 import { CardBurger } from "./components/card-burger";
-import { ModalFormStore } from "./components/form-burger";
+import { ModalFormItem } from "./components/form-burger";
 
-export const BurguerDashboard: React.FC = () => {
+export const ItemDashboard: React.FC = () => {
 	const createStore = useBoolean();
 
-	const { data: burgerData, fetchBurger } = useFetchBurgers();
+	const { data: itemData, fetchItem } = useFetchItems();
 
 	return (
 		<>
@@ -76,13 +76,13 @@ export const BurguerDashboard: React.FC = () => {
 							gap: "16px",
 						}}
 					>
-						{burgerData?.map((burger) => (
-							<CardBurger key={burger.id} refresh={fetchBurger} data={burger} />
+						{itemData?.map((burger) => (
+							<CardBurger key={burger.id} refresh={fetchItem} data={burger} />
 						))}
 					</div>
 				</s.Body>
 			</s.ContainerLeft>
-			<ModalFormStore modal={createStore} refresh={fetchBurger} />
+			<ModalFormItem modal={createStore} refresh={fetchItem} />
 		</>
 	);
 };

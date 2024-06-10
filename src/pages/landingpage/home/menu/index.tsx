@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { Text } from "../../../../components/atomic/text";
-import { useFetchBurgers } from "../../../../hooks/burger/useFetchBurger";
+import { useFetchItems } from "../../../../hooks/burger/useFetchBurger";
 import { CardMenu } from "./components/card-menu";
 import * as s from "./styles";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 
 const Menu1 = () => {
-	const { data: dataBurger } = useFetchBurgers();
+	const { data: dataBurger } = useFetchItems();
 
 	return (
 		<div

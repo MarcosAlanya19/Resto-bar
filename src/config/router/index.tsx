@@ -4,7 +4,7 @@ import { IUserRole } from "../../types/user.type";
 import { routes } from "./routes";
 
 import { Dashboard } from "../../pages/dashboard";
-import { BurguerDashboard } from "../../pages/dashboard/pages/burger";
+import { ItemDashboard } from "../../pages/dashboard/pages/burger";
 import { HistoryDashboard } from "../../pages/dashboard/pages/history";
 import { Reception } from "../../pages/dashboard/pages/reception";
 import { StoreDashboard } from "../../pages/dashboard/pages/store";
@@ -41,7 +41,7 @@ export const RoutesConfig = () => {
 				<Route path={routes.word.reception} element={<Reception />} />
 				<Route path={routes.word.orders} element={<HistoryDashboard />} />
 
-				<Route path={routes.word.burger} element={<BurguerDashboard />} />
+				<Route path={routes.word.item} element={<ItemDashboard />} />
 				<Route path={routes.word.store} element={<StoreDashboard />} />
 			</Route>
 		</Routes>

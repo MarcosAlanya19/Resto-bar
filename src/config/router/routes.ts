@@ -2,18 +2,21 @@ export const routes = {
 	index: "/",
 
 	word: {
-		store: "store",
 		menu: "menu",
 		history: "history",
-		burger: "burger",
+		store: "stores",
+		item: "items",
 		orders: "orders",
 		reception: "reception",
 	},
 
 	dashboard: {
 		index: "/dashboard",
-		store: "/dashboard/store",
+		store: "/dashboard/stores",
 		menu: "/dashboard/menu",
+		item: "/dashboard/items",
+		order: "/dashboard/orders",
+		reception: "/dashboard/reception",
 	},
 
 	login: {

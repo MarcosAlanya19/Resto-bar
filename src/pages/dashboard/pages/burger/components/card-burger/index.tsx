@@ -6,10 +6,10 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 import { Text } from "../../../../../../components/atomic/text";
 import { ModalConfirm } from "../../../../../../components/modal/confirm";
-import { useDeleteBurger } from "../../../../../../hooks/burger/useDeleteBurger";
+import { useDeleteItem } from "../../../../../../hooks/burger/useDeleteBurger";
 import { useBoolean } from "../../../../../../hooks/useBoolean";
 import { IItem } from "../../../../../../types/burger.type";
-import { ModalFormStore } from "../form-burger";
+import { ModalFormItem } from "../form-burger";
 
 interface IProps {
 	data: IItem;
@@ -22,7 +22,7 @@ export const CardBurger: React.FC<IProps> = (props) => {
 	const editStore = useBoolean();
 	const [update, setUpdate] = React.useState<IItem>(data);
 
-	const { deleteBurger } = useDeleteBurger();
+	const { deleteItem } = useDeleteItem();
 
 	return (
 		<>
@@ -95,7 +95,7 @@ export const CardBurger: React.FC<IProps> = (props) => {
 					cancel: "No, cancelar",
 				}}
 				onConfirm={async () => {
-					await deleteBurger(data.id);
+					await deleteItem(data.id);
 					toast.success("Se elimino sucursal con éxito");
 					props.refresh();
 				}}
@@ -103,7 +103,7 @@ export const CardBurger: React.FC<IProps> = (props) => {
 				refresh={props.refresh}
 			/>
 
-			<ModalFormStore
+			<ModalFormItem
 				update={update}
 				modal={editStore}
 				refresh={props.refresh}

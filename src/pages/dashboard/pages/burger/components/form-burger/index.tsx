@@ -43,7 +43,7 @@ interface IProps {
 	update?: IItem;
 }
 
-export const ModalFormStore: React.FC<IProps> = (props) => {
+export const ModalFormItem: React.FC<IProps> = (props) => {
 	const storeIds = props.update?.stores.map((store) => store.id.toString());
 	const {
 		register,
