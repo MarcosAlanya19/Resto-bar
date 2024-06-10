@@ -9,8 +9,14 @@ import { IItem } from "../../types/burger.type";
 import { MdCancel } from "react-icons/md";
 
 export const Navbar: FC = () => {
-	const { cart, removeFromCart, clearCart, submitOrder, updateItemQuantity } =
-		useUserCartContext();
+	const {
+		user,
+		cart,
+		removeFromCart,
+		clearCart,
+		submitOrder,
+		updateItemQuantity,
+	} = useUserCartContext();
 
 	const handleQuantityChange = (item: IItem, quantity: string) => {
 		updateItemQuantity(item, parseInt(quantity, 10));
@@ -196,6 +202,14 @@ export const Navbar: FC = () => {
 				</s.StyledNavLink>
 
 				<Text text="Blog" type="textDefault" />
+
+				{user ? (
+					<div style={{background: "#bfbfbf20", padding: "4px 10px", borderRadius: "16px"}}>
+						<Text text={user.user_name} type="textDefault" />
+					</div>
+				) : (
+					<Text text="Iniciar sesión" type="textDefault" />
+				)}
 			</div>
 		</div>
 	);

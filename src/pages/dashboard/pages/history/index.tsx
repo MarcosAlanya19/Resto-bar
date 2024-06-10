@@ -20,7 +20,7 @@ export const HistoryDashboard: React.FC = () => {
 					subtitle="Visualiza el historial de los pedidos realizados"
 				/>
 				<s.Body>
-					<input
+					{/* <input
 						type="text"
 						placeholder="O  Buscar por nombre de hamburguesa"
 						style={{
@@ -32,7 +32,7 @@ export const HistoryDashboard: React.FC = () => {
 							fontSize: "14px",
 							borderRadius: "8px",
 						}}
-					/>
+					/> */}
 
 					<div
 						style={{
@@ -40,17 +40,16 @@ export const HistoryDashboard: React.FC = () => {
 							overflow: "hidden",
 							backgroundColor: "#edf3fc",
 							display: "grid",
-							gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 100px",
+							gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 100px",
 							marginBottom: "4px",
 							padding: "8px 16px",
 						}}
 					>
-						<Text weight="medium" text={"Nombre"} type="text" />
-						<Text weight="medium" text={"Apertura"} type="text" />
-						<Text weight="medium" text={"Cierre"} type="text" />
-						<Text weight="medium" text={"Dirección"} type="text" />
-						<Text weight="medium" text={"Número"} type="text" />
-						<Text weight="medium" text={"Imagen"} type="text" />
+						<Text weight="medium" text={"Fecha"} type="text" />
+						<Text weight="medium" text={"Estatus"} type="text" />
+						<Text weight="medium" text={"Cliente"} type="text" />
+						<Text weight="medium" text={"Local"} type="text" />
+						<Text weight="medium" text={"Pedido"} type="text" />
 					</div>
 					<div
 						style={{

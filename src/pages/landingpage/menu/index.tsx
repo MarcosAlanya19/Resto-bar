@@ -36,7 +36,7 @@ export const Menu = () => {
 		<div
 			style={{ backgroundColor: "#bfbfbf40", minHeight: "calc(100vh - 60px)" }}
 		>
-			<div style={{ paddingTop: "50px" }}>
+			{/* <div style={{ paddingTop: "50px" }}>
 				<div
 					style={{
 						boxSizing: "content-box",
@@ -100,7 +100,7 @@ export const Menu = () => {
 						))}
 					</select>
 				</div>
-			</div>
+			</div> */}
 
 			<div
 				style={{

@@ -4,7 +4,8 @@ import * as s from "./styles";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Text } from "../../../../../../components/atomic/text";
 import { useBoolean } from "../../../../../../hooks/useBoolean";
-import { IOrder } from "../../../../../../types/order.type";
+import { IOrder, IOrderStatus } from "../../../../../../types/order.type";
+import dayjs from "dayjs";
 
 interface IProps {
 	data: IOrder;
@@ -17,8 +18,16 @@ export const CardOrder: React.FC<IProps> = (props) => {
 	// const { deleteStore } = useDeleteStore();
 	const handleWhatsAppRedirect = () => {
 		const phoneNumber = data?.user?.phone_number.replace(/\D/g, "");
-		const whatsappLink = `https://wa.me/${phoneNumber}`;
+		const whatsappLink = `https://wa.me/+51${phoneNumber}`;
 		window.location.href = whatsappLink;
+	};
+
+	const orderStatusTranslations = {
+		[IOrderStatus.pending]: "Pendiente",
+		[IOrderStatus.process]: "En proceso",
+		[IOrderStatus.delivered]: "Entregado",
+		[IOrderStatus.canceled]: "Cancelado",
+		[IOrderStatus.rejected]: "Rechazado",
 	};
 
 	return (
@@ -30,20 +39,30 @@ export const CardOrder: React.FC<IProps> = (props) => {
 					boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
 					backgroundColor: "#fff",
 					display: "grid",
-					gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 100px",
+					alignItems: "center",
+					gap: "16px",
+					gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 100px",
 					padding: "8px 16px",
 				}}
 			>
-				<Text text={data.order_date} type="text" />
-				<Text text={data.status} type="text" />
+				<Text text={dayjs(data.order_date).format('DD/MM/YYYY HH:mm')} type="text" />
+				<Text text={orderStatusTranslations[data.status]} type="text" />
 				<div style={{ display: "flex", flexDirection: "column" }}>
 					<Text text={data.user.user_name} type="text" />
+					<Text text={data.user.address} type="text" />
 					<Text
 						onClick={handleWhatsAppRedirect}
 						text={data.user.phone_number}
 						type="text"
 					/>
 				</div>
+				<Text text={data.store.store_name ?? "Sin local"} type="text" />
+				<div>
+					{data.items.map((item) => (
+						<Text text={`${item.item_name}`} type="text" />
+					))}
+				</div>
+
 				<div
 					style={{
 						display: "grid",
