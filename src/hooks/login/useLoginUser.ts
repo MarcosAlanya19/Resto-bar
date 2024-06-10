@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { apiConfig } from "../../config/axios";
 import { useUserCartContext } from "../../context/userContext";
-import { ILogin } from "../../types/user.type";
+import { ILogin, IUserRole } from "../../types/user.type";
 
 const createFormData = (data: ILogin) => {
 	const formData = new FormData();
@@ -29,15 +29,20 @@ export const useLoginUser = () => {
 		const formData = createFormData(data);
 
 		try {
-			const response = await axios.post(
-				"http://localhost:3000/api/users/login",
-				formData
-			);
+			const response = await apiConfig.post("/users/login", formData);
 
 			setResponse(response.data);
 			setUser(response.data.user);
+
+			if (response.data.user.role !== IUserRole.Administrator) {
+				toast.error(
+					`El usuario ${response.data?.user.user_name} no es administrador`
+				);
+				return;
+			}
+
 			toast.success(`Bienvenido ${response.data?.user.user_name}`);
-			navigate("/dashboard/store");
+			navigate("/dashboard/reception");
 			if (response.status === 201) {
 				setSuccess(true);
 			} else {

@@ -5,7 +5,7 @@ import { Text } from "../../components/atomic/text";
 import { useLoginUser } from "../../hooks/login/useLoginUser";
 import { ILogin } from "../../types/user.type";
 
-const Login = () => {
+export const Login = () => {
 	const {
 		formState: { errors },
 		register,
@@ -110,5 +110,3 @@ const Login = () => {
 		</div>
 	);
 };
-
-export default Login;

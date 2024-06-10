@@ -28,7 +28,7 @@ const options: IOptions[] = [
 	},
 ];
 
-const Menu = () => {
+export const Menu = () => {
 	const { data: dataItem } = useFetchBurgers();
 	const { data: dataStore } = useFetchStores();
 
@@ -114,14 +114,9 @@ const Menu = () => {
 				}}
 			>
 				{dataItem.map((data) => (
-					<CardMenuComplete
-						key={data.id}
-						data={data}
-					/>
+					<CardMenuComplete key={data.id} data={data} />
 				))}
 			</div>
 		</div>
 	);
 };
-
-export default Menu;

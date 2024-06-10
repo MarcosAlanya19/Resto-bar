@@ -3,7 +3,7 @@ import * as s from "./styles";
 import { Outlet } from "react-router-dom";
 import { AsideModal } from "./components/aside";
 
-const Dashboard = () => {
+export const Dashboard = () => {
 	return (
 		<>
 			<s.WrapperDashboard>
@@ -13,5 +13,3 @@ const Dashboard = () => {
 		</>
 	);
 };
-
-export default Dashboard;

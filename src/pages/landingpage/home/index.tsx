@@ -3,7 +3,7 @@ import Menu1 from "./menu";
 import Offert from "./offert";
 import Restaurant from "./restarurants";
 
-const Home = () => {
+export const Home = () => {
 	return (
 		<>
 			<Hero />
@@ -13,5 +13,3 @@ const Home = () => {
 		</>
 	);
 };
-
-export default Home;

@@ -2,7 +2,7 @@
 import * as sg from "../../styles";
 
 import { TabGroup } from "@headlessui/react";
-import { useFetchOrders } from "../../../../hooks/delivery/useFetchOrders";
+import { useFetchOrders } from "../../../../hooks/orders/useFetchOrders";
 import { Header } from "../../components/header";
 import { TabBody } from "./components/tabs/body";
 import { TabHeader } from "./components/tabs/header";

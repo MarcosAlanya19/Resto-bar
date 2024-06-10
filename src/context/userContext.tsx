@@ -1,15 +1,10 @@
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { IItem } from "../types/burger.type";
+import { IOrderStatus } from "../types/order.type";
+import { IUser } from "../types/user.type";
 
 // Interfaces de Tipos
-export interface User {
-	id: number;
-	user_name: string;
-	user_password: string;
-	email: string;
-}
-
 export interface CartItem extends IItem {
 	quantity: number;
 }
@@ -19,14 +14,14 @@ export interface Order {
 	user_id: number;
 	store_id: number;
 	items: CartItem[];
-	status: "pending" | "in_process" | "delivered";
-	order_date?: string; // opcional para el manejo de la fecha de pedido
+	status: IOrderStatus;
+	order_date?: string;
 }
 
 // Tipos del Contexto
 interface UserCartContextType {
-	user: User | null;
-	setUser: React.Dispatch<React.SetStateAction<User | null>>;
+	user: IUser | null;
+	setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
 	cart: CartItem[];
 	addToCart: (item: IItem) => void;
 	removeFromCart: (item: IItem) => void;
@@ -53,7 +48,7 @@ export const useUserCartContext = () => useContext(UserCartContext);
 export const UserCartProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,
 }) => {
-	const [user, setUser] = useState<User | null>(() => {
+	const [user, setUser] = useState<IUser | null>(() => {
 		const storedUser = localStorage.getItem("user");
 		return storedUser ? JSON.parse(storedUser) : null;
 	});
@@ -126,7 +121,7 @@ export const UserCartProvider: React.FC<{ children: React.ReactNode }> = ({
 		const order: Order = {
 			user_id: user.id,
 			items: orderItems,
-			status: "pending",
+			status: IOrderStatus.pending,
 		};
 
 		try {
