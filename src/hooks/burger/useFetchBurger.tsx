@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { apiConfig } from "../../config/axios";
 import { IItem } from "../../types/burger.type";
 
 export const useFetchItems = () => {
@@ -10,7 +10,7 @@ export const useFetchItems = () => {
 
 	const fetchItem = async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/api/burgers");
+			const response = await apiConfig.get("/burgers");
 			response.data;
 			setData(response.data);
 			setLoading(false);

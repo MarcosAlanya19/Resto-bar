@@ -7,9 +7,11 @@ import { ILogin } from "../../types/user.type";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../config/router/routes";
+import { useBoolean } from "../../hooks/useBoolean";
 
 export const Login = () => {
 	const navigate = useNavigate();
+	const login = useBoolean();
 
 	const {
 		formState: { errors },
@@ -62,48 +64,141 @@ export const Login = () => {
 					text="Iniciar Sesión"
 				/>
 				<s.Form>
-					<s.WrapperInput>
-						<s.Input
-							id="email"
-							{...register("email", {
-								required: "Correo es obligatrio",
-								pattern: {
-									value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-									message: "Dirección de correo electrónico no válida",
-								},
-							})}
-							type="email"
-							name="email"
-							placeholder="correo@gmail.com"
-						/>
-						{errors.email && (
-							<Text text={errors.email.message ?? ""} type="smallText" />
-						)}
-					</s.WrapperInput>
+					{!login.active ? (
+						<>
+							<s.WrapperInput>
+								<s.Input
+									id="email"
+									{...register("email", {
+										required: "Correo es obligatrio",
+										pattern: {
+											value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+											message: "Dirección de correo electrónico no válida",
+										},
+									})}
+									type="email"
+									name="email"
+									placeholder="correo@gmail.com"
+								/>
+								{errors.email && (
+									<Text text={errors.email.message ?? ""} type="smallText" />
+								)}
+							</s.WrapperInput>
 
-					<s.WrapperInput>
-						<s.Input
-							id="user_password"
-							{...register("user_password", {
-								required: "Contraseña es obligatoria",
-							})}
-							type="password"
-							name="user_password"
-							placeholder="********"
-						/>
-						{errors.user_password && (
-							<Text
-								text={errors.user_password.message ?? ""}
-								type="smallText"
-							/>
-						)}
-					</s.WrapperInput>
+							<s.WrapperInput>
+								<s.Input
+									id="user_password"
+									{...register("user_password", {
+										required: "Contraseña es obligatoria",
+									})}
+									type="password"
+									name="user_password"
+									placeholder="********"
+								/>
+								{errors.user_password && (
+									<Text
+										text={errors.user_password.message ?? ""}
+										type="smallText"
+									/>
+								)}
+							</s.WrapperInput>
+						</>
+					) : (
+						<>
+							<s.WrapperInput>
+								<s.Input
+									id="email"
+									{...register("email", {
+										required: "Correo es obligatrio",
+										pattern: {
+											value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+											message: "Dirección de correo electrónico no válida",
+										},
+									})}
+									type="email"
+									name="email"
+									placeholder="correo@gmail.com"
+								/>
+								{errors.email && (
+									<Text text={errors.email.message ?? ""} type="smallText" />
+								)}
+							</s.WrapperInput>
+
+							<s.WrapperInput>
+								<s.Input
+									id="user_password"
+									{...register("user_password", {
+										required: "Contraseña es obligatoria",
+									})}
+									type="password"
+									name="user_password"
+									placeholder="gaaaa"
+								/>
+								{errors.user_password && (
+									<Text
+										text={errors.user_password.message ?? ""}
+										type="smallText"
+									/>
+								)}
+							</s.WrapperInput>
+
+							<s.WrapperInput>
+								<s.Input
+									id="user_password"
+									{...register("user_password", {
+										required: "Contraseña es obligatoria",
+									})}
+									type="password"
+									name="user_password"
+									placeholder="gaaaa"
+								/>
+								{errors.user_password && (
+									<Text
+										text={errors.user_password.message ?? ""}
+										type="smallText"
+									/>
+								)}
+							</s.WrapperInput>
+
+							<s.WrapperInput>
+								<s.Input
+									id="user_password"
+									{...register("user_password", {
+										required: "Contraseña es obligatoria",
+									})}
+									type="password"
+									name="user_password"
+									placeholder="gaaaa"
+								/>
+								{errors.user_password && (
+									<Text
+										text={errors.user_password.message ?? ""}
+										type="smallText"
+									/>
+								)}
+							</s.WrapperInput>
+						</>
+					)}
 				</s.Form>
 				<s.Button style={{ width: "100%" }} onClick={handleSubmit(onSubmit)}>
 					Entrar
 				</s.Button>
 
-				<Text text="¿No tienes cuenta? Registrate" type="smallText" />
+				<div
+					style={{
+						display: "flex",
+						justifyContent: "end",
+						width: "100%",
+						padding: "16px 0",
+					}}
+				>
+					<Text
+						style={{ cursor: "pointer" }}
+						onClick={login.toggle}
+						text="¿No tienes cuenta? Registrate"
+						type="smallText"
+					/>
+				</div>
 			</s.Wrapper>
 		</s.WrapperLogin>
 	);

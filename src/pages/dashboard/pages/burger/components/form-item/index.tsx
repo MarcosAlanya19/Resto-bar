@@ -45,7 +45,7 @@ interface IProps {
 }
 
 export const ModalFormItem: React.FC<IProps> = (props) => {
-	const storeIds = props.update?.stores.map((store) => store.id.toString());
+	const storeIds = props.update?.stores?.map((store) => store.id.toString());
 	const {
 		register,
 		handleSubmit,
@@ -224,7 +224,7 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 								gap: "8px",
 							}}
 						>
-							{storesData.map((store) => (
+							{storesData?.map((store) => (
 								<div key={store.id}>
 									<label style={{ display: "flex", gap: "4px" }}>
 										<input

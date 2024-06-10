@@ -35,14 +35,12 @@ export const useLoginUser = () => {
 			setUser(response.data.user);
 
 			if (response.data.user.role !== IUserRole.Administrator) {
-				toast.error(
-					`El usuario ${response.data?.user.user_name} no es administrador`
-				);
-				return;
+				navigate("/");
+			} else {
+				navigate("/dashboard/reception");
 			}
 
 			toast.success(`Bienvenido ${response.data?.user.user_name}`);
-			navigate("/dashboard/reception");
 			if (response.status === 201) {
 				setSuccess(true);
 			} else {

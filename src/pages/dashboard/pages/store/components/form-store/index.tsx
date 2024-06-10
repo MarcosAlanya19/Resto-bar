@@ -170,11 +170,7 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 							<s.InputStyle
 								id="address"
 								{...register("address", {
-									required: "Correo obligatorio",
-									pattern: {
-										value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-										message: "Dirección de correo electrónico no válida",
-									},
+									required: "Direccion obligatoria",
 								})}
 								placeholder="Ingresa descripción de la hamburguesa"
 							/>
@@ -224,11 +220,6 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 								id="opening_hour"
 								{...register("opening_hour", {
 									required: "La hora de apertura es obligatoria",
-									pattern: {
-										value: /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/,
-										message:
-											"Formato de hora inválido. Utiliza el formato HH:MM",
-									},
 								})}
 							/>
 							{errors.opening_hour && (
@@ -250,11 +241,6 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 								id="closing_hour"
 								{...register("closing_hour", {
 									required: "La hora de cierre es obligatoria",
-									pattern: {
-										value: /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/,
-										message:
-											"Formato de hora inválido. Utiliza el formato HH:MM",
-									},
 								})}
 							/>
 							{errors.closing_hour && (

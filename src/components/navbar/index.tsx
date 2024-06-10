@@ -10,6 +10,7 @@ import { useUserCartContext } from "../../context/userContext";
 import { IItem } from "../../types/burger.type";
 import { Text } from "../atomic/text";
 import { routes } from "../../config/router/routes";
+import { IUserRole } from "../../types/user.type";
 
 export const Navbar: FC = () => {
 	const {
@@ -208,25 +209,33 @@ export const Navbar: FC = () => {
 				<Text text="Blog" type="textDefault" />
 
 				{user ? (
-					<div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-						<div
-							style={{
-								display: "flex",
-								background: "#bfbfbf20",
-								padding: "4px 10px",
-								borderRadius: "16px",
-							}}
-						>
-							<Text text={user.user_name} type="textDefault" />
+					<div style={{ display: "flex", alignItems: "center", gap: "30px" }}>
+						{user.role === IUserRole.Administrator && (
+							<s.StyledNavLink to={routes.dashboard.reception}>
+								<Text text="Dashboard" type="textDefault" />
+							</s.StyledNavLink>
+						)}
+
+						<div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+							<div
+								style={{
+									display: "flex",
+									background: "#bfbfbf20",
+									padding: "4px 10px",
+									borderRadius: "16px",
+								}}
+							>
+								<Text text={user.user_name} type="textDefault" />
+							</div>
+							<RiLogoutCircleLine
+								onClick={() => {
+									setUser(null);
+									toast.success("Cerrado de sesión exitoso");
+								}}
+								style={{ transform: "rotate(180deg)", cursor: "pointer" }}
+								size={24}
+							/>
 						</div>
-						<RiLogoutCircleLine
-							onClick={() => {
-								setUser(null);
-								toast.success("Cerrado de sesión exitoso");
-							}}
-							style={{ transform: "rotate(180deg)", cursor: "pointer" }}
-							size={24}
-						/>
 					</div>
 				) : (
 					<s.StyledNavLink to={routes.login.index}>

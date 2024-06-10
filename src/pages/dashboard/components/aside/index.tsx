@@ -1,3 +1,4 @@
+import { IoArrowBackOutline } from "react-icons/io5";
 import {
 	RiBubbleChartLine,
 	RiBuilding4Line,
@@ -86,6 +87,19 @@ export const AsideModal = () => {
 			</div>
 
 			<div style={{ display: "grid", gap: "8px" }}>
+				<s.BtnLogout
+					onClick={() => {
+						navigate(routes.index);
+					}}
+				>
+					<Text
+						leftIcon={<IoArrowBackOutline />}
+						weight="medium"
+						text={"Pagina principal"}
+						type="textDefault"
+					/>
+				</s.BtnLogout>
+
 				<s.BtnLogout
 					onClick={() => {
 						setUser(null);
