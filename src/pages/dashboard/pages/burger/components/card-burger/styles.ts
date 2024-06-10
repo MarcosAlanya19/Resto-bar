@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+export const Wrapper = styled.div`
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	background-color: #fff;
+	display: grid;
+	gap: 16px;
+	grid-template-columns: 1fr 0.5fr 1fr 1fr 1.5fr 100px 100px;
+	padding: 8px 16px;
+`;
+
 export const WrapperIcon = styled.div<{ alert: boolean }>`
 	display: flex;
 	justify-content: center;
@@ -15,16 +26,6 @@ export const WrapperIcon = styled.div<{ alert: boolean }>`
 		background-color: ${(props) => (props.alert ? "#FCD3D0" : "#F8F9FA")};
 		color: ${(props) => (props.alert ? "#BE1C12" : "#495057")};
 	}
-`;
-
-export const Wrapper = styled.div`
-	border-radius: 8px;
-	overflow: hidden;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	background-color: #fff;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 100px;
-	padding: 8px 16px;
 `;
 
 export const ImgItem = styled.img`
@@ -52,11 +53,12 @@ export const BadgeStore = styled.div`
 	background-color: #bfbfbf70;
 	border-radius: 8px;
 	text-transform: uppercase;
-	max-width: 120px;
+	max-width: 180px;
 `;
 
 export const WrapperBtns = styled.div`
 	display: grid;
+	align-items: center;
 	grid-template-columns: 1fr 1fr;
 	gap: 8px;
 `;

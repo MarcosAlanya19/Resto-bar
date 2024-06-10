@@ -28,8 +28,9 @@ export const CardBurger: React.FC<IProps> = (props) => {
 		<>
 			<s.Wrapper>
 				<Text text={data.item_name} type="text" />
+				<Text text={data.type} type="text" />
 				<Text text={data.description} type="text" />
-				<Text text={data.price} type="text" />
+				<Text text={`S/ ${data.price}`} type="text" />
 				<s.WrapperBadge>
 					{data.stores.map((store) => (
 						<s.BadgeStore key={store.id}>

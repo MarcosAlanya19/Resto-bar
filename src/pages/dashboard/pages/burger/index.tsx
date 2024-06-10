@@ -19,8 +19,8 @@ export const ItemDashboard: React.FC = () => {
 		<>
 			<s.ContainerLeft>
 				<Header
-					title="Hamburguesas"
-					subtitle="Crea y configura las hamburguesas de la marca"
+					title="Productos"
+					subtitle="Crea y configura las productos de la marca"
 					actions={
 						<s.Button onClick={createStore.on}>
 							<Text
@@ -57,13 +57,15 @@ export const ItemDashboard: React.FC = () => {
 							borderRadius: "8px",
 							overflow: "hidden",
 							backgroundColor: "#edf3fc",
-							display: "grid",
-							gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 100px",
 							marginBottom: "4px",
 							padding: "8px 16px",
+							display: "grid",
+							gridTemplateColumns: "1fr .5fr 1fr 1fr 1.5fr 100px 100px",
+							gap: "16px",
 						}}
 					>
 						<Text weight="medium" text={"Nombre"} type="text" />
+						<Text weight="medium" text={"Tipo"} type="text" />
 						<Text weight="medium" text={"Descripción"} type="text" />
 						<Text weight="medium" text={"Precio"} type="text" />
 						<Text weight="medium" text={"Tienda"} type="text" />
