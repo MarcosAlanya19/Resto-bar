@@ -9,14 +9,14 @@ import { ModalConfirm } from "../../../../../../components/modal/confirm";
 import { useDeleteItem } from "../../../../../../hooks/burger/useDeleteBurger";
 import { useBoolean } from "../../../../../../hooks/useBoolean";
 import { IItem } from "../../../../../../types/burger.type";
-import { ModalFormItem } from "../form-burger";
+import { ModalFormItem } from "../form-item";
 
 interface IProps {
 	data: IItem;
 	refresh: () => void;
 }
 
-export const CardBurger: React.FC<IProps> = (props) => {
+export const CardItem: React.FC<IProps> = (props) => {
 	const { data } = props;
 	const confirm = useBoolean();
 	const editStore = useBoolean();
@@ -70,7 +70,10 @@ export const CardBurger: React.FC<IProps> = (props) => {
 					props.refresh();
 				}}
 				modal={confirm}
-				refresh={props.refresh}
+				refresh={() => {
+					props.refresh();
+					setUpdate({} as IItem);
+				}}
 			/>
 
 			<ModalFormItem

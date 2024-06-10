@@ -41,6 +41,7 @@ interface IProps {
 	};
 	refresh: () => void;
 	update?: IItem;
+	setUpdate?: React.Dispatch<React.SetStateAction<IItem>>;
 }
 
 export const ModalFormItem: React.FC<IProps> = (props) => {
@@ -72,6 +73,10 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 		}
 		props.refresh();
 		props.modal.off();
+
+		if (props.setUpdate) {
+			props.setUpdate({} as IItem);
+		}
 	};
 
 	const [imagePreview, setImagePreview] = React.useState(
@@ -188,7 +193,14 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 					</s.WrapperInput>
 				</s.WrapperContent>
 				<s.WrapperBtns>
-					<s.Button onClick={props.modal.off}>
+					<s.Button
+						onClick={() => {
+							if (props.setUpdate) {
+								props.setUpdate({} as IItem);
+							}
+							props.modal.off();
+						}}
+					>
 						<Text text="Cancelar" type="text" />
 					</s.Button>
 					<s.Button onClick={handleSubmit(onSubmit)}>

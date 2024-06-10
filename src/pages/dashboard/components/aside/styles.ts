@@ -16,7 +16,7 @@ export const Sections = styled.div`
 export const Sidebar = styled.div`
 	display: grid;
 	grid-template-rows: auto 1fr auto;
-	height: 100vh;
+	min-height: 100vh;
 
 	gap: 12px;
 	padding: 16px;

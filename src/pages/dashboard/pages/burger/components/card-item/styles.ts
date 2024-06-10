@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 	background-color: #fff;
 	display: grid;
 	gap: 16px;
-	grid-template-columns: 1fr 0.5fr 1fr 1fr 1.5fr 100px 100px;
+	grid-template-columns: 1fr 0.5fr 1fr 150px 1.5fr 100px 100px;
 	padding: 8px 16px;
 `;
 

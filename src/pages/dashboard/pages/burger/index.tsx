@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import * as s from "../../styles";
+import * as sg from "../../styles";
+import * as s from "./styles";
 
 import { RiAddLine } from "react-icons/ri";
 import { Text } from "../../../../components/atomic/text";
 import { useFetchItems } from "../../../../hooks/burger/useFetchBurger";
 import { useBoolean } from "../../../../hooks/useBoolean";
 import { Header } from "../../components/header";
-import { CardBurger } from "./components/card-burger";
-import { ModalFormItem } from "./components/form-burger";
+import { CardItem } from "./components/card-item";
+import { ModalFormItem } from "./components/form-item";
 
 export const ItemDashboard: React.FC = () => {
 	const createStore = useBoolean();
@@ -17,12 +18,12 @@ export const ItemDashboard: React.FC = () => {
 
 	return (
 		<>
-			<s.ContainerLeft>
+			<sg.ContainerLeft>
 				<Header
 					title="Productos"
 					subtitle="Crea y configura las productos de la marca"
 					actions={
-						<s.Button onClick={createStore.on}>
+						<sg.Button onClick={createStore.on}>
 							<Text
 								text="Agregar"
 								type="text"
@@ -34,56 +35,32 @@ export const ItemDashboard: React.FC = () => {
 									justifyContent: "center",
 								}}
 							/>
-						</s.Button>
+						</sg.Button>
 					}
 				/>
-				<s.Body>
-					<input
+				<sg.Body>
+					{/* <s.StyledSearch
 						type="text"
 						placeholder="O  Buscar por nombre de hamburguesa"
-						style={{
-							width: "50%",
-							marginBottom: "24px",
-							border: "1px solid #bfbfbf",
-							minHeight: "40px",
-							padding: "4px 8px",
-							fontSize: "14px",
-							borderRadius: "8px",
-						}}
-					/>
+					/> */}
 
-					<div
-						style={{
-							borderRadius: "8px",
-							overflow: "hidden",
-							backgroundColor: "#edf3fc",
-							marginBottom: "4px",
-							padding: "8px 16px",
-							display: "grid",
-							gridTemplateColumns: "1fr .5fr 1fr 1fr 1.5fr 100px 100px",
-							gap: "16px",
-						}}
-					>
+					<s.WrapperHeader>
 						<Text weight="medium" text={"Nombre"} type="text" />
 						<Text weight="medium" text={"Tipo"} type="text" />
 						<Text weight="medium" text={"Descripción"} type="text" />
 						<Text weight="medium" text={"Precio"} type="text" />
 						<Text weight="medium" text={"Tienda"} type="text" />
 						<Text weight="medium" text={"Imagen"} type="text" />
-					</div>
-					<div
-						style={{
-							display: "flex",
-							flexDirection: "column",
-							gap: "16px",
-						}}
-					>
+					</s.WrapperHeader>
+
+					<s.WrapperCard>
 						{itemData?.map((burger) => (
-							<CardBurger key={burger.id} refresh={fetchItem} data={burger} />
+							<CardItem key={burger.id} refresh={fetchItem} data={burger} />
 						))}
-					</div>
-				</s.Body>
-			</s.ContainerLeft>
+					</s.WrapperCard>
+
+				</sg.Body>
+			</sg.ContainerLeft>
 			<ModalFormItem modal={createStore} refresh={fetchItem} />
 		</>
 	);
