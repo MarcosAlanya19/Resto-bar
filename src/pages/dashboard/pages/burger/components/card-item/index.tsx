@@ -8,7 +8,7 @@ import { Text } from "../../../../../../components/atomic/text";
 import { ModalConfirm } from "../../../../../../components/modal/confirm";
 import { useDeleteItem } from "../../../../../../hooks/burger/useDeleteBurger";
 import { useBoolean } from "../../../../../../hooks/useBoolean";
-import { IItem } from "../../../../../../types/burger.type";
+import { IItem, MenuItemType } from "../../../../../../types/burger.type";
 import { ModalFormItem } from "../form-item";
 
 interface IProps {
@@ -24,11 +24,18 @@ export const CardItem: React.FC<IProps> = (props) => {
 
 	const { deleteItem } = useDeleteItem();
 
+	const MenuItemTypeTranslation: { [key in MenuItemType]: string } = {
+		[MenuItemType.Never]: "Nunca",
+		[MenuItemType.Beverage]: "Bebida",
+		[MenuItemType.Burger]: "Hamburguesa",
+		[MenuItemType.Other]: "Otro",
+	};
+
 	return (
 		<>
 			<s.Wrapper>
 				<Text text={data.item_name} type="text" />
-				<Text text={data.type} type="text" />
+				<Text text={MenuItemTypeTranslation[data.type]} type="text" />
 				<Text text={data.description} type="text" />
 				<Text text={`S/ ${data.price}`} type="text" />
 				<s.WrapperBadge>
