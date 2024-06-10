@@ -12,17 +12,18 @@ const pulseAnimation = keyframes`
   }
 `;
 
-export const BtnStatus = styled.button`
-	background-color: #007bff;
+export const BtnStatus = styled.button<{ selected: boolean }>`
+	width: 100%;
+	background-color: ${(props) => (props.selected ? "#bfbfbf" : "#007bff")};
 	color: white;
 	border: none;
 	padding: 8px 16px;
 	border-radius: 4px;
-	cursor: pointer;
+	cursor: ${(props) => (props.selected ? "not-allowed" : "pointer")};
 	margin-right: 8px;
 
 	&:hover {
-		background-color: #0056b3;
+		background-color: ${(props) => !props.selected && "#0056b3"};
 	}
 
 	&:active {

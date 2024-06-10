@@ -1,10 +1,12 @@
 import React from "react";
+import * as s from "./styles";
 
 import { useForm, useWatch } from "react-hook-form";
 import { Text } from "../../../../../../../components/atomic/text";
 import { apiConfig } from "../../../../../../../config/axios";
 import { useFetchStores } from "../../../../../../../hooks/store/useFetchStore";
 import { IOrder, IOrderStatus } from "../../../../../../../types/order.type";
+import dayjs from "dayjs";
 
 interface IProps {
 	data: IOrder;
@@ -61,14 +63,19 @@ export const CardOrderPeding: React.FC<IProps> = (props) => {
 			}}
 		>
 			<Text
-				text={`Cliente: ${order.user_name}`}
+				text={`Cliente: ${order.user.user_name}`}
 				type="textDefault"
-				style={{ fontWeight: "bold", marginBottom: "8px" }}
+				weight="semiBold"
 			/>
+			<div style={{ display: "flex", gap: "4px" }}>
+				<Text text={`${order.user.phone_number}`} type="text" />
+				<Text text={`-`} type="text" />
+				<Text text={`${order.user.address}`} type="text" />
+			</div>
 			<Text
-				text={`Fecha: ${new Date(order.order_date).toLocaleString()}`}
-				type="textDefault"
-				style={{ marginBottom: "8px", color: "#757575" }}
+				text={`Hora pedido: ${dayjs(order.order_date).format("hh:mm A")}`}
+				type="text"
+				style={{ color: "#757575" }}
 			/>
 			<ul style={{ listStyleType: "none", paddingLeft: 0 }}>
 				{order.items.map((item) => (
@@ -102,20 +109,13 @@ export const CardOrderPeding: React.FC<IProps> = (props) => {
 						</option>
 					))}
 				</select>
-				<button
+				<s.BtnStatus
+					selected={!selectedStoreWatch}
 					onClick={() => updateOrderStatus(order.order_id)}
 					disabled={selectedStoreWatch === ""}
-					style={{
-						backgroundColor: selectedStoreWatch === "" ? "#bfbfbf" : "#007BFF",
-						color: "white",
-						border: "none",
-						padding: "8px 16px",
-						borderRadius: "4px",
-						cursor: selectedStoreWatch === "" ? "not-allowed" : "pointer",
-					}}
 				>
 					Marcar como En Proceso
-				</button>
+				</s.BtnStatus>
 			</div>
 		</div>
 	);

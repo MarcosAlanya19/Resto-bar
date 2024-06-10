@@ -13,6 +13,7 @@ const pulseAnimation = keyframes`
 `;
 
 export const BtnStatus = styled.button`
+	width: 100%;
 	background-color: #007bff;
 	color: white;
 	border: none;
