@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { useUserCartContext } from "../../context/userContext";
 import { IItem } from "../../types/burger.type";
 import { Text } from "../atomic/text";
+import { routes } from "../../config/router/routes";
 
 export const Navbar: FC = () => {
 	const {
@@ -196,11 +197,11 @@ export const Navbar: FC = () => {
 					</Transition>
 				</Popover>
 
-				<s.StyledNavLink to={"/"}>
+				<s.StyledNavLink to={routes.index}>
 					<Text text="Inicio" type="textDefault" />
 				</s.StyledNavLink>
 
-				<s.StyledNavLink to={"menu"}>
+				<s.StyledNavLink to={routes.word.menu}>
 					<Text text="Menú" type="textDefault" />
 				</s.StyledNavLink>
 
@@ -228,7 +229,9 @@ export const Navbar: FC = () => {
 						/>
 					</div>
 				) : (
-					<Text text="Iniciar sesión" type="textDefault" />
+					<s.StyledNavLink to={routes.login.index}>
+						<Text text="Iniciar sesión" type="textDefault" />
+					</s.StyledNavLink>
 				)}
 			</div>
 		</div>
