@@ -89,8 +89,8 @@ export const AsideModal = () => {
 				<s.BtnLogout
 					onClick={() => {
 						setUser(null);
-						navigate(routes.login.index);
 						toast.success("Cerrado de sesión exitoso");
+						navigate(routes.login.index);
 					}}
 				>
 					<Text

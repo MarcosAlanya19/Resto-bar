@@ -2,14 +2,17 @@ import { FC } from "react";
 import * as s from "./styles";
 
 import { Popover, Transition } from "@headlessui/react";
-import { Text } from "../atomic/text";
 import { FaCartShopping } from "react-icons/fa6";
+import { MdCancel } from "react-icons/md";
+import { RiLogoutCircleLine } from "react-icons/ri";
+import { toast } from "react-toastify";
 import { useUserCartContext } from "../../context/userContext";
 import { IItem } from "../../types/burger.type";
-import { MdCancel } from "react-icons/md";
+import { Text } from "../atomic/text";
 
 export const Navbar: FC = () => {
 	const {
+		setUser,
 		user,
 		cart,
 		removeFromCart,
@@ -204,8 +207,25 @@ export const Navbar: FC = () => {
 				<Text text="Blog" type="textDefault" />
 
 				{user ? (
-					<div style={{background: "#bfbfbf20", padding: "4px 10px", borderRadius: "16px"}}>
-						<Text text={user.user_name} type="textDefault" />
+					<div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+						<div
+							style={{
+								display: "flex",
+								background: "#bfbfbf20",
+								padding: "4px 10px",
+								borderRadius: "16px",
+							}}
+						>
+							<Text text={user.user_name} type="textDefault" />
+						</div>
+						<RiLogoutCircleLine
+							onClick={() => {
+								setUser(null);
+								toast.success("Cerrado de sesión exitoso");
+							}}
+							style={{ transform: "rotate(180deg)", cursor: "pointer" }}
+							size={24}
+						/>
 					</div>
 				) : (
 					<Text text="Iniciar sesión" type="textDefault" />
