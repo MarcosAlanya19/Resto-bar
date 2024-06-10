@@ -16,6 +16,14 @@ interface IProps {
 	refresh: () => void;
 }
 
+const truncateDescription = (description: string, maxWords: number) => {
+	const words = description.split(" ");
+	if (words.length > maxWords) {
+		return words.slice(0, maxWords).join(" ") + "...";
+	}
+	return description;
+};
+
 export const CardStore: React.FC<IProps> = (props) => {
 	const { data } = props;
 	const confirm = useBoolean();
@@ -23,6 +31,7 @@ export const CardStore: React.FC<IProps> = (props) => {
 	const [update, setUpdate] = React.useState<IStore>(data);
 
 	const { deleteStore } = useDeleteStore();
+	const truncatedDescription = truncateDescription(data.description, 5);
 
 	return (
 		<>
@@ -33,11 +42,13 @@ export const CardStore: React.FC<IProps> = (props) => {
 					boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
 					backgroundColor: "#fff",
 					display: "grid",
-					gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 100px",
+					gap: "16px",
+					gridTemplateColumns: "1.5fr 1.5fr 1fr 1fr 1fr 1fr 1fr 100px",
 					padding: "8px 16px",
 				}}
 			>
 				<Text text={data.store_name} type="text" />
+				<Text text={truncatedDescription} type="text" />
 				<Text text={data.opening_hour} type="text" />
 				<Text text={data.closing_hour} type="text" />
 				<Text text={data.address} type="text" />
@@ -89,6 +100,7 @@ export const CardStore: React.FC<IProps> = (props) => {
 
 			<ModalFormStore
 				update={update}
+				setUpdate={setUpdate}
 				modal={editStore}
 				refresh={props.refresh}
 			/>

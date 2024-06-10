@@ -37,12 +37,14 @@ interface IProps {
 	};
 	refresh: () => void;
 	update?: IStore;
+	setUpdate?: React.Dispatch<React.SetStateAction<IStore>>;
 }
 
 export const ModalFormStore: React.FC<IProps> = (props) => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm<IFormInput>({
 		defaultValues: {
@@ -67,6 +69,10 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 		}
 		props.refresh();
 		props.modal.off();
+		reset();
+		if (props.setUpdate) {
+			props.setUpdate({} as IStore);
+		}
 	};
 
 	const [imagePreview, setImagePreview] = React.useState(
@@ -101,28 +107,46 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 				<s.WrapperContent>
 					<s.WrapperInput>
 						<Text text="Nombre de sucursal" type="text" />
-						<s.InputStyle
-							id="store_name"
-							type="text"
-							{...register("store_name", {
-								required: "Store name is required",
-							})}
-							placeholder="Ingresa nombre de la hamburguesa"
-						/>
-						{errors.store_name && <p>{errors.store_name.message}</p>}
+						<div>
+							<s.InputStyle
+								id="store_name"
+								type="text"
+								{...register("store_name", {
+									required: "Nombre de tienda obligatorio",
+								})}
+								placeholder="Ingresa nombre de la hamburguesa"
+							/>
+							{errors.store_name && (
+								<Text
+									text={errors.store_name.message ?? ""}
+									type="smallText"
+									style={{ color: "#F14A41" }}
+									weight="medium"
+								/>
+							)}
+						</div>
 					</s.WrapperInput>
 
 					<s.WrapperInput>
 						<Text text="Descripción" type="text" />
-						<s.InputStyle
-							id="description"
-							type="text"
-							{...register("description", {
-								required: "Store name is required",
-							})}
-							placeholder="Ingresa una descripción"
-						/>
-						{errors.description && <p>{errors.description.message}</p>}
+						<div>
+							<s.InputStyle
+								id="description"
+								type="text"
+								{...register("description", {
+									required: "Descripción obligatoria",
+								})}
+								placeholder="Ingresa una descripción"
+							/>
+							{errors.description && (
+								<Text
+									text={errors.description.message ?? ""}
+									type="smallText"
+									style={{ color: "#F14A41" }}
+									weight="medium"
+								/>
+							)}
+						</div>
 					</s.WrapperInput>
 
 					<s.WrapperInput>
@@ -135,7 +159,6 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 							placeholder="Ingresa nombre de la hamburguesa"
 							onChange={handleImageChange}
 						/>
-						{errors.image && <p>{errors.image.message}</p>}
 						{imagePreview && (
 							<img src={imagePreview} alt="Imagen de sucursal" width="100" />
 						)}
@@ -143,53 +166,118 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 
 					<s.WrapperInput>
 						<Text text="Dirección" type="text" />
-						<s.InputStyle
-							id="address"
-							{...register("address", { required: "Address is required" })}
-							placeholder="Ingresa descripción de la hamburguesa"
-						/>
-						{errors.address && <p>{errors.address.message}</p>}
+						<div>
+							<s.InputStyle
+								id="address"
+								{...register("address", {
+									required: "Correo obligatorio",
+									pattern: {
+										value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+										message: "Dirección de correo electrónico no válida",
+									},
+								})}
+								placeholder="Ingresa descripción de la hamburguesa"
+							/>
+							{errors.address && (
+								<Text
+									text={errors.address.message ?? ""}
+									type="smallText"
+									style={{ color: "#F14A41" }}
+									weight="medium"
+								/>
+							)}
+						</div>
 					</s.WrapperInput>
 
 					<s.WrapperInput>
 						<Text text="Telefono" type="text" />
-						<s.InputStyle
-							type="phone"
-							id="phone"
-							{...register("phone", { required: "Phone is required" })}
-							placeholder="Ingresa costo de la hamburguesa"
-						/>
-						{errors.phone && <p>{errors.phone.message}</p>}
+						<div>
+							<s.InputStyle
+								type="phone"
+								id="phone"
+								{...register("phone", {
+									required: "Teléfono obligatorio",
+									pattern: {
+										value: /^\d{0,9}$/,
+										message:
+											"El número de teléfono debe tener máximo 9 dígitos",
+									},
+								})}
+								placeholder="Ingresa costo de la hamburguesa"
+							/>
+							{errors.phone && (
+								<Text
+									text={errors.phone.message ?? ""}
+									type="smallText"
+									style={{ color: "#F14A41" }}
+									weight="medium"
+								/>
+							)}
+						</div>
 					</s.WrapperInput>
 
 					<s.WrapperInput>
 						<Text text="Hora de apertura" type="text" />
-						<s.InputStyle
-							type="time"
-							id="opening_hour"
-							{...register("opening_hour", {
-								required: "Opening hour is required",
-							})}
-							placeholder="Ingresa costo de la hamburguesa"
-						/>
-						{errors.opening_hour && <p>{errors.opening_hour.message}</p>}
+						<div>
+							<s.InputStyle
+								type="time"
+								id="opening_hour"
+								{...register("opening_hour", {
+									required: "La hora de apertura es obligatoria",
+									pattern: {
+										value: /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/,
+										message:
+											"Formato de hora inválido. Utiliza el formato HH:MM",
+									},
+								})}
+							/>
+							{errors.opening_hour && (
+								<Text
+									text={errors.opening_hour.message ?? ""}
+									type="smallText"
+									style={{ color: "#F14A41" }}
+									weight="medium"
+								/>
+							)}
+						</div>
 					</s.WrapperInput>
 
 					<s.WrapperInput>
 						<Text text="Hora de cierre" type="text" />
-						<s.InputStyle
-							type="time"
-							id="closing_hour"
-							{...register("closing_hour", {
-								required: "Closing hour is required",
-							})}
-							placeholder="Ingresa costo de la hamburguesa"
-						/>
-						{errors.closing_hour && <p>{errors.closing_hour.message}</p>}
+						<div>
+							<s.InputStyle
+								type="time"
+								id="closing_hour"
+								{...register("closing_hour", {
+									required: "La hora de cierre es obligatoria",
+									pattern: {
+										value: /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/,
+										message:
+											"Formato de hora inválido. Utiliza el formato HH:MM",
+									},
+								})}
+							/>
+							{errors.closing_hour && (
+								<Text
+									text={errors.closing_hour.message ?? ""}
+									type="smallText"
+									style={{ color: "#F14A41" }}
+									weight="medium"
+								/>
+							)}
+						</div>
 					</s.WrapperInput>
 				</s.WrapperContent>
 				<s.WrapperBtns>
-					<s.Button onClick={props.modal.off}>
+					<s.Button
+						onClick={() => {
+							props.modal.off();
+							if (props.setUpdate) {
+								props.setUpdate({} as IStore);
+								reset();
+							}
+						}}
+					>
 						<Text text="Cancelar" type="text" />
 					</s.Button>
 					<s.Button onClick={handleSubmit(onSubmit)}>
