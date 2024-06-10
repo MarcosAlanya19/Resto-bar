@@ -107,38 +107,74 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 				<s.WrapperHeader>
 					<Text
 						type="title"
-						text={props.update ? "Edición de Hamburguesa" : "Nueva Hamburguesa"}
+						text={props.update ? "Edición de producto" : "Nueva producto"}
 					/>
 				</s.WrapperHeader>
 				<s.WrapperContent>
 					<s.WrapperInput>
-						<Text text="Nombre de hamburguesa" type="text" />
-						<s.InputStyle
-							id="store_name"
-							type="text"
-							{...register("item_name")}
-							placeholder="Ingresa nombre de la hamburguesa"
-						/>
-						{errors.item_name && <p>{errors.item_name.message}</p>}
+						<Text text="Nombre del producto" type="text" />
+						<div>
+							<s.InputStyle
+								id="store_name"
+								type="text"
+								{...register("item_name", {
+									required: "El nombre del producto es obligatorio",
+								})}
+								placeholder="Ingresa nombre del producto"
+							/>
+							{errors.item_name && (
+								<Text
+									text={errors.item_name.message ?? ""}
+									type="smallText"
+									style={{ color: "#F14A41" }}
+									weight="medium"
+								/>
+							)}
+						</div>
 					</s.WrapperInput>
 
 					<s.WrapperInput>
 						<Text text="Tipo de elemento" type="text" />
-						<s.SelectStyle {...register("type")}>
-							<option value={MenuItemType.Beverage}>Bebida</option>
-							<option value={MenuItemType.Burger}>Hamburguesa</option>
-							<option value={MenuItemType.Other}>Otro</option>
-						</s.SelectStyle>
+						<div>
+							<s.SelectStyle
+								{...register("type", {
+									required: "El tipo del producto es obligatorio",
+								})}
+							>
+								<option value={MenuItemType.Beverage}>Bebida</option>
+								<option value={MenuItemType.Burger}>Hamburguesa</option>
+								<option value={MenuItemType.Other}>Otro</option>
+							</s.SelectStyle>
+							{errors.type && (
+								<Text
+									text={errors.type.message ?? ""}
+									type="smallText"
+									style={{ color: "#F14A41" }}
+									weight="medium"
+								/>
+							)}
+						</div>
 					</s.WrapperInput>
 
 					<s.WrapperInput>
 						<Text text="Descripción" type="text" />
-						<s.InputStyle
-							id="description"
-							{...register("description", { required: "Address is required" })}
-							placeholder="Ingresa descripción de la hamburguesa"
-						/>
-						{errors.description && <p>{errors.description.message}</p>}
+						<div>
+							<s.InputStyle
+								id="description"
+								{...register("description", {
+									required: "La descripción es obligatoria",
+								})}
+								placeholder="Ingresa descripción de la hamburguesa"
+							/>
+							{errors.description && (
+								<Text
+									text={errors.description.message ?? ""}
+									type="smallText"
+									style={{ color: "#F14A41" }}
+									weight="medium"
+								/>
+							)}
+						</div>
 					</s.WrapperInput>
 
 					<s.WrapperInput>

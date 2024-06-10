@@ -44,6 +44,7 @@ export const WrapperInput = styled.div`
 `;
 
 export const InputStyle = styled.input`
+	width: 100%;
 	min-height: 40px;
 	border-radius: 8px;
 	border: 1px solid #bfbfbf;
@@ -52,6 +53,7 @@ export const InputStyle = styled.input`
 `;
 
 export const SelectStyle = styled.select`
+	width: 100%;
 	min-height: 40px;
 	border-radius: 8px;
 	border: 1px solid #bfbfbf;

@@ -66,18 +66,16 @@ export const CardItem: React.FC<IProps> = (props) => {
 				}}
 				onConfirm={async () => {
 					await deleteItem(data.id);
-					toast.success("Se elimino sucursal con éxito");
+					toast.success("Se elimino producto con éxito");
 					props.refresh();
 				}}
 				modal={confirm}
-				refresh={() => {
-					props.refresh();
-					setUpdate({} as IItem);
-				}}
+				refresh={props.refresh}
 			/>
 
 			<ModalFormItem
 				update={update}
+				setUpdate={setUpdate}
 				modal={editStore}
 				refresh={props.refresh}
 			/>
