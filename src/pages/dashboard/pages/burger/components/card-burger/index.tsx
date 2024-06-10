@@ -26,52 +26,21 @@ export const CardBurger: React.FC<IProps> = (props) => {
 
 	return (
 		<>
-			<div
-				style={{
-					borderRadius: "8px",
-					overflow: "hidden",
-					boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-					backgroundColor: "#fff",
-					display: "grid",
-					gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 100px",
-					padding: "8px 16px",
-				}}
-			>
+			<s.Wrapper>
 				<Text text={data.item_name} type="text" />
 				<Text text={data.description} type="text" />
 				<Text text={data.price} type="text" />
-				<div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+				<s.WrapperBadge>
 					{data.stores.map((store) => (
-						<div
-							key={store.id}
-							style={{
-								display: "flex",
-								justifyContent: "center",
-								alignItems: "center",
-								backgroundColor: "#bfbfbf70",
-								borderRadius: "8px",
-								textTransform: "uppercase",
-								maxWidth: "120px",
-							}}
-						>
+						<s.BadgeStore key={store.id}>
 							<Text text={store.name} type="text" weight="medium" />
-						</div>
+						</s.BadgeStore>
 					))}
-				</div>
-				<div style={{ width: 50, height: 50, overflow: "hidden" }}>
-					<img
-						src={data.secure_url}
-						alt="img-store"
-						style={{ width: "100%", height: "100%", objectFit: "cover" }}
-					/>
-				</div>
-				<div
-					style={{
-						display: "grid",
-						gridTemplateColumns: "1fr 1fr",
-						gap: "8px",
-					}}
-				>
+				</s.WrapperBadge>
+				<s.WrapperImgItem>
+					<s.ImgItem src={data.secure_url} alt="img-store" />
+				</s.WrapperImgItem>
+				<s.WrapperBtns>
 					<s.WrapperIcon alert onClick={confirm.on}>
 						<RiDeleteBinLine size={16} />
 					</s.WrapperIcon>
@@ -84,8 +53,8 @@ export const CardBurger: React.FC<IProps> = (props) => {
 					>
 						<PiPencilSimpleLineDuotone size={16} />
 					</s.WrapperIcon>
-				</div>
-			</div>
+				</s.WrapperBtns>
+			</s.Wrapper>
 
 			<ModalConfirm
 				info={{
