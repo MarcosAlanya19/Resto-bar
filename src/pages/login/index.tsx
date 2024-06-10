@@ -24,40 +24,13 @@ export const Login = () => {
 	};
 
 	return (
-		<div
-			style={{
-				display: "grid",
-				gridTemplateColumns: "4fr 2fr",
-				width: "100%",
-				height: "100vh",
-			}}
-		>
-			<img
-				style={{
-					width: "100%",
-					objectFit: "cover",
-					height: "100vh",
-					objectPosition: "top",
-				}}
-				src="./img/login/img-login.jpg"
-				alt="img-login"
-			/>
+		<s.WrapperLogin>
+			<s.ImgLogin src="./img/login/img-login.jpg" alt="img-login" />
 			<s.Wrapper>
 				{error && (
-					<div
-						style={{
-							background: "#f03c20",
-							width: "100%",
-							borderRadius: "4px",
-							padding: "8px",
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-							marginBottom: "16px",
-						}}
-					>
+					<s.WrapperError>
 						<Text type="text" text={error ?? ""} weight="medium" />
-					</div>
+					</s.WrapperError>
 				)}
 
 				<Text
@@ -66,7 +39,7 @@ export const Login = () => {
 					text="Iniciar Sesión"
 				/>
 				<s.Form>
-					<div style={{ width: "100%", display: "grid", gap: "4px" }}>
+					<s.WrapperInput>
 						<s.Input
 							id="email"
 							{...register("email", {
@@ -83,9 +56,9 @@ export const Login = () => {
 						{errors.email && (
 							<Text text={errors.email.message ?? ""} type="smallText" />
 						)}
-					</div>
+					</s.WrapperInput>
 
-					<div style={{ width: "100%", display: "grid", gap: "4px" }}>
+					<s.WrapperInput>
 						<s.Input
 							id="user_password"
 							{...register("user_password", {
@@ -101,12 +74,12 @@ export const Login = () => {
 								type="smallText"
 							/>
 						)}
-					</div>
+					</s.WrapperInput>
 				</s.Form>
 				<s.Button style={{ width: "100%" }} onClick={handleSubmit(onSubmit)}>
 					Entrar
 				</s.Button>
 			</s.Wrapper>
-		</div>
+		</s.WrapperLogin>
 	);
 };

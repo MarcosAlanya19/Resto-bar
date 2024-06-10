@@ -1,5 +1,36 @@
 import styled, { keyframes } from "styled-components";
 
+export const WrapperLogin = styled.div`
+	display: grid;
+	grid-template-columns: 4fr 2fr;
+	width: 100%;
+	height: 100vh;
+`;
+
+export const ImgLogin = styled.img`
+	width: 100%;
+	object-fit: cover;
+	height: 100vh;
+	object-position: top;
+`;
+
+export const WrapperError = styled.div`
+	background: #f03c20;
+	width: 100%;
+	border-radius: 4px;
+	padding: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 16px;
+`;
+
+export const WrapperInput = styled.div`
+	width: 100%;
+	display: grid;
+	gap: 4px;
+`;
+
 export const jump = keyframes`
   from{
     transform: translateY(0)
