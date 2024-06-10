@@ -1,9 +1,7 @@
 import React from "react";
 
-import axios from "axios";
-import { useForm, useWatch } from "react-hook-form";
+import dayjs from "dayjs";
 import { Text } from "../../../../../../../components/atomic/text";
-import { useFetchStores } from "../../../../../../../hooks/store/useFetchStore";
 import { IOrder } from "../../../../../../../types/order.type";
 
 interface IProps {
@@ -13,38 +11,17 @@ interface IProps {
 
 export const CardOrderDelivered: React.FC<IProps> = (props) => {
 	const [order, setOrder] = React.useState(props.data);
-	const { data: dataStore } = useFetchStores();
 
 	React.useEffect(() => {
 		setOrder(props.data);
 	}, [props.data]);
 
-	const { register, control } = useForm({
-		defaultValues: {
-			store: "",
-		},
-	});
-
-	const selectedStoreWatch = useWatch({
-		control,
-		name: "store",
-	});
-
-	const updateOrderStatus = async (orderId: number, newStatus: string) => {
-		try {
-			await axios.patch(`http://localhost:3000/api/orders/${orderId}`, {
-				newStatus,
-				newStoreId: selectedStoreWatch,
-			});
-		} catch (error) {
-			console.error("Error updating order status:", error);
-		}
-	};
-
 	return (
 		<div
 			key={order.order_id}
 			style={{
+				display: "grid",
+				gridAutoRows: "1fr auto",
 				border: "1px solid #e0e0e0",
 				padding: "16px",
 				borderRadius: "8px",
@@ -58,61 +35,49 @@ export const CardOrderDelivered: React.FC<IProps> = (props) => {
 				(e.currentTarget as HTMLDivElement).style.transform = "scale(1)";
 			}}
 		>
-			<Text
-				text={`Cliente: ${order.user_name}`}
-				type="textDefault"
-				style={{ fontWeight: "bold", marginBottom: "8px" }}
-			/>
-			<Text
-				text={`Fecha: ${new Date(order.order_date).toLocaleString()}`}
-				type="textDefault"
-				style={{ marginBottom: "8px", color: "#757575" }}
-			/>
-			<ul style={{ listStyleType: "none", paddingLeft: 0 }}>
-				{order.items.map((item) => (
-					<li key={item.id} style={{ marginBottom: "4px" }}>
+			<div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+				<div style={{ display: "grid", gap: "4px" }}>
+					<div>
 						<Text
-							text={`${item.item_name} - Cantidad: ${item.quantity}`}
+							text={`Local encargado:`}
 							type="textDefault"
-							style={{ color: "#424242" }}
+							weight="medium"
 						/>
-					</li>
-				))}
-			</ul>
+						<Text text={` ${order.store.store_name}`} type="textDefault" />
+					</div>
+					<div>
+						<Text
+							text={`Cliente: ${order.user.user_name}`}
+							type="textDefault"
+							weight="medium"
+						/>
+						<div style={{ display: "flex", gap: "4px" }}>
+							<Text text={`${order.user.phone_number}`} type="text" />
+							<Text text={`-`} type="text" />
+							<Text text={`${order.user.address}`} type="text" />
+						</div>
+						<Text
+							text={`Hora pedido: ${dayjs(order.order_date).format("hh:mm A")}`}
+							type="text"
+							style={{ color: "#757575" }}
+						/>
+					</div>
+				</div>
 
-			<select
-				{...register("store")}
-				style={{
-					borderRadius: "8px",
-					padding: "10px",
-					boxSizing: "border-box",
-					border: "1px solid #ccc",
-					fontSize: "16px",
-				}}
-			>
-				<option value="" disabled hidden>
-					Seleccione Tienda
-				</option>
-				{dataStore.map((option, index) => (
-					<option key={index} value={option.id}>
-						{option.store_name}
-					</option>
-				))}
-			</select>
-			<button
-				onClick={() => updateOrderStatus(order.order_id, "in_process")}
-				style={{
-					backgroundColor: "#007BFF",
-					color: "white",
-					border: "none",
-					padding: "8px 16px",
-					borderRadius: "4px",
-					cursor: "pointer",
-					marginRight: "8px",
-				}}
-			>
-				Marcar como En Proceso
-			</button>
+				<div>
+					<ul style={{ listStyleType: "none", paddingLeft: 0 }}>
+						{order.items.map((item) => (
+							<li key={item.id} style={{ marginBottom: "4px" }}>
+								<Text
+									text={`${item.item_name} - Cantidad: ${item.quantity}`}
+									type="textDefault"
+									style={{ color: "#424242" }}
+								/>
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
 		</div>
 	);
 };
