@@ -49,6 +49,7 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm<IPostItem>({
 		defaultValues: {
@@ -73,6 +74,7 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 		}
 		props.refresh();
 		props.modal.off();
+		reset();
 
 		if (props.setUpdate) {
 			props.setUpdate({} as IItem);
@@ -187,20 +189,30 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 							placeholder="Ingresa nombre de la hamburguesa"
 							onChange={handleImageChange}
 						/>
-						{errors.image && <p>{errors.image.message}</p>}
 						{imagePreview && (
 							<img src={imagePreview} alt="Imagen de sucursal" width="100" />
 						)}
 					</s.WrapperInput>
+
 					<s.WrapperInput>
 						<Text text="Precio" type="text" />
-						<s.InputStyle
-							type="number"
-							id="price"
-							{...register("price")}
-							placeholder="Ingresa costo de la hamburguesa"
-						/>
-						{errors.price && <p>{errors.price.message}</p>}
+						<div>
+							<s.InputStyle
+								type="number"
+								id="price"
+								{...register("price", { required: "El precio es obligario" })}
+								placeholder="Ingresa costo de la hamburguesa"
+							/>
+
+							{errors.price && (
+								<Text
+									text={errors.price.message ?? ""}
+									type="smallText"
+									style={{ color: "#F14A41" }}
+									weight="medium"
+								/>
+							)}
+						</div>
 					</s.WrapperInput>
 
 					<s.WrapperInput>
@@ -218,13 +230,22 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 										<input
 											type="checkbox"
 											value={store.id}
-											{...register("store_ids")}
+											{...register("store_ids", {
+												required: "Selecciona al menos un local",
+											})}
 										/>
 										<Text text={store.store_name} type="text" />
 									</label>
 								</div>
 							))}
-							{errors.store_ids && <p>{errors.store_ids.message}</p>}
+							{errors.store_ids && (
+								<Text
+									text={errors.store_ids.message ?? ""}
+									type="smallText"
+									style={{ color: "#F14A41" }}
+									weight="medium"
+								/>
+							)}
 						</div>
 					</s.WrapperInput>
 				</s.WrapperContent>
@@ -235,6 +256,7 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 								props.setUpdate({} as IItem);
 							}
 							props.modal.off();
+							reset();
 						}}
 					>
 						<Text text="Cancelar" type="text" />
