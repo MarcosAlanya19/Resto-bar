@@ -27,6 +27,14 @@ export const Navbar: FC = () => {
 		updateItemQuantity(item, parseInt(quantity, 10));
 	};
 
+	const calculateTotal = () => {
+		let total = 0;
+		cart.forEach((item) => {
+			total += Number(item.price) * item.quantity;
+		});
+		return total.toFixed(2);
+	};
+
 	return (
 		<div
 			style={{
@@ -139,6 +147,22 @@ export const Navbar: FC = () => {
 												/>
 											</div>
 										))}
+
+										<div
+											style={{
+												marginTop: "16px",
+												borderTop: "1px solid #fff",
+												paddingTop: "8px",
+												display: "flex",
+												justifyContent: "flex-end",
+												alignItems: "center",
+											}}
+										>
+											<Text
+												text={`Total: S/ ${calculateTotal()}`}
+												style={{ fontSize: "24px", fontWeight: "bold" }}
+											/>
+										</div>
 									</div>
 								)}
 								{cart.length > 0 && (
@@ -182,7 +206,7 @@ export const Navbar: FC = () => {
 												borderRadius: "8px",
 												cursor: "pointer",
 											}}
-											onClick={() => submitOrder()}
+											onClick={submitOrder}
 										>
 											<Text
 												text="Realizar Pedido"

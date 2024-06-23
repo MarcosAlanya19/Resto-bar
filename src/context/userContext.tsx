@@ -168,7 +168,7 @@ export const UserCartProvider: React.FC<{ children: React.ReactNode }> = ({
 
 	const submitOrder = async () => {
 		if (!user) {
-			alert("Usuario no autenticado");
+			alert("Requiere de inicio de sesión");
 			return;
 		}
 
