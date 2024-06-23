@@ -30,3 +30,22 @@ export const BtnStatus = styled.button<{ selected: boolean }>`
 		animation: ${pulseAnimation} 0.3s ease-out;
 	}
 `;
+
+export const BtnCancel = styled.button`
+  width: 100%;
+  background-color: #F14A41;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+
+  &:hover {
+    background-color: #BA372F;
+  }
+
+  &:active {
+    animation: ${pulseAnimation} 0.3s ease-out;
+  }
+`;

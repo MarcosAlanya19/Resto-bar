@@ -1,11 +1,8 @@
 import React from "react";
-import * as s from "./styles";
 
-import { RiDeleteBinLine } from "react-icons/ri";
-import { Text } from "../../../../../../components/atomic/text";
-import { useBoolean } from "../../../../../../hooks/useBoolean";
-import { IOrder, IOrderStatus } from "../../../../../../types/order.type";
 import dayjs from "dayjs";
+import { Text } from "../../../../../../components/atomic/text";
+import { IOrder, IOrderStatus } from "../../../../../../types/order.type";
 
 interface IProps {
 	data: IOrder;
@@ -13,9 +10,7 @@ interface IProps {
 
 export const CardOrder: React.FC<IProps> = (props) => {
 	const { data } = props;
-	const confirm = useBoolean();
 
-	// const { deleteStore } = useDeleteStore();
 	const handleWhatsAppRedirect = () => {
 		const phoneNumber = data?.user?.phone_number.replace(/\D/g, "");
 		const whatsappLink = `https://wa.me/+51${phoneNumber}`;
@@ -41,11 +36,14 @@ export const CardOrder: React.FC<IProps> = (props) => {
 					display: "grid",
 					alignItems: "center",
 					gap: "16px",
-					gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 100px",
+					gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
 					padding: "8px 16px",
 				}}
 			>
-				<Text text={dayjs(data.order_date).format('DD/MM/YYYY HH:mm')} type="text" />
+				<Text
+					text={dayjs(data.order_date).format("DD/MM/YYYY HH:mm")}
+					type="text"
+				/>
 				<Text text={orderStatusTranslations[data.status]} type="text" />
 				<div style={{ display: "flex", flexDirection: "column" }}>
 					<Text text={data.user.user_name} type="text" />
@@ -62,35 +60,7 @@ export const CardOrder: React.FC<IProps> = (props) => {
 						<Text text={`${item.item_name}`} type="text" />
 					))}
 				</div>
-
-				<div
-					style={{
-						display: "grid",
-						gridTemplateColumns: "1fr 1fr",
-						gap: "8px",
-					}}
-				>
-					<s.WrapperIcon alert onClick={confirm.on}>
-						<RiDeleteBinLine size={16} />
-					</s.WrapperIcon>
-				</div>
 			</div>
-
-			{/* <ModalConfirm
-				info={{
-					title: "¿Estás seguro que deseas eliminar esta sucursal?",
-					subtitle: "Esta acción no se puede deshacer",
-					confirm: "Si, eliminar",
-					cancel: "No, cancelar",
-				}}
-				onConfirm={async () => {
-					// await deleteStore(data.id);
-					toast.success("Se elimino sucursal con éxito");
-					props.refresh();
-				}}
-				modal={confirm}
-				refresh={props.refresh}
-			/> */}
 		</>
 	);
 };

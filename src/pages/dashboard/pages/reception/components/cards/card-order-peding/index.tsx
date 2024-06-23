@@ -7,6 +7,7 @@ import { apiConfig } from "../../../../../../../config/axios";
 import { useFetchStores } from "../../../../../../../hooks/store/useFetchStore";
 import { IOrder, IOrderStatus } from "../../../../../../../types/order.type";
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
 
 interface IProps {
 	data: IOrder;
@@ -36,6 +37,20 @@ export const CardOrderPeding: React.FC<IProps> = (props) => {
 		try {
 			await apiConfig.patch(`/orders/${orderId}`, {
 				newStatus: IOrderStatus.process,
+				newStoreId: selectedStoreWatch,
+			});
+
+			toast.success(`Se paso a en proceso la orden: ${orderId}`);
+			props.refresh();
+		} catch (error) {
+			console.error("Error updating order status:", error);
+		}
+	};
+
+	const cancelOrderStatus = async (orderId: number) => {
+		try {
+			await apiConfig.patch(`/orders/${orderId}`, {
+				newStatus: IOrderStatus.rejected,
 				newStoreId: selectedStoreWatch,
 			});
 
@@ -109,13 +124,24 @@ export const CardOrderPeding: React.FC<IProps> = (props) => {
 						</option>
 					))}
 				</select>
-				<s.BtnStatus
-					selected={!selectedStoreWatch}
-					onClick={() => updateOrderStatus(order.order_id)}
-					disabled={selectedStoreWatch === ""}
+				<div
+					style={{
+						display: "grid",
+						gridTemplateColumns: "1fr 2fr",
+						gap: "8px",
+					}}
 				>
-					Marcar como En Proceso
-				</s.BtnStatus>
+					<s.BtnCancel onClick={() => cancelOrderStatus(order.order_id)}>
+						Cancelar
+					</s.BtnCancel>
+					<s.BtnStatus
+						selected={!selectedStoreWatch}
+						onClick={() => updateOrderStatus(order.order_id)}
+						disabled={selectedStoreWatch === ""}
+					>
+						En Proceso
+					</s.BtnStatus>
+				</div>
 			</div>
 		</div>
 	);

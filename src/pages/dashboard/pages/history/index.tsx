@@ -8,8 +8,6 @@ import { Header } from "../../components/header";
 import { CardOrder } from "./components/card-store";
 
 export const HistoryDashboard: React.FC = () => {
-	// const createStore = useBoolean();
-
 	const { data: orderData } = useFetchOrders();
 
 	return (
@@ -20,28 +18,15 @@ export const HistoryDashboard: React.FC = () => {
 					subtitle="Visualiza el historial de los pedidos realizados"
 				/>
 				<s.Body>
-					{/* <input
-						type="text"
-						placeholder="O  Buscar por nombre de hamburguesa"
-						style={{
-							width: "50%",
-							marginBottom: "24px",
-							border: "1px solid #bfbfbf",
-							minHeight: "40px",
-							padding: "4px 8px",
-							fontSize: "14px",
-							borderRadius: "8px",
-						}}
-					/> */}
-
 					<div
 						style={{
 							borderRadius: "8px",
 							overflow: "hidden",
 							backgroundColor: "#edf3fc",
 							display: "grid",
-							gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 100px",
+							gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
 							marginBottom: "4px",
+							gap: "16px",
 							padding: "8px 16px",
 						}}
 					>

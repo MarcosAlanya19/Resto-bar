@@ -20,7 +20,7 @@ export const Reception = () => {
 			<sg.ContainerLeft>
 				<Header
 					title="Pedidos"
-					subtitle="Crea y configura las hamburguesas de la marca"
+					subtitle="Maneja los pedidos en tres secciones"
 				/>
 				<sg.Body>
 					{isLoading ? (
