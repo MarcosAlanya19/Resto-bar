@@ -58,7 +58,6 @@ export const ItemDashboard: React.FC = () => {
 							<CardItem key={burger.id} refresh={fetchItem} data={burger} />
 						))}
 					</s.WrapperCard>
-
 				</sg.Body>
 			</sg.ContainerLeft>
 			<ModalFormItem modal={createStore} refresh={fetchItem} />

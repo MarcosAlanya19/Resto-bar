@@ -68,7 +68,6 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 			await updateBurger(props.update.id, data);
 			toast.success("Actualización de sucursal con éxito");
 		} else {
-			console.log({ data });
 			await postBurger(data);
 			toast.success("Creación de sucursal con éxito");
 		}

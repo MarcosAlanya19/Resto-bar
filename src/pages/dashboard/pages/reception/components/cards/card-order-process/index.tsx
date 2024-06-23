@@ -19,10 +19,13 @@ export const CardOrderProcess: React.FC<IProps> = (props) => {
 		setOrder(props.data);
 	}, [props.data]);
 
+	console.log({order})
+
 	const updateOrderStatus = async (orderId: number) => {
 		try {
 			await apiConfig.patch(`/orders/${orderId}`, {
 				newStatus: IOrderStatus.delivered,
+				newStoreId: order.assigned_store_id,
 			});
 			toast.success(`Se paso a entregado la orden: ${props.data.order_id}`)
 			props.refresh();
