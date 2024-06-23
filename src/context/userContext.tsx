@@ -27,7 +27,7 @@ interface UserCartContextType {
 	removeFromCart: (item: IItem) => void;
 	updateItemQuantity: (item: IItem, quantity: number) => void;
 	clearCart: () => void;
-	submitOrder: (store_id: number) => Promise<void>;
+	submitOrder: () => Promise<void>;
 }
 
 // Creación del Contexto
