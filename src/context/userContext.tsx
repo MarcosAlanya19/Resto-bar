@@ -120,7 +120,7 @@ export const UserCartProvider: React.FC<{ children: React.ReactNode }> = ({
 		items: typeof orderItems;
 		status: IOrderStatus;
 	}) => {
-		let message = `TostiDetalle:\n`;
+		let message = `*TostiDetalle:*\n`;
 
 		order.items.forEach((item) => {
 			const product = item.item_name;
@@ -140,29 +140,22 @@ export const UserCartProvider: React.FC<{ children: React.ReactNode }> = ({
 			`¿Deseas enviar el siguiente pedido por WhatsApp?\n\n${message}`
 		);
 		if (confirmed) {
-			const phoneNumber = "+51934737663";
+			const phoneNumber = "+51923452026";
 			const formattedMessage = encodeURIComponent(message);
 			const whatsappUrl = `https://wa.me/${phoneNumber}?text=${formattedMessage}`;
 
 			try {
-				const newWindow = window.open(whatsappUrl, "_blank");
-				if (
-					!newWindow ||
-					newWindow.closed ||
-					typeof newWindow.closed === "undefined"
-				) {
-					throw new Error(
-						"No se pudo abrir la ventana emergente. Por favor, permite las ventanas emergentes para este sitio."
-					);
-				}
+				window.open(whatsappUrl, "_blank");
 			} catch (error) {
 				console.error(
 					"Error al intentar abrir WhatsApp en una nueva ventana:",
 					error
 				);
 			}
+			return true;
 		} else {
 			console.log("El usuario canceló el envío del pedido por WhatsApp.");
+			return false
 		}
 	};
 
@@ -184,6 +177,12 @@ export const UserCartProvider: React.FC<{ children: React.ReactNode }> = ({
 			status: IOrderStatus.pending,
 		};
 
+		const confirmed = await sendWhatsAppMessage(order);
+
+		if(!confirmed) {
+			return;
+		}
+
 		try {
 			const response = await axios.post(
 				"http://localhost:3000/api/orders",
@@ -191,8 +190,8 @@ export const UserCartProvider: React.FC<{ children: React.ReactNode }> = ({
 			);
 
 			if (response.status === 201) {
-				await sendWhatsAppMessage(order);
 				clearCart();
+				alert("Pedido realizado con exito");
 			} else {
 				alert("Error al realizar el pedido");
 			}

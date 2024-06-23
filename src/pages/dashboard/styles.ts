@@ -1,4 +1,6 @@
+import DatePicker from "react-datepicker";
 import styled from "styled-components";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const WrapperDashboard = styled.div`
 	display: grid;
@@ -31,6 +33,12 @@ export const Body = styled.div`
 	overflow: hidden;
 	padding: 24px 16px;
 `;
+
+export const StyleDate = styled(DatePicker)`
+	border-radius: 8px;
+	padding: 8px 16px;
+`
+
 
 const ButtonStyled = styled.button`
 	border: none;

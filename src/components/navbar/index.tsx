@@ -230,7 +230,9 @@ export const Navbar: FC = () => {
 					<Text text="Menú" type="textDefault" />
 				</s.StyledNavLink>
 
-				<Text text="Blog" type="textDefault" />
+				<s.StyledNavLink to={routes.word.blog}>
+					<Text text="Blog" type="textDefault" />
+				</s.StyledNavLink>
 
 				{user ? (
 					<div style={{ display: "flex", alignItems: "center", gap: "30px" }}>

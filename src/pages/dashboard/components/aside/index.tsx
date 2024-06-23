@@ -28,7 +28,7 @@ export const AsideModal = () => {
 				}}
 			>
 				<Text
-					text="EL TOSTADO."
+					text="TOSTADO."
 					type="title"
 					weight="medium"
 					style={{ fontSize: "32px" }}

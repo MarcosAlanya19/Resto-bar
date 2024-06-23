@@ -6,9 +6,11 @@ import { Text } from "../../../../components/atomic/text";
 import { useFetchOrders } from "../../../../hooks/orders/useFetchOrders";
 import { Header } from "../../components/header";
 import { CardOrder } from "./components/card-store";
+import dayjs from "dayjs";
 
 export const HistoryDashboard: React.FC = () => {
 	const { data: orderData } = useFetchOrders();
+	orderData.sort((a, b) => dayjs(b.order_date).diff(dayjs(a.order_date)));
 
 	return (
 		<>

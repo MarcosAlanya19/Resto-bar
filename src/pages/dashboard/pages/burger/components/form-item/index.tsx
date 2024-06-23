@@ -109,7 +109,7 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 				<s.WrapperHeader>
 					<Text
 						type="title"
-						text={props.update ? "Edición de producto" : "Nueva producto"}
+						text={props.update ? "Edición de producto" : "Nuevo producto"}
 					/>
 				</s.WrapperHeader>
 				<s.WrapperContent>
@@ -180,7 +180,7 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 					</s.WrapperInput>
 
 					<s.WrapperInput>
-						<Text text="Imagen de hamburguesa" type="text" />
+						<Text text="Imagen de producto" type="text" />
 
 						<s.InputStyle
 							id="image"
@@ -263,7 +263,7 @@ export const ModalFormItem: React.FC<IProps> = (props) => {
 					</s.Button>
 					<s.Button onClick={handleSubmit(onSubmit)}>
 						<Text
-							text={props.update ? "Editar sucursal" : "Crear sucursal"}
+							text={props.update ? "Editar producto" : "Crear producto"}
 							type="text"
 						/>
 					</s.Button>

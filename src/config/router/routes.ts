@@ -3,6 +3,7 @@ export const routes = {
 
 	word: {
 		menu: "menu",
+		blog: "blog",
 		history: "history",
 		store: "stores",
 		item: "items",

@@ -114,7 +114,7 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 								{...register("store_name", {
 									required: "Nombre de tienda obligatorio",
 								})}
-								placeholder="Ingresa nombre de la hamburguesa"
+								placeholder="Ingresa nombre de la sucursal"
 							/>
 							{errors.store_name && (
 								<Text
@@ -156,7 +156,7 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 							id="image"
 							type="file"
 							{...register("image")}
-							placeholder="Ingresa nombre de la hamburguesa"
+							placeholder="Ingresa nombre de la sucursal"
 							onChange={handleImageChange}
 						/>
 						{imagePreview && (
@@ -172,7 +172,7 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 								{...register("address", {
 									required: "Direccion obligatoria",
 								})}
-								placeholder="Ingresa descripción de la hamburguesa"
+								placeholder="Ingresa descripción de la sucursal"
 							/>
 							{errors.address && (
 								<Text
@@ -199,7 +199,7 @@ export const ModalFormStore: React.FC<IProps> = (props) => {
 											"El número de teléfono debe tener máximo 9 dígitos",
 									},
 								})}
-								placeholder="Ingresa costo de la hamburguesa"
+								placeholder="Ingresa costo de la sucursal"
 							/>
 							{errors.phone && (
 								<Text
