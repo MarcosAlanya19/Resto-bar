@@ -1,13 +1,15 @@
 import * as s from "./styles";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Text } from "../../components/atomic/text";
-import { useLoginUser } from "../../hooks/login/useLoginUser";
-import { ILogin } from "../../types/user.type";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { Text } from "../../components/atomic/text";
 import { routes } from "../../config/router/routes";
+import { useLoginUser } from "../../hooks/login/useLoginUser";
+import { usePostUser } from "../../hooks/login/usePostUser";
 import { useBoolean } from "../../hooks/useBoolean";
+import { ILogin } from "../../types/user.type";
+import { toast } from "react-toastify";
 
 export const Login = () => {
 	const navigate = useNavigate();
@@ -17,17 +19,37 @@ export const Login = () => {
 		formState: { errors },
 		register,
 		handleSubmit,
+		reset
 	} = useForm<ILogin>({
 		defaultValues: {
 			email: "",
 			user_password: "",
+			phone_number: "",
+			address: "",
+			user_name: "",
 		},
 	});
 
 	const { loginUser, error } = useLoginUser();
+	const { postBurger } = usePostUser();
 
 	const onSubmit: SubmitHandler<ILogin> = async (data) => {
-		await loginUser(data);
+		const payload = {
+			email: data.email,
+			user_password: data.user_password,
+			phone_number: data.phone_number,
+			address: data.address,
+			user_name: data.user_name,
+		};
+
+		if (!login.active) {
+			await loginUser(data);
+		} else {
+			await postBurger(payload);
+			toast.success("Se creo usuario correctamente");
+			login.toggle();
+			reset()
+		}
 	};
 
 	return (
@@ -107,6 +129,57 @@ export const Login = () => {
 						<>
 							<s.WrapperInput>
 								<s.Input
+									id="user_name"
+									{...register("user_name", {
+										required: "Ingresa nombre de usuario",
+									})}
+									type="text"
+									name="user_name"
+									placeholder="Ingresa nombre de usuario"
+								/>
+								{errors.user_name && (
+									<Text
+										text={errors.user_name.message ?? ""}
+										type="smallText"
+									/>
+								)}
+							</s.WrapperInput>
+
+							<s.WrapperInput>
+								<s.Input
+									id="address"
+									{...register("address", {
+										required: "La dirección es obligatoria",
+									})}
+									type="text"
+									name="address"
+									placeholder="Ingresa dirección"
+								/>
+								{errors.address && (
+									<Text text={errors.address.message ?? ""} type="smallText" />
+								)}
+							</s.WrapperInput>
+
+							<s.WrapperInput>
+								<s.Input
+									id="phone_number"
+									{...register("phone_number", {
+										required: "Movil obligatorio",
+									})}
+									type="number"
+									name="phone_number"
+									placeholder="Ingresa movil"
+								/>
+								{errors.phone_number && (
+									<Text
+										text={errors.phone_number.message ?? ""}
+										type="smallText"
+									/>
+								)}
+							</s.WrapperInput>
+
+							<s.WrapperInput>
+								<s.Input
 									id="email"
 									{...register("email", {
 										required: "Correo es obligatrio",
@@ -132,43 +205,7 @@ export const Login = () => {
 									})}
 									type="password"
 									name="user_password"
-									placeholder="gaaaa"
-								/>
-								{errors.user_password && (
-									<Text
-										text={errors.user_password.message ?? ""}
-										type="smallText"
-									/>
-								)}
-							</s.WrapperInput>
-
-							<s.WrapperInput>
-								<s.Input
-									id="user_password"
-									{...register("user_password", {
-										required: "Contraseña es obligatoria",
-									})}
-									type="password"
-									name="user_password"
-									placeholder="gaaaa"
-								/>
-								{errors.user_password && (
-									<Text
-										text={errors.user_password.message ?? ""}
-										type="smallText"
-									/>
-								)}
-							</s.WrapperInput>
-
-							<s.WrapperInput>
-								<s.Input
-									id="user_password"
-									{...register("user_password", {
-										required: "Contraseña es obligatoria",
-									})}
-									type="password"
-									name="user_password"
-									placeholder="gaaaa"
+									placeholder="Ingresa contraseña"
 								/>
 								{errors.user_password && (
 									<Text
@@ -181,7 +218,7 @@ export const Login = () => {
 					)}
 				</s.Form>
 				<s.Button style={{ width: "100%" }} onClick={handleSubmit(onSubmit)}>
-					Entrar
+					{!login.active ? "Entrar" : "Registrar"}
 				</s.Button>
 
 				<div

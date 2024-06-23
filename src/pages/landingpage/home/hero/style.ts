@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-	background-image: url("./img/home/hero-1-hero.png");
+	background-image: url("/img/home/hero-1-hero.png");
 
 	background-size: cover;
 	background-position: center;

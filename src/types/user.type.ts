@@ -6,6 +6,9 @@ export enum IUserRole {
 export interface ILogin {
 	email: string;
 	user_password: string;
+	phone_number: string;
+	address: string;
+	user_name: string;
 }
 
 export interface IUser {
