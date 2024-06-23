@@ -107,18 +107,78 @@ export const UserCartProvider: React.FC<{ children: React.ReactNode }> = ({
 		setCart([]);
 	};
 
+	const orderItems = cart.map((item) => ({
+		item_id: item.id,
+		quantity: item.quantity,
+		price: item.price,
+		item_name: item.item_name,
+	}));
+
+	const sendWhatsAppMessage = async (order: {
+		user_id: string;
+		user_name: string;
+		items: typeof orderItems;
+		status: IOrderStatus;
+	}) => {
+		let message = `TostiDetalle:\n`;
+
+		order.items.forEach((item) => {
+			const product = item.item_name;
+			const quantity = item.quantity;
+			const price = parseFloat(item.price) * quantity;
+			message += `- ${product} x ${quantity} = S/. ${price}\n`;
+		});
+
+		const totalPrice = order.items.reduce((total, item) => {
+			const price = parseFloat(item.price) * item.quantity;
+			return total + price;
+		}, 0);
+
+		message += `\nTotal: S/. ${totalPrice}`;
+
+		const confirmed = window.confirm(
+			`¿Deseas enviar el siguiente pedido por WhatsApp?\n\n${message}`
+		);
+		if (confirmed) {
+			const phoneNumber = "+51934737663";
+			const formattedMessage = encodeURIComponent(message);
+			const whatsappUrl = `https://wa.me/${phoneNumber}?text=${formattedMessage}`;
+
+			try {
+				const newWindow = window.open(whatsappUrl, "_blank");
+				if (
+					!newWindow ||
+					newWindow.closed ||
+					typeof newWindow.closed === "undefined"
+				) {
+					throw new Error(
+						"No se pudo abrir la ventana emergente. Por favor, permite las ventanas emergentes para este sitio."
+					);
+				}
+			} catch (error) {
+				console.error(
+					"Error al intentar abrir WhatsApp en una nueva ventana:",
+					error
+				);
+			}
+		} else {
+			console.log("El usuario canceló el envío del pedido por WhatsApp.");
+		}
+	};
+
 	const submitOrder = async () => {
 		if (!user) {
 			alert("Usuario no autenticado");
 			return;
 		}
 
-		const orderItems = cart.map((item) => ({
-			item_id: item.id,
-			quantity: item.quantity,
-		}));
-
-		const order: Order = {
+		const order: {
+			user_name: string;
+			user_id: string;
+			items: typeof orderItems;
+			status: IOrderStatus;
+		} = {
+			user_name: user.user_name,
 			user_id: user.id,
 			items: orderItems,
 			status: IOrderStatus.pending,
@@ -129,8 +189,9 @@ export const UserCartProvider: React.FC<{ children: React.ReactNode }> = ({
 				"http://localhost:3000/api/orders",
 				order
 			);
+
 			if (response.status === 201) {
-				alert("Pedido realizado con éxito");
+				await sendWhatsAppMessage(order);
 				clearCart();
 			} else {
 				alert("Error al realizar el pedido");
